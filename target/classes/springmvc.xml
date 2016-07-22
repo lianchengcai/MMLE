@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd 
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd 
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/websocket
+        http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
+        
+        
+	<!-- 
+		spring可以自动去扫描base-package下面或者子包下面的java文件，
+		如果扫描到有@Component @Controller @Service @Repository等这些注解的类，则把这些类注册为bean 
+	-->
+    <context:component-scan base-package="com.mmle.*" />
+    
+    <bean id="applicationContextUtil" class="com.mmle.utils.ApplicationContextUtil"></bean>
+
+	<bean id="utf8Charset" class="java.nio.charset.Charset"
+          factory-method="forName">
+        <constructor-arg value="UTF-8"/>
+    </bean>
+    
+    <mvc:annotation-driven> 
+        <mvc:message-converters  >
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <constructor-arg ref="utf8Charset"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+    
+	<!-- shiro 注解 使用这个程序报错-->
+	<!-- <aop:config proxy-target-class="true"></aop:config> -->
+	
+	<!-- 使用这个代替上面shiro注解的方法。原因？ -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor">
+		<property name="proxyTargetClass" value="true"/>
+	</bean>
+	
+	<!-- 开启shiro注解支持 -->
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
+	</bean>
+	
+	<!-- 注解开发授权认证没有权限的时候的跳转。没用这个时报500。为什么unauthorizedUrl不起作用 ？？？？-->
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="org.apache.shiro.authz.UnauthorizedException">refuse</prop>
+            </props>
+        </property>
+    </bean>
+				
+		
+	<!-- 使用 mvc:annotation-driven代替上边注解映射器和注解适配器配置
+	mvc:annotation-driven默认加载很多的参数绑定方法，
+	比如json转换解析器就默认加载了，如果使用mvc:annotation-driven不用配置上边的RequestMappingHandlerMapping和RequestMappingHandlerAdapter
+	实际开发时使用mvc:annotation-driven
+	 --> 
+	<!-- <mvc:annotation-driven></mvc:annotation-driven> -->
+	  
+    <!-- 
+    	模型解析，在请求时为模型视图名称添加前后缀 
+    	比如在controller类中需要请求/WEB-INF/page/index.jsp文件，直接写index就可以了
+    -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/WEB-INF/jsp/" p:suffix=".jsp" />
+	<!-- 启动 MVC注解 -->
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="objectMapper" ref="myObjectMapper" />
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	          <!--文件上传，当form的enctype="multipart/form-data"时必须配置  -->
+      <bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设置上传文件的最大尺寸为5MB -->
+		<property name="maxUploadSize">
+			<value>5242880</value>
+		</property>
+	</bean>
+	
+</beans>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:task="http://www.springframework.org/schema/task"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd 
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd 
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd">
+        
+    <description>apache shiro配置</description>
+
+		<!-- 踢出用户 -->
+	<bean id="kickoutSessionControlFilter" class="com.mmle.shiro.KickoutSessionControlFilter">  
+	    <property name="cacheManager" ref="cacheManager"/>  
+	    <property name="sessionManager" ref="sessionManager"/>  
+	  
+	    <property name="kickoutAfter" value="false"/>  
+	    <property name="maxSession" value="1"/>  
+	    <property name="kickoutUrl" value="/SecurityVerification/kick.do"/>  
+	</bean>   
+
+
+<!-- web.xml中shiro的filter对应的bean -->
+	<!-- Shiro 的Web过滤器 -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		
+		<!-- loginUrl认证提交地址，如果没有认证将会请求此地址进行认证，请求此地址将由formAuthenticationFilter进行表单认证 -->
+		<property name="loginUrl" value="/SecurityVerification/login.do" />
+		
+		<!-- 通过unauthorizedUrl指定没有权限操作时跳转页面-->
+		<property name="unauthorizedUrl" value="/refuse.do" />
+		<!-- 自定义filter配置 跟验证码相关 -->
+		<property name="filters">
+			<map>
+				<!-- 将自定义 的FormAuthenticationFilter注入shiroFilter中-->
+				<!-- value-re和 自定义form认证过虑器的ID对应-->
+				<entry key="authc" value-ref="formAuthenticationFilter" />
+				<entry key="kickout" value-ref="kickoutSessionControlFilter"/>
+			</map>
+		</property>
+		
+		<!-- 过虑器链定义，从上向下顺序执行，一般将/**放在最下边 -->
+		<property name="filterChainDefinitions">
+			<value>
+				<!-- 静态资源匿名访问 -->
+				/images/** = anon
+				/js/** = anon
+				/styles/** = anon
+				
+				<!-- 手机端可访问 -->
+				/customer/** = anon
+				
+				<!-- 登录页面 -->
+				/SecurityVerification/pcLogin.do == anon
+				
+				<!-- 被踢出后的跳转页面 -->
+				/SecurityVerification/kick.do = anon
+				
+				<!-- 请求 logout.action地址，shiro去清除session-->
+				/logout.do = logout
+				
+				<!-- 验证码，可匿名访问 -->
+				/validatecode.jsp = anon
+				
+				<!-- authc 所有的url不许认证才能访问 kickout,authc -->
+				/back/* = authc
+			</value>
+		</property>
+	</bean>
+	
+	<!-- securityManager安全管理器 -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+<!-- 		<property name="realm" ref="CustomerRealm" />	 -->
+<!-- 		<property name="realm" ref="LoginRealm" />		-->
+		<property name="realms">  
+	        <list>  
+	        	<ref bean="LoginRealm" />  
+	        </list>  
+    	</property>  
+    	
+    	<!-- 认证策略 
+    	<property name="authenticator" ref="authenticator1"/>
+    	-->
+		<!-- 注入缓存管理器 -->
+		<property name="cacheManager" ref="cacheManager"/>
+		<!-- 注入session管理器 -->
+		<property name="sessionManager" ref="sessionManager" />
+		<!-- 记住我 -->
+		<property name="rememberMeManager" ref="rememberMeManager"/>
+	</bean>
+	
+	
+	<!-- 缓存管理器 -->
+	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+    	<property name="cacheManagerConfigFile" value="classpath:shiro-ehcache.xml"/>
+    </bean>
+    
+    <!-- 会话DAO -->
+    <bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.MemorySessionDAO"/>
+    
+    <!-- 会话管理器 -->
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+		<property name="sessionDAO" ref="sessionDAO"/>
+        <!-- session的失效时长，单位毫秒 -->
+        <property name="globalSessionTimeout" value="600000"/>
+        <!-- 删除失效的session -->
+        <property name="deleteInvalidSessions" value="true"/>
+    </bean>
+    
+    <!-- 自定义form认证过虑器 -->
+	<!-- 基于Form表单的身份验证过滤器，不配置将也会注册此过虑器，表单中的用户账号、密码及loginurl将采用默认值，建议配置 -->
+	<bean id="formAuthenticationFilter" 
+	class="com.mmle.shiro.LoginFormAuthenticationFilter">
+	
+		<!-- 表单中账号的input名称 -->
+		<property name="usernameParam" value="username" />
+		<!-- 表单中密码的input名称 -->
+		<property name="passwordParam" value="password" />
+		<!-- 记住我input的名称 -->
+		<property name="rememberMeParam" value="rememberMe"/>
+ 	</bean>
+ 	
+ 	<!-- rememberMeManager管理器，写cookie，取出cookie生成用户信息 -->
+	<bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+		<property name="cookie" ref="rememberMeCookie" />
+	</bean>
+	<!-- 记住我cookie -->
+	<bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+		<!-- rememberMe是cookie的名字 -->
+		<constructor-arg value="rememberMe" />
+		<!-- 记住我cookie生效时间30天 -->
+		<property name="maxAge" value="2592000" />
+	</bean>
+	
+	<!-- realm -->
+	<bean id="LoginRealm" class="com.mmle.shiro.LoginRealm">
+		<property name="credentialsMatcher" ref="credentialsMatcher"/>
+	</bean>
+
+	<!-- 凭证匹配器  realm中调用-->
+	<bean id="credentialsMatcher" class=" org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+		<property name="hashAlgorithmName" value="md5" />
+		<property name="hashIterations" value="1" />
+	</bean>
+
+</beans>

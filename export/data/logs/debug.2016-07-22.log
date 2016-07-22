@@ -1,0 +1,7 @@
+22:14:33.919 [main] DEBUG com.mmle.dao.UserDao.insertUser - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@106d6599]]]
+22:14:33.925 [main] DEBUG com.mmle.dao.UserDao.insertUser - ==>  Preparing: INSERT INTO tbl_user (name, account, password) VALUES (?, ?, ?) 
+22:14:33.948 [main] DEBUG com.mmle.dao.UserDao.insertUser - ==> Parameters: 李冰冰(String), 1111(String), 123(String)
+22:17:08.825 [main] DEBUG com.mmle.dao.UserDao.insertUser - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@77d48fcb]]]
+22:17:08.831 [main] DEBUG com.mmle.dao.UserDao.insertUser - ==>  Preparing: INSERT INTO tbl_user (name, account, password, role_id) VALUES (?, ?, ?, ?) 
+22:17:08.855 [main] DEBUG com.mmle.dao.UserDao.insertUser - ==> Parameters: 李冰冰(String), 1111(String), 123(String), 1(Integer)
+22:17:08.896 [main] DEBUG com.mmle.dao.UserDao.insertUser - <==    Updates: 1
