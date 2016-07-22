@@ -5,7 +5,7 @@ public class Permission {
 
     private String name;
 
-    private Integer flag;
+    private Boolean flag;
 
     public Integer getPermissionId() {
         return permissionId;
@@ -23,11 +23,11 @@ public class Permission {
         this.name = name == null ? null : name.trim();
     }
 
-    public Integer getFlag() {
+    public Boolean getFlag() {
         return flag;
     }
 
-    public void setFlag(Integer flag) {
+    public void setFlag(Boolean flag) {
         this.flag = flag;
     }
 }
