@@ -1,0 +1,118 @@
+13:49:30.227 [main] DEBUG com.mmle.dao.CaseDao.getCaseByName - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@5c314b48]]]
+13:49:30.231 [main] DEBUG com.mmle.dao.CaseDao.getCaseByName - ==>  Preparing: select * from tbl_case where case_name = ? 
+13:49:30.255 [main] DEBUG com.mmle.dao.CaseDao.getCaseByName - ==> Parameters: 捕捞的渔获物中的幼鱼超过规定比例(String)
+13:49:30.270 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@5c314b48]]]
+13:49:30.271 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - ==>  Preparing: select * from tbl_case_type where type_id = ? 
+13:49:30.272 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - ==> Parameters: 1(Integer)
+13:49:30.275 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - <==      Total: 1
+13:49:30.275 [main] DEBUG com.mmle.dao.CaseDao.getCaseByName - <==      Total: 1
+13:51:54.196 [main] DEBUG com.mmle.dao.CaseDao.getCase - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@2ff6893c]]]
+13:51:54.200 [main] DEBUG com.mmle.dao.CaseDao.getCase - ==>  Preparing: select * from tbl_case 
+13:51:54.223 [main] DEBUG com.mmle.dao.CaseDao.getCase - ==> Parameters: 
+13:51:54.239 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@2ff6893c]]]
+13:51:54.240 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - ==>  Preparing: select * from tbl_case_type where type_id = ? 
+13:51:54.240 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - ==> Parameters: 1(Integer)
+13:51:54.241 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - <==      Total: 1
+13:51:54.243 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@2ff6893c]]]
+13:51:54.243 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - ==>  Preparing: select * from tbl_case_type where type_id = ? 
+13:51:54.244 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - ==> Parameters: 2(Integer)
+13:51:54.244 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - <==      Total: 1
+13:51:54.245 [main] DEBUG com.mmle.dao.CaseDao.getCase - <==      Total: 4
+2016-07-23 14:26:52.964 [main] DEBUG com.mmle.dao.CaseDao.getCaseByName - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@84cbae7]]]
+2016-07-23 14:26:53.075 [main] DEBUG com.mmle.dao.CaseDao.getCaseByName - ==>  Preparing: select * from tbl_case where case_name = ? 
+2016-07-23 14:26:53.103 [main] DEBUG com.mmle.dao.CaseDao.getCaseByName - ==> Parameters: 捕捞的渔获物中的幼鱼超过规定比例(String)
+2016-07-23 14:26:53.806 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@84cbae7]]]
+2016-07-23 14:26:53.806 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - ==>  Preparing: select * from tbl_case_type where type_id = ? 
+2016-07-23 14:26:53.807 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - ==> Parameters: 1(Integer)
+2016-07-23 14:26:53.808 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - <==      Total: 1
+2016-07-23 14:26:53.809 [main] DEBUG com.mmle.dao.CaseDao.getCaseByName - <==      Total: 1
+2016-07-23 14:28:37.695 [main] DEBUG com.mmle.dao.CaseDao.getCaseByName - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@5baf3648]]]
+2016-07-23 14:28:37.699 [main] DEBUG com.mmle.dao.CaseDao.getCaseByName - ==>  Preparing: select * from tbl_case where case_name = ? 
+2016-07-23 14:28:37.729 [main] DEBUG com.mmle.dao.CaseDao.getCaseByName - ==> Parameters: 违规(String)
+2016-07-23 14:28:37.770 [main] DEBUG com.mmle.dao.CaseDao.getCaseByName - <==      Total: 0
+2016-07-23 14:41:35.390 [main] DEBUG com.mmle.dao.CaseDao.getCaseByName - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@7076b8d2]]]
+2016-07-23 14:41:35.435 [main] DEBUG com.mmle.dao.CaseDao.getCaseByName - ==>  Preparing: select * from tbl_case where case_name = ? 
+2016-07-23 14:41:35.463 [main] DEBUG com.mmle.dao.CaseDao.getCaseByName - ==> Parameters: 违规(String)
+2016-07-23 14:41:35.479 [main] DEBUG com.mmle.dao.CaseDao.getCaseByName - <==      Total: 0
+2016-07-23 14:44:30.571 [main] DEBUG com.mmle.dao.CaseDao.getCaseByName - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@5baf3648]]]
+2016-07-23 14:44:30.574 [main] DEBUG com.mmle.dao.CaseDao.getCaseByName - ==>  Preparing: select * from tbl_case where case_name = ? 
+2016-07-23 14:44:30.602 [main] DEBUG com.mmle.dao.CaseDao.getCaseByName - ==> Parameters: 违规(String)
+2016-07-23 14:44:30.615 [main] DEBUG com.mmle.dao.CaseDao.getCaseByName - <==      Total: 0
+2016-07-23 14:44:57.930 [main] DEBUG com.mmle.dao.CaseDao.getCaseByName - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@387dd89b]]]
+2016-07-23 14:44:57.933 [main] DEBUG com.mmle.dao.CaseDao.getCaseByName - ==>  Preparing: select * from tbl_case where case_name = ? 
+2016-07-23 14:44:57.961 [main] DEBUG com.mmle.dao.CaseDao.getCaseByName - ==> Parameters: 违规(String)
+2016-07-23 14:44:57.975 [main] DEBUG com.mmle.dao.CaseDao.getCaseByName - <==      Total: 0
+2016-07-23 14:44:57.976 [main] DEBUG c.mmle.dao.CaseDao.getCaseTypeByName - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@387dd89b]]]
+2016-07-23 14:44:57.976 [main] DEBUG c.mmle.dao.CaseDao.getCaseTypeByName - ==>  Preparing: select * from tbl_case_type where name = ? 
+2016-07-23 14:44:57.977 [main] DEBUG c.mmle.dao.CaseDao.getCaseTypeByName - ==> Parameters: 渔港管理(String)
+2016-07-23 14:44:57.977 [main] DEBUG c.mmle.dao.CaseDao.getCaseTypeByName - <==      Total: 0
+2016-07-23 14:44:57.993 [main] DEBUG com.mmle.dao.CaseDao.insertCaseType - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@387dd89b]]]
+2016-07-23 14:44:57.993 [main] DEBUG com.mmle.dao.CaseDao.insertCaseType - ==>  Preparing: INSERT INTO tbl_case_type (name) VALUES (?) 
+2016-07-23 14:44:57.993 [main] DEBUG com.mmle.dao.CaseDao.insertCaseType - ==> Parameters: 渔港管理(String)
+2016-07-23 14:44:57.994 [main] DEBUG com.mmle.dao.CaseDao.insertCaseType - <==    Updates: 1
+2016-07-23 14:44:57.995 [main] DEBUG com.mmle.dao.CaseDao.insertCase - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@387dd89b]]]
+2016-07-23 14:44:57.995 [main] DEBUG com.mmle.dao.CaseDao.insertCase - ==>  Preparing: INSERT INTO tbl_case (case_name, case_type) VALUES (?, ?) 
+2016-07-23 14:44:57.997 [main] DEBUG com.mmle.dao.CaseDao.insertCase - ==> Parameters: 违规(String), 5(Integer)
+2016-07-23 14:44:58.025 [main] DEBUG com.mmle.dao.CaseDao.insertCase - <==    Updates: 1
+2016-07-23 14:46:02.370 [main] DEBUG com.mmle.dao.CaseDao.getCaseByName - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@4e17c516]]]
+2016-07-23 14:46:02.374 [main] DEBUG com.mmle.dao.CaseDao.getCaseByName - ==>  Preparing: select * from tbl_case where case_name = ? 
+2016-07-23 14:46:02.401 [main] DEBUG com.mmle.dao.CaseDao.getCaseByName - ==> Parameters: 捕捞的渔获物中的幼鱼超过规定比例(String)
+2016-07-23 14:46:03.036 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@4e17c516]]]
+2016-07-23 14:46:03.908 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - ==>  Preparing: select * from tbl_case_type where type_id = ? 
+2016-07-23 14:46:03.909 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - ==> Parameters: 1(Integer)
+2016-07-23 14:46:03.911 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - <==      Total: 1
+2016-07-23 14:46:03.911 [main] DEBUG com.mmle.dao.CaseDao.getCaseByName - <==      Total: 1
+2016-07-23 14:46:03.912 [main] DEBUG c.mmle.dao.CaseDao.getCaseTypeByName - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@4e17c516]]]
+2016-07-23 14:46:03.912 [main] DEBUG c.mmle.dao.CaseDao.getCaseTypeByName - ==>  Preparing: select * from tbl_case_type where name = ? 
+2016-07-23 14:46:03.912 [main] DEBUG c.mmle.dao.CaseDao.getCaseTypeByName - ==> Parameters: 渔港管理(String)
+2016-07-23 14:46:03.913 [main] DEBUG c.mmle.dao.CaseDao.getCaseTypeByName - <==      Total: 1
+2016-07-23 15:04:57.782 [main] DEBUG com.mmle.dao.CaseDao.getCaseByCaseId - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@3aae9cc9]]]
+2016-07-23 15:04:57.794 [main] DEBUG com.mmle.dao.CaseDao.getCaseByCaseId - ==>  Preparing: select * from tbl_case where case_id = ? 
+2016-07-23 15:04:57.826 [main] DEBUG com.mmle.dao.CaseDao.getCaseByCaseId - ==> Parameters: 6(Integer)
+2016-07-23 15:04:57.858 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@3aae9cc9]]]
+2016-07-23 15:04:57.859 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - ==>  Preparing: select * from tbl_case_type where type_id = ? 
+2016-07-23 15:04:57.859 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - ==> Parameters: 2(Integer)
+2016-07-23 15:04:57.860 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - <==      Total: 1
+2016-07-23 15:04:57.860 [main] DEBUG com.mmle.dao.CaseDao.getCaseByCaseId - <==      Total: 1
+2016-07-23 15:04:57.884 [main] DEBUG com.mmle.dao.CaseDao.deleteCaseInfo - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@3aae9cc9]]]
+2016-07-23 15:04:57.884 [main] DEBUG com.mmle.dao.CaseDao.deleteCaseInfo - ==>  Preparing: delete from tbl_case where case_id = ? 
+2016-07-23 15:04:57.884 [main] DEBUG com.mmle.dao.CaseDao.deleteCaseInfo - ==> Parameters: 6(Integer)
+2016-07-23 15:04:57.885 [main] DEBUG com.mmle.dao.CaseDao.deleteCaseInfo - <==    Updates: 1
+2016-07-23 15:17:09.880 [main] DEBUG com.mmle.dao.CaseDao.updateCaseInfo - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@2961c329]]]
+2016-07-23 15:17:09.908 [main] DEBUG com.mmle.dao.CaseDao.updateCaseInfo - ==>  Preparing: UPDATE tbl_case SET case_name = ? WHERE (case_id = ?) 
+2016-07-23 15:17:09.937 [main] DEBUG com.mmle.dao.CaseDao.updateCaseInfo - ==> Parameters: 穿梭(String), 7(Integer)
+2016-07-23 15:17:09.938 [main] DEBUG com.mmle.dao.CaseDao.updateCaseInfo - <==    Updates: 1
+2016-07-23 15:17:29.892 [main] DEBUG com.mmle.dao.CaseDao.updateCaseInfo - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@7d0908b6]]]
+2016-07-23 15:17:29.895 [main] DEBUG com.mmle.dao.CaseDao.updateCaseInfo - ==>  Preparing: UPDATE tbl_case SET case_name = ? WHERE (case_id = ?) 
+2016-07-23 15:17:29.920 [main] DEBUG com.mmle.dao.CaseDao.updateCaseInfo - ==> Parameters: fei(String), 7(Integer)
+2016-07-23 15:17:29.921 [main] DEBUG com.mmle.dao.CaseDao.updateCaseInfo - <==    Updates: 1
+2016-07-23 15:17:57.266 [main] DEBUG com.mmle.dao.CaseDao.updateCaseInfo - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@614e22d9]]]
+2016-07-23 15:17:57.271 [main] DEBUG com.mmle.dao.CaseDao.updateCaseInfo - ==>  Preparing: UPDATE tbl_case SET case_name = ? WHERE (case_id = ?) 
+2016-07-23 15:17:57.326 [main] DEBUG com.mmle.dao.CaseDao.updateCaseInfo - ==> Parameters: fei(String), 6(Integer)
+2016-07-23 15:17:57.327 [main] DEBUG com.mmle.dao.CaseDao.updateCaseInfo - <==    Updates: 0
+2016-07-23 15:29:25.938 [main] DEBUG com.mmle.dao.CaseDao.updateCaseType - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@2cee336e]]]
+2016-07-23 15:29:25.943 [main] DEBUG com.mmle.dao.CaseDao.updateCaseType - ==>  Preparing: UPDATE tbl_case_type WHERE (type_id = ?) 
+2016-07-23 15:29:25.977 [main] DEBUG com.mmle.dao.CaseDao.updateCaseType - ==> Parameters: null
+2016-07-23 15:30:28.356 [main] DEBUG com.mmle.dao.CaseDao.updateCaseType - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@5b1cb26c]]]
+2016-07-23 15:30:28.359 [main] DEBUG com.mmle.dao.CaseDao.updateCaseType - ==>  Preparing: UPDATE tbl_case_type WHERE (type_id = ?) 
+2016-07-23 15:30:28.384 [main] DEBUG com.mmle.dao.CaseDao.updateCaseType - ==> Parameters: null
+2016-07-23 15:43:43.622 [main] DEBUG com.mmle.dao.CaseDao.updateCaseType - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@4a7291cd]]]
+2016-07-23 15:43:43.626 [main] DEBUG com.mmle.dao.CaseDao.updateCaseType - ==>  Preparing: UPDATE tbl_case_type SET flag = ? WHERE (type_id = ?) 
+2016-07-23 15:43:43.651 [main] DEBUG com.mmle.dao.CaseDao.updateCaseType - ==> Parameters: true(Boolean), 1(Integer)
+2016-07-23 15:43:43.652 [main] DEBUG com.mmle.dao.CaseDao.updateCaseType - <==    Updates: 1
+2016-07-23 15:50:44.658 [main] DEBUG c.mmle.dao.CaseDao.getCaseTypeByName - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@3943e3c4]]]
+2016-07-23 15:50:44.661 [main] DEBUG c.mmle.dao.CaseDao.getCaseTypeByName - ==>  Preparing: select * from tbl_case_type where name = ? 
+2016-07-23 15:50:44.704 [main] DEBUG c.mmle.dao.CaseDao.getCaseTypeByName - ==> Parameters: 船员管理(String)
+2016-07-23 15:50:44.761 [main] DEBUG c.mmle.dao.CaseDao.getCaseTypeByName - <==      Total: 1
+2016-07-23 15:51:01.846 [main] DEBUG c.mmle.dao.CaseDao.getCaseTypeByName - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@cbfd5c3]]]
+2016-07-23 15:51:01.850 [main] DEBUG c.mmle.dao.CaseDao.getCaseTypeByName - ==>  Preparing: select * from tbl_case_type where name = ? 
+2016-07-23 15:51:01.890 [main] DEBUG c.mmle.dao.CaseDao.getCaseTypeByName - ==> Parameters: 船员是管理(String)
+2016-07-23 15:51:01.903 [main] DEBUG c.mmle.dao.CaseDao.getCaseTypeByName - <==      Total: 0
+2016-07-23 15:51:01.907 [main] DEBUG com.mmle.dao.CaseDao.insertCaseType - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@cbfd5c3]]]
+2016-07-23 15:51:01.908 [main] DEBUG com.mmle.dao.CaseDao.insertCaseType - ==>  Preparing: INSERT INTO tbl_case_type (name) VALUES (?) 
+2016-07-23 15:51:01.908 [main] DEBUG com.mmle.dao.CaseDao.insertCaseType - ==> Parameters: 船员是管理(String)
+2016-07-23 15:51:02.578 [main] DEBUG com.mmle.dao.CaseDao.insertCaseType - <==    Updates: 1
+2016-07-23 16:15:10.881 [main] DEBUG com.mmle.dao.CaseDao.updateCaseType - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@5ae41caa]]]
+2016-07-23 16:15:10.902 [main] DEBUG com.mmle.dao.CaseDao.updateCaseType - ==>  Preparing: UPDATE tbl_case_type SET flag = ? WHERE (type_id = ?) 
+2016-07-23 16:15:10.930 [main] DEBUG com.mmle.dao.CaseDao.updateCaseType - ==> Parameters: false(Boolean), 6(Integer)
+2016-07-23 16:15:10.931 [main] DEBUG com.mmle.dao.CaseDao.updateCaseType - <==    Updates: 1
