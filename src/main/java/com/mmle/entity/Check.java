@@ -7,9 +7,11 @@ public class Check {
 
     private Integer type;
 
-    private Integer boat;
+   // private Integer boat;
+    private FishBoat boat;
 
-    private Integer checkMan;
+    //private Integer checkMan;
+    private User checkMan;
 
     private Date checkTime;
 
@@ -57,19 +59,28 @@ public class Check {
         this.type = type;
     }
 
-    public Integer getBoat() {
-        return boat;
-    }
+//    public Integer getBoat() {
+//        return boat;
+//    }
+//
+//    public void setBoat(Integer boat) {
+//        this.boat = boat;
+//    }
+    
 
-    public void setBoat(Integer boat) {
-        this.boat = boat;
-    }
+    public FishBoat getBoat() {
+		return boat;
+	}
 
-    public Integer getCheckMan() {
+	public void setBoat(FishBoat boat) {
+		this.boat = boat;
+	}
+
+	public User getCheckMan() {
         return checkMan;
     }
 
-    public void setCheckMan(Integer checkMan) {
+    public void setCheckMan(User checkMan) {
         this.checkMan = checkMan;
     }
 

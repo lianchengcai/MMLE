@@ -144,7 +144,8 @@ public class CaseService implements ICaseService {
 		}
 		return map;
 	}
-
+	
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public Map<String, Object> addCaseType(CaseType caseType) {
 		Map<String, Object> map = new HashMap<>();
 		if (caseType != null) {

@@ -4,6 +4,7 @@ import org.apache.ibatis.jdbc.SQL;
 
 import com.mmle.entity.Case;
 import com.mmle.entity.CaseType;
+import com.mmle.entity.Check;
 import com.mmle.entity.User;
 
 
@@ -81,6 +82,67 @@ public class DynaSqlProvider {
 				}
 				if (cas.getFlag()!= null) {
 					VALUES("flag", "#{flag}");
+				}
+			}
+		}.toString();
+	}
+	public String addCheck(final Check check) {
+		return new SQL() {
+			{
+				INSERT_INTO("tbl_check");
+				if (check.getBoatCheck() != null) {
+					VALUES("boat_check", "#{boatCheck}");
+				}
+				if (check.getBoater() != null) {
+					VALUES("boater", "#{boater}");
+				}
+				if (check.getChiefEngineer() != null) {
+					VALUES("chief_engineer", "#{chiefEngineer}");
+				}
+				if (check.getCompass()!= null) {
+					VALUES("compass", "#{compass}");
+				}
+				if (check.getFishing()!= null) {
+					VALUES("fishing", "#{fishing}");
+				}
+				if (check.getNationality()!= null) {
+					VALUES("nationality", "#{nationality}");
+				}
+				if (check.getFlag()!= null) {
+					VALUES("flag", "#{flag}");
+				}
+				if (check.getRadar()!= null) {
+					VALUES("radar", "#{radar}");
+				}
+				if (check.getSailing()!= null) {
+					VALUES("sailing", "#{sailing}");
+				}
+				if (check.getSatelliteNavigation()!= null) {
+					VALUES("satelliteNavigation", "#{satelliteNavigation}");
+				}
+				if (check.getSsb()!= null) {
+					VALUES("ssb", "#{ssb}");
+				}
+				if (check.getBoat()!= null) {
+					VALUES("boat", "#{boat.boatId}");
+				}
+				if (check.getBoatImage()!= null) {
+					VALUES("boat_image", "#{boatImage}");
+				}
+				if (check.getCheckMan()!= null) {
+					VALUES("check_man", "#{checkMan.account}");
+				}
+				if (check.getCheckTime()!= null) {
+					VALUES("check_time", "#{checkTime}");
+				}
+				if (check.getManImage()!= null) {
+					VALUES("man_image", "#{manImage}");
+				}
+				if (check.getTitle()!= null) {
+					VALUES("title", "#{title}");
+				}
+				if (check.getType()!= null) {
+					VALUES("type", "#{type}");
 				}
 			}
 		}.toString();

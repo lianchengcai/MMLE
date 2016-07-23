@@ -3,6 +3,8 @@ package com.mmle.utils;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.mmle.entity.Case;
 import com.mmle.entity.CaseType;
 import com.mmle.entity.Check;
@@ -28,6 +30,14 @@ public class DTO {
 	private Check check;
 	private Exploration exploration;
 	private User user;
+	private MultipartFile[] pic;
+	
+	public MultipartFile[] getPic() {
+		return pic;
+	}
+	public void setPic(MultipartFile[] pic) {
+		this.pic = pic;
+	}
 	public Integer getCurrentPage() {
 		return currentPage;
 	}

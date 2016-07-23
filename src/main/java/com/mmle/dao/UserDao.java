@@ -1,6 +1,9 @@
 package com.mmle.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import com.mmle.entity.User;
@@ -19,4 +22,7 @@ import com.mmle.utils.DynaSqlProvider;
 public interface UserDao {
 	@InsertProvider(type = DynaSqlProvider.class, method = "insertUser")
 	int insertUser(User user);
+
+	@Select("select * from tbl_user where name like concat('%', #{name}, '%')")
+	List<User> getUserByName(String name);
 }
