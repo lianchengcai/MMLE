@@ -1,13 +1,26 @@
 package com.mmle.entity;
 
+import javax.mail.search.IntegerComparisonTerm;
+
 public class CaseType {
     private Integer typeId;
 
     private String name;
 
     private Boolean flag;
+    
+    private Integer count ;
+    
 
-    public Integer getTypeId() {
+    public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+
+	public Integer getTypeId() {
         return typeId;
     }
 

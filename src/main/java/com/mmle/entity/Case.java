@@ -3,7 +3,8 @@ package com.mmle.entity;
 public class Case {
     private Integer caseId;
 
-    private Integer caseType;
+  //  private Integer caseType;
+    private CaseType caseType;
 
     private String caseName;
 
@@ -25,15 +26,23 @@ public class Case {
         this.caseId = caseId;
     }
 
-    public Integer getCaseType() {
-        return caseType;
-    }
+//    public Integer getCaseType() {
+//        return caseType;
+//    }
+//
+//    public void setCaseType(Integer caseType) {
+//        this.caseType = caseType;
+//    }
 
-    public void setCaseType(Integer caseType) {
-        this.caseType = caseType;
-    }
+    public CaseType getCaseType() {
+		return caseType;
+	}
 
-    public String getCaseName() {
+	public void setCaseType(CaseType caseType) {
+		this.caseType = caseType;
+	}
+
+	public String getCaseName() {
         return caseName;
     }
 
@@ -80,4 +89,12 @@ public class Case {
     public void setFlag(Boolean flag) {
         this.flag = flag;
     }
+
+	@Override
+	public String toString() {
+		return "Case [caseId=" + caseId + ", caseType=" + caseType + ", caseName=" + caseName + ", violateRule="
+				+ violateRule + ", basisPunishment=" + basisPunishment + ", typePunishment=" + typePunishment
+				+ ", state=" + state + ", flag=" + flag + "]";
+	}
+    
 }
