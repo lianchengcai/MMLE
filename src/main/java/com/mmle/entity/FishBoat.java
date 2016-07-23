@@ -2,40 +2,45 @@ package com.mmle.entity;
 
 import java.util.Date;
 
+/**
+ * 渔船信息表
+ * @author MyPC
+ *
+ */
 public class FishBoat {
-    private Integer boatId;
+    private String boatId;//渔船编号
 
-    private String boatName;
+    private String boatName;//渔船名称
 
-    private String boatLlocation;
+    private String boatLlocation;//渔船所属地
 
-    private String homePort;
+    private String homePort;//船港籍
 
-    private Float length;
+    private Float length;//船长度
 
-    private Float width;
+    private Float width;//船宽
 
-    private Float totalWeight;
+    private Float totalWeight;//总吨位
 
-    private String fishPermitNo;
+    private String fishPermitNo;//捕捞许可证编号
 
-    private Date fishPermitTime;
+    private Date fishPermitTime;//捕捞许可到期时间
 
-    private String substitutingNo;
+    private String substitutingNo;//船检证书编号
 
-    private Date substitutingTime;
+    private Date substitutingTime;//船检证书到期时间
 
-    private Date createTime;
+    private Date createTime;//渔船信息更新时间
 
-    private Boolean state;
+    private Boolean state;//是否黑名单
 
-    private Boolean flag;
+    private Boolean flag;//信息是否有效，即是否删除
 
-    public Integer getBoatId() {
+    public String getBoatId() {
         return boatId;
     }
 
-    public void setBoatId(Integer boatId) {
+    public void setBoatId(String boatId) {
         this.boatId = boatId;
     }
 
@@ -142,4 +147,16 @@ public class FishBoat {
     public void setFlag(Boolean flag) {
         this.flag = flag;
     }
+
+	@Override
+	public String toString() {
+		return "FishBoat [boatId=" + boatId + ", boatName=" + boatName + ", boatLlocation=" + boatLlocation
+				+ ", homePort=" + homePort + ", length=" + length + ", width=" + width + ", totalWeight=" + totalWeight
+				+ ", fishPermitNo=" + fishPermitNo + ", fishPermitTime=" + fishPermitTime + ", substitutingNo="
+				+ substitutingNo + ", substitutingTime=" + substitutingTime + ", createTime=" + createTime + ", state="
+				+ state + ", flag=" + flag + "]";
+	}
+
+
+    
 }

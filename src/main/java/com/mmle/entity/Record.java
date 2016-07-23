@@ -2,154 +2,172 @@ package com.mmle.entity;
 
 import java.util.Date;
 
+/**
+ * 笔录表
+ * @author MyPC
+ *
+ */
 public class Record {
-    private Integer id;
+	
+    private Integer id;//笔录表ID
 
-    private String location;
+    private String location;//笔录询问地点
 
-    private Date date;
+    private Date startDate;//笔录询问开始时间
+    
+    private Date endDate;//笔录询问结束时间
 
-    private String ask;
+    private String ask;//询问人即执法人员工号 ，2个，以-拼接。
 
-    private String recorder;
+    private String recorder;//记录人即执法人员工号
 
-    private String departmentName;
+    private String departmentName;//单位名称
 
-    private String account;
+    private String account;//执行证件号即执法人员工号 ，2个，以-拼接。
 
-    private String violateRule;
+    private String violateRule;//违反条款
 
-    private String content;
+    private String content;//违反内容
 
-    private String asked;
+    private String asked;//被询问人名称
 
-    private Boolean feedbackOne;
+    private Boolean feedbackOne;//反馈1.是否听清，默认1
 
-    private String feedbackTwo;
+    private String feedbackTwo;//反馈2：用户信息
 
-    private Integer caseId;
+    private Integer lawEnforcementId;//执法表ID
+    
+    private Boolean flag;//信息是否有效，即是否删除
 
-    private Integer lawEnforcementId;
+	public Integer getId() {
+		return id;
+	}
 
-    private Boolean flag;
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public String getLocation() {
+		return location;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setLocation(String location) {
+		this.location = location;
+	}
 
-    public String getLocation() {
-        return location;
-    }
+	public Date getStartDate() {
+		return startDate;
+	}
 
-    public void setLocation(String location) {
-        this.location = location == null ? null : location.trim();
-    }
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
 
-    public Date getDate() {
-        return date;
-    }
+	public Date getEndDate() {
+		return endDate;
+	}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
 
-    public String getAsk() {
-        return ask;
-    }
+	public String getAsk() {
+		return ask;
+	}
 
-    public void setAsk(String ask) {
-        this.ask = ask == null ? null : ask.trim();
-    }
+	public void setAsk(String ask) {
+		this.ask = ask;
+	}
 
-    public String getRecorder() {
-        return recorder;
-    }
+	public String getRecorder() {
+		return recorder;
+	}
 
-    public void setRecorder(String recorder) {
-        this.recorder = recorder == null ? null : recorder.trim();
-    }
+	public void setRecorder(String recorder) {
+		this.recorder = recorder;
+	}
 
-    public String getDepartmentName() {
-        return departmentName;
-    }
+	public String getDepartmentName() {
+		return departmentName;
+	}
 
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName == null ? null : departmentName.trim();
-    }
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
+	}
 
-    public String getAccount() {
-        return account;
-    }
+	public String getAccount() {
+		return account;
+	}
 
-    public void setAccount(String account) {
-        this.account = account == null ? null : account.trim();
-    }
+	public void setAccount(String account) {
+		this.account = account;
+	}
 
-    public String getViolateRule() {
-        return violateRule;
-    }
+	public String getViolateRule() {
+		return violateRule;
+	}
 
-    public void setViolateRule(String violateRule) {
-        this.violateRule = violateRule == null ? null : violateRule.trim();
-    }
+	public void setViolateRule(String violateRule) {
+		this.violateRule = violateRule;
+	}
 
-    public String getContent() {
-        return content;
-    }
+	public String getContent() {
+		return content;
+	}
 
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
-    }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    public String getAsked() {
-        return asked;
-    }
+	public String getAsked() {
+		return asked;
+	}
 
-    public void setAsked(String asked) {
-        this.asked = asked == null ? null : asked.trim();
-    }
+	public void setAsked(String asked) {
+		this.asked = asked;
+	}
 
-    public Boolean getFeedbackOne() {
-        return feedbackOne;
-    }
+	public Boolean getFeedbackOne() {
+		return feedbackOne;
+	}
 
-    public void setFeedbackOne(Boolean feedbackOne) {
-        this.feedbackOne = feedbackOne;
-    }
+	public void setFeedbackOne(Boolean feedbackOne) {
+		this.feedbackOne = feedbackOne;
+	}
 
-    public String getFeedbackTwo() {
-        return feedbackTwo;
-    }
+	public String getFeedbackTwo() {
+		return feedbackTwo;
+	}
 
-    public void setFeedbackTwo(String feedbackTwo) {
-        this.feedbackTwo = feedbackTwo == null ? null : feedbackTwo.trim();
-    }
+	public void setFeedbackTwo(String feedbackTwo) {
+		this.feedbackTwo = feedbackTwo;
+	}
 
-    public Integer getCaseId() {
-        return caseId;
-    }
+	public Integer getLawEnforcementId() {
+		return lawEnforcementId;
+	}
 
-    public void setCaseId(Integer caseId) {
-        this.caseId = caseId;
-    }
+	public void setLawEnforcementId(Integer lawEnforcementId) {
+		this.lawEnforcementId = lawEnforcementId;
+	}
 
-    public Integer getLawEnforcementId() {
-        return lawEnforcementId;
-    }
+	public Boolean getFlag() {
+		return flag;
+	}
 
-    public void setLawEnforcementId(Integer lawEnforcementId) {
-        this.lawEnforcementId = lawEnforcementId;
-    }
+	public void setFlag(Boolean flag) {
+		this.flag = flag;
+	}
 
-    public Boolean getFlag() {
-        return flag;
-    }
+	@Override
+	public String toString() {
+		return "Record [id=" + id + ", location=" + location + ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", ask=" + ask + ", recorder=" + recorder + ", departmentName=" + departmentName + ", account="
+				+ account + ", violateRule=" + violateRule + ", content=" + content + ", asked=" + asked
+				+ ", feedbackOne=" + feedbackOne + ", feedbackTwo=" + feedbackTwo + ", lawEnforcementId="
+				+ lawEnforcementId + ", flag=" + flag + "]";
+	}
 
-    public void setFlag(Boolean flag) {
-        this.flag = flag;
-    }
+
+   
 }
