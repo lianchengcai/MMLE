@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.mmle.dao.UserDao;
 import com.mmle.entity.User;
+import com.mmle.serviceImple.IUserService;
 
 /**   
  * @Title: UserService.java 
@@ -19,7 +20,7 @@ import com.mmle.entity.User;
  * @version V1.0   
  */
 @Service
-public class UserService {
+public class UserService implements IUserService{
 	@Resource
 	UserDao userDao;
 	

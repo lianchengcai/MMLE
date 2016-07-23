@@ -2,124 +2,121 @@ package com.mmle.entity;
 
 import java.util.Date;
 
+/**
+ *处罚表
+ * @author MyPC
+ *
+ */
 public class PenaltyDecision {
-    private Integer id;
+	
+    private Integer id;//处罚决定ID
 
-    private String partiesInformation;
+    private String partiesInformation;//当事人信息
 
-    private String caseName;
+    private String violateContent;//违反内容
 
-    private String violateContent;
+    private String evidence;//证据
 
-    private String evidence;
+    private String violateRule;//违反条款
 
-    private String violateRule;
+    private String basis;;//违反条款依据
 
-    private String basis;
+    private String location;//缴纳罚款位置
 
-    private String location;
+    private Date date;//处罚时间
+    
+    private Integer lawEnforcementId;//执法表ID
 
-    private Date date;
+    private Boolean flag;//信息是否有效，即是否删除 .true有效,flase删除
 
-    private Integer caseId;
+	public Integer getId() {
+		return id;
+	}
 
-    private Integer lawEnforcementId;
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    private Boolean flag;
+	public String getPartiesInformation() {
+		return partiesInformation;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public void setPartiesInformation(String partiesInformation) {
+		this.partiesInformation = partiesInformation;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public String getViolateContent() {
+		return violateContent;
+	}
 
-    public String getPartiesInformation() {
-        return partiesInformation;
-    }
+	public void setViolateContent(String violateContent) {
+		this.violateContent = violateContent;
+	}
 
-    public void setPartiesInformation(String partiesInformation) {
-        this.partiesInformation = partiesInformation == null ? null : partiesInformation.trim();
-    }
+	public String getEvidence() {
+		return evidence;
+	}
 
-    public String getCaseName() {
-        return caseName;
-    }
+	public void setEvidence(String evidence) {
+		this.evidence = evidence;
+	}
 
-    public void setCaseName(String caseName) {
-        this.caseName = caseName == null ? null : caseName.trim();
-    }
+	public String getViolateRule() {
+		return violateRule;
+	}
 
-    public String getViolateContent() {
-        return violateContent;
-    }
+	public void setViolateRule(String violateRule) {
+		this.violateRule = violateRule;
+	}
 
-    public void setViolateContent(String violateContent) {
-        this.violateContent = violateContent == null ? null : violateContent.trim();
-    }
+	public String getBasis() {
+		return basis;
+	}
 
-    public String getEvidence() {
-        return evidence;
-    }
+	public void setBasis(String basis) {
+		this.basis = basis;
+	}
 
-    public void setEvidence(String evidence) {
-        this.evidence = evidence == null ? null : evidence.trim();
-    }
+	public String getLocation() {
+		return location;
+	}
 
-    public String getViolateRule() {
-        return violateRule;
-    }
+	public void setLocation(String location) {
+		this.location = location;
+	}
 
-    public void setViolateRule(String violateRule) {
-        this.violateRule = violateRule == null ? null : violateRule.trim();
-    }
+	public Date getDate() {
+		return date;
+	}
 
-    public String getBasis() {
-        return basis;
-    }
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
-    public void setBasis(String basis) {
-        this.basis = basis == null ? null : basis.trim();
-    }
+	public Integer getLawEnforcementId() {
+		return lawEnforcementId;
+	}
 
-    public String getLocation() {
-        return location;
-    }
+	public void setLawEnforcementId(Integer lawEnforcementId) {
+		this.lawEnforcementId = lawEnforcementId;
+	}
 
-    public void setLocation(String location) {
-        this.location = location == null ? null : location.trim();
-    }
+	public Boolean getFlag() {
+		return flag;
+	}
 
-    public Date getDate() {
-        return date;
-    }
+	public void setFlag(Boolean flag) {
+		this.flag = flag;
+	}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	@Override
+	public String toString() {
+		return "PenaltyDecision [id=" + id + ", partiesInformation=" + partiesInformation + ", violateContent="
+				+ violateContent + ", evidence=" + evidence + ", violateRule=" + violateRule + ", basis=" + basis
+				+ ", location=" + location + ", date=" + date + ", lawEnforcementId=" + lawEnforcementId + ", flag="
+				+ flag + "]";
+	}
 
-    public Integer getCaseId() {
-        return caseId;
-    }
 
-    public void setCaseId(Integer caseId) {
-        this.caseId = caseId;
-    }
-
-    public Integer getLawEnforcementId() {
-        return lawEnforcementId;
-    }
-
-    public void setLawEnforcementId(Integer lawEnforcementId) {
-        this.lawEnforcementId = lawEnforcementId;
-    }
-
-    public Boolean getFlag() {
-        return flag;
-    }
-
-    public void setFlag(Boolean flag) {
-        this.flag = flag;
-    }
+   
 }

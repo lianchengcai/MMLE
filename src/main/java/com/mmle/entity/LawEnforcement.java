@@ -2,74 +2,101 @@ package com.mmle.entity;
 
 import java.util.Date;
 
+/**
+ * 执法表
+ * @author MyPC
+ *
+ */
 public class LawEnforcement {
-    private Integer id;
+	
+    private Integer id;//执法表ID
+    
+    private String caseName;//案件名
 
-    private Integer caseId;
+    private Integer caseId;//案由ID关联案由表
 
-    private Date date;
+    private Date date;//执法程序创建时间
 
-    private Integer state;
+    private Integer state;//执法表状态，0:执法信息未完全，1：第一级审批，2：第二级审批3：第三级审批
 
-    private String processMan;
+    private String processMan;//审批人ID，关联用户表
 
-    private String lawEnforcementMan;
+    private String lawEnforcementMan;//执法人ID,关联用户表
 
-    private Boolean flag;
+    private Boolean flag;//信息是否有效，即是否删除 .true有效,flase删除
 
-    public Integer getId() {
-        return id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public Integer getCaseId() {
-        return caseId;
-    }
+	public String getCaseName() {
+		return caseName;
+	}
 
-    public void setCaseId(Integer caseId) {
-        this.caseId = caseId;
-    }
+	public void setCaseName(String caseName) {
+		this.caseName = caseName;
+	}
 
-    public Date getDate() {
-        return date;
-    }
+	public Integer getCaseId() {
+		return caseId;
+	}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	public void setCaseId(Integer caseId) {
+		this.caseId = caseId;
+	}
 
-    public Integer getState() {
-        return state;
-    }
+	public Date getDate() {
+		return date;
+	}
 
-    public void setState(Integer state) {
-        this.state = state;
-    }
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
-    public String getProcessMan() {
-        return processMan;
-    }
+	public Integer getState() {
+		return state;
+	}
 
-    public void setProcessMan(String processMan) {
-        this.processMan = processMan == null ? null : processMan.trim();
-    }
+	public void setState(Integer state) {
+		this.state = state;
+	}
 
-    public String getLawEnforcementMan() {
-        return lawEnforcementMan;
-    }
+	public String getProcessMan() {
+		return processMan;
+	}
 
-    public void setLawEnforcementMan(String lawEnforcementMan) {
-        this.lawEnforcementMan = lawEnforcementMan == null ? null : lawEnforcementMan.trim();
-    }
+	public void setProcessMan(String processMan) {
+		this.processMan = processMan;
+	}
 
-    public Boolean getFlag() {
-        return flag;
-    }
+	public String getLawEnforcementMan() {
+		return lawEnforcementMan;
+	}
 
-    public void setFlag(Boolean flag) {
-        this.flag = flag;
-    }
+	public void setLawEnforcementMan(String lawEnforcementMan) {
+		this.lawEnforcementMan = lawEnforcementMan;
+	}
+
+	public Boolean getFlag() {
+		return flag;
+	}
+
+	public void setFlag(Boolean flag) {
+		this.flag = flag;
+	}
+
+	@Override
+	public String toString() {
+		return "LawEnforcement [id=" + id + ", caseName=" + caseName + ", caseId=" + caseId + ", date=" + date
+				+ ", state=" + state + ", processMan=" + processMan + ", lawEnforcementMan=" + lawEnforcementMan
+				+ ", flag=" + flag + "]";
+	}
+
+   
+    
+    
 }
