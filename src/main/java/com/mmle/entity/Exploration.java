@@ -2,114 +2,130 @@ package com.mmle.entity;
 
 import java.util.Date;
 
+/**
+ * 现场勘查表
+ * @author MyPC
+ *
+ */
 public class Exploration {
-    private Integer explorationId;
+	
+    private Integer explorationId;//勘察表ID
 
-    private Date explorationTime;
+    private Date explorationStartTime;//勘查起始时间
+    
+    private Date explorationEndTime;//勘查结束时间
 
-    private String explorationLocation;
+    private String explorationLocation;//勘查地点
 
-    private String parties;
+    private String parties;//当事人
 
-    private String situation;
+    private String situation;//现场勘查情况
 
-    private String account;
+    private String account;//执行证件号即执法人员工号 ，2个，以-拼接。
 
-    private Integer state;
+    private Integer lawEnforcementId;//执法表ID
+    
+    private Boolean state;//当事人是否确认
 
-    private Integer caseId;
+    private Boolean flag;//信息是否有效，即是否删除
 
-    private Integer lawEnforcementId;
+    private String witnesses;//见证人
 
-    private Boolean flag;
+	public Integer getExplorationId() {
+		return explorationId;
+	}
 
-    private String witnesses;
+	public void setExplorationId(Integer explorationId) {
+		this.explorationId = explorationId;
+	}
 
-    public Integer getExplorationId() {
-        return explorationId;
-    }
+	public Date getExplorationStartTime() {
+		return explorationStartTime;
+	}
 
-    public void setExplorationId(Integer explorationId) {
-        this.explorationId = explorationId;
-    }
+	public void setExplorationStartTime(Date explorationStartTime) {
+		this.explorationStartTime = explorationStartTime;
+	}
 
-    public Date getExplorationTime() {
-        return explorationTime;
-    }
+	public Date getExplorationEndTime() {
+		return explorationEndTime;
+	}
 
-    public void setExplorationTime(Date explorationTime) {
-        this.explorationTime = explorationTime;
-    }
+	public void setExplorationEndTime(Date explorationEndTime) {
+		this.explorationEndTime = explorationEndTime;
+	}
 
-    public String getExplorationLocation() {
-        return explorationLocation;
-    }
+	public String getExplorationLocation() {
+		return explorationLocation;
+	}
 
-    public void setExplorationLocation(String explorationLocation) {
-        this.explorationLocation = explorationLocation == null ? null : explorationLocation.trim();
-    }
+	public void setExplorationLocation(String explorationLocation) {
+		this.explorationLocation = explorationLocation;
+	}
 
-    public String getParties() {
-        return parties;
-    }
+	public String getParties() {
+		return parties;
+	}
 
-    public void setParties(String parties) {
-        this.parties = parties == null ? null : parties.trim();
-    }
+	public void setParties(String parties) {
+		this.parties = parties;
+	}
 
-    public String getSituation() {
-        return situation;
-    }
+	public String getSituation() {
+		return situation;
+	}
 
-    public void setSituation(String situation) {
-        this.situation = situation == null ? null : situation.trim();
-    }
+	public void setSituation(String situation) {
+		this.situation = situation;
+	}
 
-    public String getAccount() {
-        return account;
-    }
+	public String getAccount() {
+		return account;
+	}
 
-    public void setAccount(String account) {
-        this.account = account == null ? null : account.trim();
-    }
+	public void setAccount(String account) {
+		this.account = account;
+	}
 
-    public Integer getState() {
-        return state;
-    }
+	public Integer getLawEnforcementId() {
+		return lawEnforcementId;
+	}
 
-    public void setState(Integer state) {
-        this.state = state;
-    }
+	public void setLawEnforcementId(Integer lawEnforcementId) {
+		this.lawEnforcementId = lawEnforcementId;
+	}
 
-    public Integer getCaseId() {
-        return caseId;
-    }
+	public Boolean getState() {
+		return state;
+	}
 
-    public void setCaseId(Integer caseId) {
-        this.caseId = caseId;
-    }
+	public void setState(Boolean state) {
+		this.state = state;
+	}
 
-    public Integer getLawEnforcementId() {
-        return lawEnforcementId;
-    }
+	public Boolean getFlag() {
+		return flag;
+	}
 
-    public void setLawEnforcementId(Integer lawEnforcementId) {
-        this.lawEnforcementId = lawEnforcementId;
-    }
+	public void setFlag(Boolean flag) {
+		this.flag = flag;
+	}
 
-    public Boolean getFlag() {
-        return flag;
-    }
+	public String getWitnesses() {
+		return witnesses;
+	}
 
-    public void setFlag(Boolean flag) {
-        this.flag = flag;
-    }
+	public void setWitnesses(String witnesses) {
+		this.witnesses = witnesses;
+	}
 
-    public String getWitnesses() {
-        return witnesses;
-    }
+	@Override
+	public String toString() {
+		return "Exploration [explorationId=" + explorationId + ", explorationStartTime=" + explorationStartTime
+				+ ", explorationEndTime=" + explorationEndTime + ", explorationLocation=" + explorationLocation
+				+ ", parties=" + parties + ", situation=" + situation + ", account=" + account + ", lawEnforcementId="
+				+ lawEnforcementId + ", state=" + state + ", flag=" + flag + ", witnesses=" + witnesses + "]";
+	}
 
-    public void setWitnesses(String witnesses) {
-        this.witnesses = witnesses == null ? null : witnesses.trim();
-    }
+
 }
