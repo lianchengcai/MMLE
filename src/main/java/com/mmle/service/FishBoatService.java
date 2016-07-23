@@ -28,6 +28,11 @@ public class FishBoatService implements IFishBoatService{
 		return false;
 	}
 	
+	public boolean delete(String boatId){
+		if(fishBoatDao.deleteFishBoatById(boatId)==1)return true;
+		return false;
+	}
+	
 	public PageUtil<FishBoat> getFishBoatPage(FishBoat fishBoat,int currentPage,int size){
 		int count = fishBoatDao.selectFishBoatCount(fishBoat);
 		PageUtil<FishBoat> fishBoatPage = new PageUtil<>(currentPage, count, size);
