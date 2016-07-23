@@ -1,12 +1,15 @@
 package com.mmle.utils;
 
-import java.util.List;
 import java.util.Map;
 
 import com.mmle.entity.Case;
 import com.mmle.entity.CaseType;
 import com.mmle.entity.Check;
 import com.mmle.entity.Exploration;
+import com.mmle.entity.FishBoat;
+import com.mmle.entity.LawEnforcement;
+import com.mmle.entity.PenaltyDecision;
+import com.mmle.entity.Record;
 import com.mmle.entity.User;
 
 
@@ -27,6 +30,10 @@ public class DTO {
 	private CaseType caseType;
 	private Check check;
 	private Exploration exploration;
+	private FishBoat fishBoat;
+	private LawEnforcement lawEnforcement;
+	private PenaltyDecision penaltyDecision;
+	private Record record;
 	private User user;
 	public Integer getCurrentPage() {
 		return currentPage;
@@ -76,10 +83,37 @@ public class DTO {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	public FishBoat getFishBoat() {
+		return fishBoat;
+	}
+	public void setFishBoat(FishBoat fishBoat) {
+		this.fishBoat = fishBoat;
+	}
+	public LawEnforcement getLawEnforcement() {
+		return lawEnforcement;
+	}
+	public void setLawEnforcement(LawEnforcement lawEnforcement) {
+		this.lawEnforcement = lawEnforcement;
+	}
+	public PenaltyDecision getPenaltyDecision() {
+		return penaltyDecision;
+	}
+	public void setPenaltyDecision(PenaltyDecision penaltyDecision) {
+		this.penaltyDecision = penaltyDecision;
+	}
+	public Record getRecord() {
+		return record;
+	}
+	public void setRecord(Record record) {
+		this.record = record;
+	}
 	@Override
 	public String toString() {
 		return "DTO [currentPage=" + currentPage + ", size=" + size + ", map=" + map + ", cas=" + cas + ", caseType="
-				+ caseType + ", check=" + check + ", exploration=" + exploration + ", user=" + user + "]";
+				+ caseType + ", check=" + check + ", exploration=" + exploration + ", fishBoat=" + fishBoat
+				+ ", lawEnforcement=" + lawEnforcement + ", penaltyDecision=" + penaltyDecision + ", record=" + record
+				+ ", user=" + user + "]";
 	}
+
 
 }
