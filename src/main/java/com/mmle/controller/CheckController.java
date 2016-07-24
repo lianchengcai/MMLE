@@ -47,4 +47,19 @@ public class CheckController {
 		return map;
 	}
 	
+	@RequestMapping("updateCheck")
+	@ResponseBody
+	public Map<String, Object> updateCheck(@RequestBody DTO data){
+		log.info("updateCheck:"+data.toString());
+		Map<String, Object> map = checkService.updateCheck(data.getCheck());
+		return map;
+	}
+	
+	@RequestMapping("deleteCheck")
+	@ResponseBody
+	public Map<String, Object> deleteCheck(@RequestBody DTO data){
+		log.info("deleteCheck:"+data.toString());
+		Map<String, Object> map = checkService.deleteCheck(data.getCheck().getCheckId());
+		return map;
+	}
 }

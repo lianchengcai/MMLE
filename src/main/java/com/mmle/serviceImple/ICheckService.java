@@ -19,4 +19,8 @@ public interface ICheckService {
 
 	public Map<String, Object> getCheck(Check check, Integer size, Integer currentPage);
 
+	public Map<String, Object> updateCheck(Check check);
+
+	public Map<String, Object> deleteCheck(Integer checkId);
+
 }

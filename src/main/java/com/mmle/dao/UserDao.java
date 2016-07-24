@@ -25,4 +25,7 @@ public interface UserDao {
 
 	@Select("select * from tbl_user where name like concat('%', #{name}, '%')")
 	List<User> getUserByName(String name);
+	
+	@Select("select * from tbl_user where account=#{account}")
+	User getUserById(String account);
 }

@@ -92,4 +92,34 @@ public class CheckService implements ICheckService{
 		return map;
 	}
 
+	@Override
+	public Map<String, Object> updateCheck(Check check) {
+		Map<String, Object> map = new HashMap<>();
+		if (check!=null) {
+			if (checkDao.updateCheck(check)==1) {
+				map.put("code", 1);
+			}else {
+				map.put("code", 0);
+			}
+		}else{
+			map.put("code", 0);
+		}
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> deleteCheck(Integer checkId) {
+		Map<String, Object> map = new HashMap<>();
+		if (checkId!=null) {
+			if (checkDao.deleteCheck(checkId)==1) {
+				map.put("code", 1);
+			}else {
+				map.put("code", 0);
+			}
+		}else {
+			map.put("code", 0);
+		}
+		return map;
+	}
+
 }

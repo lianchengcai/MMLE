@@ -190,4 +190,66 @@ public class DynaSqlProvider {
 			}
 		}.toString();
 	}	
+	public String updateCheck(final Check check) {
+		return new SQL() {
+			{
+				UPDATE("tbl_check");
+				if (check.getBoatCheck()!= null) {
+					SET(" boat_check= #{boatCheck}");
+				}
+				if (check.getBoater()!= null) {
+					SET("boater = #{boater}");
+				}
+				if (check.getChiefEngineer() != null) {
+					SET("chief_engineer = #{chiefEngineer}");
+				}
+				if (check.getCompass() != null) {
+					SET("compass = #{compass}");
+				}
+				if (check.getFishing() != null) {
+					SET("fishing = #{fishing}");
+				}
+				if (check.getNationality() != null) {
+					SET("nationality = #{nationality}");
+				}
+				if (check.getFlag() != null) {
+					SET("flag = #{flag}");
+				}
+				if (check.getRadar() != null) {
+					SET("radar = #{radar}");
+				}
+				if (check.getSailing() != null) {
+					SET("sailing = #{sailing}");
+				}
+				if (check.getSatelliteNavigation() != null) {
+					SET("satelliteNavigation = #{satelliteNavigation}");
+				}
+				if (check.getSsb() != null) {
+					SET("ssb = #{ssb}");
+				}
+				if (check.getBoat() != null) {
+					SET("boat = #{boat.boatId}");
+				}
+				if (check.getBoatImage() != null) {
+					SET("boat_image = #{boatImage}");
+				}
+				if (check.getCheckMan() != null) {
+					SET("check_man = #{checkMan.account}");
+				}
+				if (check.getCheckTime() != null) {
+					SET("check_time = #{checkTime}");
+				}
+				if (check.getManImage() != null) {
+					SET("man_image = #{manImage}");
+				}
+				if (check.getTitle() != null) {
+					SET("title = #{title}");
+				}
+				if (check.getType() != null) {
+					SET("type = #{type}");
+				}
+				WHERE("check_id = #{checkId}");
+			}
+		}.toString();
+	}	
 }
