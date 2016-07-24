@@ -1,10 +1,13 @@
 package com.mmle.utils;
 
+import java.util.Map;
+
 import org.apache.ibatis.jdbc.SQL;
 
 import com.mmle.entity.Case;
 import com.mmle.entity.CaseType;
 import com.mmle.entity.Check;
+import com.mmle.entity.FishBoat;
 import com.mmle.entity.User;
 
 
@@ -70,9 +73,6 @@ public class DynaSqlProvider {
 				}
 				if (cas.getCaseType() != null) {
 					VALUES("case_type", "#{caseType.typeId}");
-				}
-				if (cas.getState()!= null) {
-					VALUES("state", "#{state}");
 				}
 				if (cas.getTypePunishment()!= null) {
 					VALUES("type_punishment", "#{typePunishment}");
@@ -144,6 +144,9 @@ public class DynaSqlProvider {
 				if (check.getType()!= null) {
 					VALUES("type", "#{type}");
 				}
+				if (check.getContent()!= null) {
+					VALUES("content", "#{content}");
+				}
 			}
 		}.toString();
 	}
@@ -162,9 +165,6 @@ public class DynaSqlProvider {
 				}
 				if (cas.getTypePunishment() != null) {
 					SET("type_punishment = #{typePunishment}");
-				}
-				if (cas.getState() != null) {
-					SET("state = #{state}");
 				}
 				if (cas.getViolateRule() != null) {
 					SET("violate_rule = #{violateRule}");
@@ -248,8 +248,55 @@ public class DynaSqlProvider {
 				if (check.getType() != null) {
 					SET("type = #{type}");
 				}
+				if (check.getContent() != null) {
+					SET("content = #{content}");
+				}
 				WHERE("check_id = #{checkId}");
 			}
 		}.toString();
 	}	
+	
+	public String getCheck(final Map<String, Object> map){
+		Check check = (Check) map.get("check");
+		System.out.println(check);
+		Integer offset = (Integer)map.get("offset");
+		Integer size = (Integer)map.get("size");
+		StringBuffer s = new StringBuffer();
+		s.append("select * from ");
+		s.append("tbl_check");
+		s.append(" where 1=1 ");
+		if (check!=null) {
+			if (check.getType() != null) {
+				s.append("and type LIKE '%");
+				s.append(check.getType());
+				s.append("%' ");
+			}
+			if (check.getTitle() != null) {
+				s.append("and title LIKE '%");
+				s.append(check.getTitle());
+				s.append("%' ");
+			} 
+			if (check.getCheckMan() != null) {
+				if (check.getCheckMan().getName()!=null) {
+					s.append("and check_man LIKE '%");
+					s.append(check.getCheckMan().getName());
+					s.append("%' ");
+				}
+			} 
+			if (check.getFlag() != null) {
+				s.append("and flag =");
+				s.append(check.getFlag());
+				s.append(" ");
+			}
+			if(offset != null && offset!=0  && size != null && size!=0 && size>offset){
+				s.append("limit ");
+				s.append(offset);
+				s.append(",");
+				s.append(size);
+				
+			}
+		}
+		System.out.println(s.toString());
+		return s.toString();
+	}
 }

@@ -5,7 +5,7 @@ import java.util.Date;
 public class Check {
     private Integer checkId;
 
-    private Integer type;
+    private String type;
 
    // private Integer boat;
     private FishBoat boat;
@@ -43,7 +43,17 @@ public class Check {
 
     private Boolean flag;
 
-    public Integer getCheckId() {
+    private String content;
+    
+    public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public Integer getCheckId() {
         return checkId;
     }
 
@@ -51,11 +61,11 @@ public class Check {
         this.checkId = checkId;
     }
 
-    public Integer getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -203,4 +213,16 @@ public class Check {
     public void setFlag(Boolean flag) {
         this.flag = flag;
     }
+
+	@Override
+	public String toString() {
+		return "Check [checkId=" + checkId + ", type=" + type + ", boat=" + boat + ", checkMan=" + checkMan
+				+ ", checkTime=" + checkTime + ", title=" + title + ", boatImage=" + boatImage + ", manImage="
+				+ manImage + ", nationality=" + nationality + ", boatCheck=" + boatCheck + ", fishing=" + fishing
+				+ ", sailing=" + sailing + ", boater=" + boater + ", chiefEngineer=" + chiefEngineer
+				+ ", satelliteNavigation=" + satelliteNavigation + ", radar=" + radar + ", ssb=" + ssb + ", compass="
+				+ compass + ", flag=" + flag + ", content=" + content + "]";
+	}
+
+    
 }

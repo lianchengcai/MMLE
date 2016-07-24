@@ -9,7 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.mmle.serviceImple.ICheckService;
 import com.mmle.utils.DTO;
@@ -33,9 +35,9 @@ public class CheckController {
 
 	@RequestMapping("addCheck")
 	@ResponseBody
-	public Map<String, Object> addCheck(@RequestBody DTO data){
-		log.info("addCheck:"+data.toString());
-		Map<String, Object> map = checkService.addCheck(data.getCheck(),data.getPic());
+	public Map<String, Object> addCheck(@RequestBody DTO data,@RequestParam MultipartFile[] pic){
+		log.info("addCheck:"+data.toString()+pic.toString());
+		Map<String, Object> map = checkService.addCheck(data.getCheck(),pic);
 		return map;
 	}
 	
@@ -43,7 +45,7 @@ public class CheckController {
 	@ResponseBody
 	public Map<String, Object> getCheck(@RequestBody DTO data){
 		log.info("getCheck:"+data.toString());
-		Map<String, Object> map = checkService.getCheck(data.getCheck(),data.getSize(),data.getCurrentPage());
+		Map<String, Object> map = checkService.getCheck2(data.getCheck(),data.getSize(),data.getCurrentPage());
 		return map;
 	}
 	
@@ -59,7 +61,7 @@ public class CheckController {
 	@ResponseBody
 	public Map<String, Object> deleteCheck(@RequestBody DTO data){
 		log.info("deleteCheck:"+data.toString());
-		Map<String, Object> map = checkService.deleteCheck(data.getCheck().getCheckId());
+		Map<String, Object> map = checkService.deleteCheck(data.getCheck());
 		return map;
 	}
 }

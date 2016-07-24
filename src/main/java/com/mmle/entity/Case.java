@@ -14,8 +14,6 @@ public class Case {
 
     private String typePunishment;
 
-    private Integer state;
-
     private Boolean flag;
 
     public Integer getCaseId() {
@@ -74,13 +72,6 @@ public class Case {
         this.typePunishment = typePunishment == null ? null : typePunishment.trim();
     }
 
-    public Integer getState() {
-        return state;
-    }
-
-    public void setState(Integer state) {
-        this.state = state;
-    }
 
     public Boolean getFlag() {
         return flag;
@@ -94,7 +85,7 @@ public class Case {
 	public String toString() {
 		return "Case [caseId=" + caseId + ", caseType=" + caseType + ", caseName=" + caseName + ", violateRule="
 				+ violateRule + ", basisPunishment=" + basisPunishment + ", typePunishment=" + typePunishment
-				+ ", state=" + state + ", flag=" + flag + "]";
+				+ ", flag=" + flag + "]";
 	}
     
 }

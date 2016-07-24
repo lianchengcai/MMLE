@@ -1,5 +1,6 @@
 package com.mmle.utils;
 
+import java.util.Arrays;
 import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -37,14 +38,7 @@ public class DTO {
 	private PenaltyDecision penaltyDecision;
 	private Record record;
 	private User user;
-	private MultipartFile[] pic;
 	
-	public MultipartFile[] getPic() {
-		return pic;
-	}
-	public void setPic(MultipartFile[] pic) {
-		this.pic = pic;
-	}
 	public Integer getCurrentPage() {
 		return currentPage;
 	}
