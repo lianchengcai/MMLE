@@ -150,6 +150,9 @@ public class DynaSqlProvider {
 				if (check.getLocation()!= null) {
 					VALUES("location", "#{location}");
 				}
+				if (check.getState()!= null) {
+					VALUES("state", "#{state}");
+				}
 			}
 		}.toString();
 	}
@@ -256,6 +259,9 @@ public class DynaSqlProvider {
 				}
 				if (check.getLocation() != null) {
 					SET("location = #{location}");
+				}
+				if (check.getState() != null) {
+					SET("state = #{state}");
 				}
 				WHERE("check_id = #{checkId}");
 			}

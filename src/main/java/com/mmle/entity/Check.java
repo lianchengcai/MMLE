@@ -47,7 +47,18 @@ public class Check {
     
     private String location;
     
-    public String getLocation() {
+    private Boolean state;
+    
+    
+    public Boolean getState() {
+		return state;
+	}
+
+	public void setState(Boolean state) {
+		this.state = state;
+	}
+
+	public String getLocation() {
 		return location;
 	}
 
@@ -231,7 +242,9 @@ public class Check {
 				+ manImage + ", nationality=" + nationality + ", boatCheck=" + boatCheck + ", fishing=" + fishing
 				+ ", sailing=" + sailing + ", boater=" + boater + ", chiefEngineer=" + chiefEngineer
 				+ ", satelliteNavigation=" + satelliteNavigation + ", radar=" + radar + ", ssb=" + ssb + ", compass="
-				+ compass + ", flag=" + flag + ", content=" + content + ", location=" + location + "]";
+				+ compass + ", flag=" + flag + ", content=" + content + ", location=" + location + ", state=" + state
+				+ "]";
 	}
+
 
 }
