@@ -131,30 +131,32 @@ public class FishBoatDynaSql {
 		s.append("select * from ");
 		s.append(TABLE_NAME);
 		s.append(" where 1=1 ");
-		if (fishBoat.getBoatName() != null) {
-			s.append("and boat_name LIKE '%");
-			s.append(fishBoat.getBoatName());
-			s.append("%' ");
-		}
-		if (fishBoat.getBoatId() != null) {
-			s.append("and boat_id LIKE '%");
-			s.append(fishBoat.getBoatId());
-			s.append("%' ");
-		} 
-		if (fishBoat.getSubstitutingTime()!=null) {
-			s.append("and substituting_time >'");
-			s.append(fishBoat.getSubstitutingTime());
-			s.append("' ");
-		}
-		if (fishBoat.getBoatLlocation() != null) {
-			s.append("and boat_llocation LIKE '%");
-			s.append(fishBoat.getBoatLlocation());
-			s.append("%' ");
-		}
-		if (fishBoat.getFlag() != null) {
-			s.append("and flag =");
-			s.append(fishBoat.getFlag());
-			s.append(" ");
+		if(fishBoat!=null){
+			if (fishBoat.getBoatName() != null) {
+				s.append("and boat_name LIKE '%");
+				s.append(fishBoat.getBoatName());
+				s.append("%' ");
+			}
+			if (fishBoat.getBoatId() != null) {
+				s.append("and boat_id LIKE '%");
+				s.append(fishBoat.getBoatId());
+				s.append("%' ");
+			} 
+			if (fishBoat.getSubstitutingTime()!=null) {
+				s.append("and substituting_time >'");
+				s.append(fishBoat.getSubstitutingTime());
+				s.append("' ");
+			}
+			if (fishBoat.getBoatLlocation() != null) {
+				s.append("and boat_llocation LIKE '%");
+				s.append(fishBoat.getBoatLlocation());
+				s.append("%' ");
+			}
+			if (fishBoat.getFlag() != null) {
+				s.append("and flag =");
+				s.append(fishBoat.getFlag());
+				s.append(" ");
+			}
 		}
 		if(start != null && start!=0  && end != null && end!=0 && end>start){
 			s.append("limit ");
@@ -171,6 +173,7 @@ public class FishBoatDynaSql {
 		s.append("select count(*) from ");
 		s.append(TABLE_NAME);
 		s.append(" where 1=1 ");
+		if(fishBoat==null)return s.toString();
 		if (fishBoat.getBoatName() != null) {
 			s.append("and boat_name LIKE '%");
 			s.append(fishBoat.getBoatName());

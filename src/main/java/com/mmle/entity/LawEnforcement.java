@@ -18,6 +18,10 @@ public class LawEnforcement {
     private Date date;//执法程序创建时间
 
     private Integer state;//执法表状态，0:执法信息未完全，1：第一级审批，2：第二级审批3：第三级审批
+    
+    private Boolean pass;//审核是否通过
+    
+    private String reason;//审核是否通过的原因
 
     private String processMan;//审批人ID，关联用户表
 
@@ -89,12 +93,32 @@ public class LawEnforcement {
 		this.flag = flag;
 	}
 
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+
+	public Boolean getPass() {
+		return pass;
+	}
+
+	public void setPass(Boolean pass) {
+		this.pass = pass;
+	}
+
 	@Override
 	public String toString() {
 		return "LawEnforcement [id=" + id + ", caseName=" + caseName + ", caseId=" + caseId + ", date=" + date
-				+ ", state=" + state + ", processMan=" + processMan + ", lawEnforcementMan=" + lawEnforcementMan
-				+ ", flag=" + flag + "]";
+				+ ", state=" + state + ", pass=" + pass + ", reason=" + reason + ", processMan=" + processMan
+				+ ", lawEnforcementMan=" + lawEnforcementMan + ", flag=" + flag + "]";
 	}
+
+	
+
+	
 
    
     
