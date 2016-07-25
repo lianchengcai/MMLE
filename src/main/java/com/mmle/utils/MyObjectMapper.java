@@ -31,7 +31,7 @@ public class MyObjectMapper extends ObjectMapper {
 		// 设置null转换""
 //		getSerializerProvider().setNullValueSerializer(new NullSerializer());
 		// 设置日期转换yyyy-MM-dd HH:mm:ss
-		setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+		setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm"));
 	}
 
 	// null的JSON序列

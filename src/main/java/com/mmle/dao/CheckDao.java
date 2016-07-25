@@ -40,7 +40,7 @@ public interface CheckDao {
 	@Results({
 		//这两个映射要看其他人的方法怎么写
 		@Result(property="boat",column="boat",one=@One(select="com.mmle.dao.IFishBoatDao.selectFishBoatById")),
-		@Result(property="checkMan",column="check_man",one=@One(select="com.mmle.dao.UserDao.getUserById")),
+		//@Result(property="checkMan",column="check_man",one=@One(select="com.mmle.dao.UserDao.getUserById")),
 	})
 	List<Check> getCheckByType(Map<String, Object> query);
 
@@ -48,7 +48,7 @@ public interface CheckDao {
 	@Results({
 		//这两个映射要看其他人的方法怎么写
 		@Result(property="boat",column="boat",one=@One(select="com.mmle.dao.IFishBoatDao.selectFishBoatById")),
-		@Result(property="checkMan",column="check_man",one=@One(select="com.mmle.dao.UserDao.getUserById")),
+		//@Result(property="checkMan",column="check_man",one=@One(select="com.mmle.dao.UserDao.getUserById")),
 	})
 	List<Check> getCheckByTitle(Map<String, Object> query);
 
@@ -56,7 +56,7 @@ public interface CheckDao {
 	@Results({
 		//这两个映射要看其他人的方法怎么写
 		@Result(property="boat",column="boat",one=@One(select="com.mmle.dao.IFishBoatDao.selectFishBoatById")),
-		@Result(property="checkMan",column="check_man",one=@One(select="com.mmle.dao.UserDao.getUserById")),
+		//@Result(property="checkMan",column="check_man",one=@One(select="com.mmle.dao.UserDao.getUserById")),
 	})
 	List<Check> getcheckByCheckMan(Map<String, Object> query);
 
@@ -73,7 +73,7 @@ public interface CheckDao {
 	@Results({
 		//这两个映射要看其他人的方法怎么写
 		@Result(property="boat",column="boat",one=@One(select="com.mmle.dao.IFishBoatDao.selectFishBoatById")),
-		@Result(property="checkMan",column="check_man",one=@One(select="com.mmle.dao.UserDao.getUserById")),
+		//@Result(property="checkMan",column="check_man",one=@One(select="com.mmle.dao.UserDao.getUserById")),
 	})
 	List<Check> getAllCheck();
 
@@ -87,7 +87,7 @@ public interface CheckDao {
 	@Results({
 		//这两个映射要看其他人的方法怎么写
 		@Result(property="boat",column="boat",one=@One(select="com.mmle.dao.IFishBoatDao.selectFishBoatById")),
-		@Result(property="checkMan",column="check_man",one=@One(select="com.mmle.dao.UserDao.getUserById")),
+		//@Result(property="checkMan",column="check_man",one=@One(select="com.mmle.dao.UserDao.getUserById")),
 	})
 	List<Check> getCheck(Map<String, Object> query);
 }

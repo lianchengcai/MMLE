@@ -48,7 +48,7 @@ public class CheckControllerTest {
 		mockMvc = webAppContextSetup(wac).build();
 	}
 
-	//@Test
+	@Test
 	public void getCheck() throws Exception {
 		DTO data = new DTO();
 		Check check = new Check();
@@ -156,7 +156,7 @@ public class CheckControllerTest {
 
 
 
-	@Test
+	//@Test
 	public void deleteCheck() throws Exception {
 		DTO data = new DTO();
 		Check check = new Check();

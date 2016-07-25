@@ -14,6 +14,8 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang.ObjectUtils.Null;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mmle.dao.CheckDao;
@@ -106,6 +108,7 @@ public class CheckService implements ICheckService {
 		return map;
 	}
 
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	@Override
 	public Map<String, Object> getCheck(Check check, Integer size, Integer currentPage) {
 		currentPage = currentPage != null ? currentPage : 1;

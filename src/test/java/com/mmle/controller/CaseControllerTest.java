@@ -47,12 +47,14 @@ public class CaseControllerTest {
 		mockMvc = webAppContextSetup(wac).build();
 	}
 
-	// @Test
+	 @Test
 	public void getCaseInfo() throws Exception {
 		DTO data = new DTO();
-		// Case cas = new Case();
-		// cas.setCaseName("捕捞的渔获物中的幼鱼超过规定比例");
-		// data.setCas(cas);
+		Case cas = new Case();
+		CaseType caseType = new CaseType();
+		caseType.setTypeId(1);
+		cas.setCaseType(caseType);
+		data.setCas(cas);
 		ObjectMapper mapper = new ObjectMapper();
 		// mapper.configure(SerializationConfig.Feature.INDENT_OUTPUT,
 		// Boolean.TRUE);
@@ -197,7 +199,7 @@ public class CaseControllerTest {
 		System.out.println(result.getResponse().getContentAsString());
 	}
 
-	@Test
+	//@Test
 	public void deleteCaseType() throws Exception {
 		DTO data = new DTO();
 		CaseType caseType = new CaseType();

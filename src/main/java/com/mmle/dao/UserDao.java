@@ -31,4 +31,7 @@ public interface UserDao {
 
 	@Select("select * from tbl_user where account=#{account} and password=#{password}")
 	User login(User user);
+	
+	@Select("select * from tbl_user")
+	List<User> getUser();
 }

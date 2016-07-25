@@ -49,4 +49,19 @@ public class UserController {
 		Map<String, Object> map = userService.login(data.getUser());
 		return map;
 	}
+	
+	/**
+	 * 
+	 * @Title: getUser 
+	 * @Description: TODO(安卓暂用) 
+	 * @param @return    设定文件 
+	 * @return Map<String,Object>    返回类型 
+	 * @throws
+	 */
+	@RequestMapping("/getUser")
+	@ResponseBody
+	public Map<String, Object> getUser() {
+		Map<String, Object> map = userService.getUser();
+		return map;
+	}
 }

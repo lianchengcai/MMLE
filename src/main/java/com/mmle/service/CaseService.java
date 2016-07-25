@@ -154,6 +154,7 @@ public class CaseService implements ICaseService {
 				map.put("code", 101);
 			} else {
 				caseDao.insertCaseType(caseType);
+				System.out.println(caseType.getTypeId());
 				map.put("code", 1);
 			}
 		}

@@ -1,6 +1,8 @@
 package com.mmle.service;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -42,6 +44,14 @@ public class UserService implements IUserService {
 		}else {
 			map.put("code", 0);
 		}
+		return map;
+	}
+
+	
+	public Map<String, Object> getUser() {
+		Map<String,Object> map = new HashMap<>();
+		List<User> users = userDao.getUser();
+		map.put("user", users);
 		return map;
 	}
 

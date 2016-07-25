@@ -45,7 +45,17 @@ public class Check {
 
     private String content;
     
-    public String getContent() {
+    private String location;
+    
+    public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getContent() {
 		return content;
 	}
 
@@ -221,8 +231,7 @@ public class Check {
 				+ manImage + ", nationality=" + nationality + ", boatCheck=" + boatCheck + ", fishing=" + fishing
 				+ ", sailing=" + sailing + ", boater=" + boater + ", chiefEngineer=" + chiefEngineer
 				+ ", satelliteNavigation=" + satelliteNavigation + ", radar=" + radar + ", ssb=" + ssb + ", compass="
-				+ compass + ", flag=" + flag + ", content=" + content + "]";
+				+ compass + ", flag=" + flag + ", content=" + content + ", location=" + location + "]";
 	}
 
-    
 }
