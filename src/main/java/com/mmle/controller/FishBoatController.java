@@ -43,7 +43,7 @@ public class FishBoatController {
 	}
 	
 	@RequestMapping(value="getPageList")
-	public @ResponseBody Map<String, Object> getFishBoatList(@RequestBody DTO data)throws Exception{
+	public @ResponseBody String getFishBoatList(@RequestBody DTO data)throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		int currentPage=data.getCurrentPage();//当前页
@@ -51,12 +51,11 @@ public class FishBoatController {
 		FishBoat fishBoat = data.getFishBoat();
 		PageUtil<FishBoat> fishBoatPage = fishBoatService.getFishBoatPage(fishBoat, currentPage, size);
 		map.put("fishBoatPage", fishBoatPage);
-		return map;
 		
-//		JsonConfig config = new JsonConfig(); 
-//		config.registerJsonValueProcessor(Date.class, new DateJsonValueProcessor("yyyy-MM-dd hh:mm:ss")); 
-//		JSONObject result = JSONObject.fromObject(map,config);
-//		return result.toString();
+		JsonConfig config = new JsonConfig(); 
+		config.registerJsonValueProcessor(Date.class, new DateJsonValueProcessor("yyyy-MM-dd hh:mm")); 
+		JSONObject result = JSONObject.fromObject(map,config);
+		return result.toString();
 	}
 	
 	@RequestMapping(value="delete")

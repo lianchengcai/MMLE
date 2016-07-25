@@ -72,7 +72,7 @@ public class FishBoatControllerTest {
 		
 		DTO data = new DTO();
 		
-		Map<String, Object> map = fishBoatController.getFishBoatList(data);
+		String map = fishBoatController.getFishBoatList(data);
 		
 		JSONObject jsonb = JSONObject.fromObject(map);
 		System.out.println(jsonb.toString());

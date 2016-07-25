@@ -21,7 +21,11 @@ import com.mmle.service.LawEnforcementService;
 import com.mmle.service.PenaltyDecisionService;
 import com.mmle.service.RecordService;
 import com.mmle.utils.DTO;
+import com.mmle.utils.DateJsonValueProcessor;
 import com.mmle.utils.PageUtil;
+
+import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
 
 @Controller
 @RequestMapping("lawEnforcement")
@@ -57,7 +61,7 @@ public class LawEnforcementController {
 	}
 	
 	@RequestMapping(value="getLawEnforcementPage")
-	public @ResponseBody Map<String, Object> getLawEnforcement(@RequestBody DTO data)throws Exception{
+	public @ResponseBody String getLawEnforcement(@RequestBody DTO data)throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		Integer currentPage = data.getCurrentPage();
@@ -65,7 +69,11 @@ public class LawEnforcementController {
 		LawEnforcement lawEnforcement = data.getLawEnforcement();
 		PageUtil<LawEnforcementExtend> lawEnforcementExtendPage = lawEnforcementService.getLawEnforcementPage(lawEnforcement, currentPage, size);
 		map.put("lawEnforcementExtendPage", lawEnforcementExtendPage);
-		return map;
+		
+		JsonConfig config = new JsonConfig(); 
+		config.registerJsonValueProcessor(Date.class, new DateJsonValueProcessor("yyyy-MM-dd hh:mm")); 
+		JSONObject result = JSONObject.fromObject(map,config);
+		return result.toString();
 	}
 	
 	@RequestMapping(value="delete")

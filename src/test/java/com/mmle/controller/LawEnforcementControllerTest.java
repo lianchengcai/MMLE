@@ -150,7 +150,9 @@ public class LawEnforcementControllerTest {
 		String json = mapper.writeValueAsString(data);
 		System.out.println("Java2Json: " + json);
 		
-		Map<String, Object> map = lawEnforcementController.getLawEnforcement(data);
+		String map = lawEnforcementController.getLawEnforcement(data);
+		
+		
 		System.out.println(JSONObject.fromObject(map).toString());
 	}
 }
