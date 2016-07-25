@@ -48,7 +48,7 @@ public class ExplorationDynaSql {
 					VALUES("law_enforcement_id", "#{lawEnforcementId}");
 				}
 				if (exploration.getState() != null) {
-					VALUES("fish_permit_time", "#{fishPermitTime}");
+					VALUES("state", "#{state}");
 				}
 				if (exploration.getWitnesses() != null) {
 					VALUES("witnesses", "#{witnesses}");

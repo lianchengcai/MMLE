@@ -35,6 +35,6 @@ public interface IExplorationDao {
 	@UpdateProvider(type = ExplorationDynaSql.class, method = "updateExploration")
 	int updateExploration(Exploration exploration);
 	
-	@Select("select * from tbl_exploration where lawEnforcement_id=#{lawEnforcementId}")
-	Exploration selectExplorationByLawEnforcementId(String lawEnforcementId);
+	@Select("select * from tbl_exploration where law_enforcement_id=#{lawEnforcementId}")
+	Exploration selectExplorationByLawEnforcementId(int lawEnforcementId);
 }

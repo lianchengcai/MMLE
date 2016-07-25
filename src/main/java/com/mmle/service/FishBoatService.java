@@ -37,7 +37,9 @@ public class FishBoatService implements IFishBoatService{
 		int count = fishBoatDao.selectFishBoatCount(fishBoat);
 		PageUtil<FishBoat> fishBoatPage = new PageUtil<>(currentPage, count, size);
 		if(count>0){
-			List<FishBoat> fishBoatList = fishBoatDao.selectFishBoatByConditions(fishBoat, fishBoatPage.getDataStart(), fishBoatPage.getDataEnd());
+			Integer start =  fishBoatPage.getDataStart();
+			Integer end = fishBoatPage.getDataEnd();
+			List<FishBoat> fishBoatList = fishBoatDao.selectFishBoatByConditions(fishBoat,start, end);
 			fishBoatPage.setList(fishBoatList);
 			return fishBoatPage;
 		}
