@@ -17,7 +17,7 @@ public class Record {
     
     private Date endDate;//笔录询问结束时间
 
-    private String ask;//询问人即执法人员工号 ，2个，以-拼接。
+    private String ask;//询问人即执法名字 ，2个，以-拼接。
 
     private String recorder;//记录人即执法人员工号
 

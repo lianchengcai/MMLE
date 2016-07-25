@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.apache.ibatis.jdbc.SQL;
 
+import com.mmle.entity.FishBoat;
 import com.mmle.entity.LawEnforcement;
 
 /**
@@ -34,6 +35,12 @@ public class LawEnforcementDynaSql {
 				if (lawEnforcement.getState() != null) {
 					VALUES("state", "#{state}");
 				}
+				if (lawEnforcement.getPass() != null) {
+					VALUES("pass", "#{pass}");
+				}
+				if (lawEnforcement.getReason() != null) {
+					VALUES("reason", "#{reason}");
+				}
 				if (lawEnforcement.getProcessMan()!= null) {
 					VALUES("process_man", "#{processMan}");
 				}
@@ -63,6 +70,12 @@ public class LawEnforcementDynaSql {
 				}
 				if (lawEnforcement.getState() != null) {
 					SET("state = #{state}");
+				}
+				if (lawEnforcement.getPass() != null) {
+					SET("pass = #{pass}");
+				}
+				if (lawEnforcement.getReason() != null) {
+					SET("reason = #{reason}");
 				}
 				if (lawEnforcement.getProcessMan()!= null) {
 					SET("process_man = #{processMan}");
@@ -96,6 +109,16 @@ public class LawEnforcementDynaSql {
 			s.append(lawEnforcement.getState());
 			s.append(" ");
 		} 
+		if (lawEnforcement.getPass() != null) {
+			s.append("and pass = ");
+			s.append(lawEnforcement.getPass());
+			s.append(" ");
+		} 
+		if (lawEnforcement.getReason() != null) {
+			s.append("and reason = ");
+			s.append(lawEnforcement.getReason());
+			s.append(" ");
+		} 
 		if (lawEnforcement.getCaseName()!=null) {
 			s.append("and case_name LIKE '%");
 			s.append(lawEnforcement.getCaseName());
@@ -108,7 +131,7 @@ public class LawEnforcementDynaSql {
 		}
 		if (lawEnforcement.getLawEnforcementMan() != null) {
 			s.append("and law_enforcement_man LIKE '%");
-			s.append(lawEnforcement.getProcessMan());
+			s.append(lawEnforcement.getLawEnforcementMan());
 			s.append("%' ");
 		}
 		if (lawEnforcement.getFlag() != null) {
@@ -125,5 +148,54 @@ public class LawEnforcementDynaSql {
 		}
 		return s.toString();
 	}
+	
+	public String selectLawEnforcementCount(final LawEnforcement lawEnforcement){
+		StringBuffer s = new StringBuffer();
+		s.append("select count(*) from ");
+		s.append(TABLE_NAME);
+		s.append(" where 1=1 ");
+		if (lawEnforcement.getCaseId() != null) {
+			s.append("and case_id = ");
+			s.append(lawEnforcement.getCaseId());
+			s.append(" ");
+		}
+		if (lawEnforcement.getState() != null) {
+			s.append("and state = ");
+			s.append(lawEnforcement.getState());
+			s.append(" ");
+		} 
+		if (lawEnforcement.getPass() != null) {
+			s.append("and pass = ");
+			s.append(lawEnforcement.getPass());
+			s.append(" ");
+		} 
+		if (lawEnforcement.getReason() != null) {
+			s.append("and reason = ");
+			s.append(lawEnforcement.getReason());
+			s.append(" ");
+		} 
+		if (lawEnforcement.getCaseName()!=null) {
+			s.append("and case_name LIKE '%");
+			s.append(lawEnforcement.getCaseName());
+			s.append("%' ");
+		}
+		if (lawEnforcement.getProcessMan()!=null) {
+			s.append("and process_man LIKE '%");
+			s.append(lawEnforcement.getProcessMan());
+			s.append("%' ");
+		}
+		if (lawEnforcement.getLawEnforcementMan() != null) {
+			s.append("and law_enforcement_man LIKE '%");
+			s.append(lawEnforcement.getLawEnforcementMan());
+			s.append("%' ");
+		}
+		if (lawEnforcement.getFlag() != null) {
+			s.append("and flag =");
+			s.append(lawEnforcement.getFlag());
+			s.append(" ");
+		}
+		return s.toString();
+	}
+
 
 }

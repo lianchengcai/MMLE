@@ -36,7 +36,7 @@ public class PenaltyDecisionDynaSql {
 					VALUES("evidence", "#{evidence}");
 				}
 				if (penaltyDecision.getViolateRule() != null) {
-					VALUES("violateRule", "#{violateRule}");
+					VALUES("violate_rule", "#{violateRule}");
 				}
 				if (penaltyDecision.getBasis() != null) {
 					VALUES("basis", "#{basis}");

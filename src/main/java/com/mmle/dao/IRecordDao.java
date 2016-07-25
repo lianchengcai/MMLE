@@ -32,6 +32,6 @@ public interface IRecordDao {
 	@UpdateProvider(type = RecordDynaSql.class, method = "updateRecord")
 	int updateRecord(Record record);
 	
-	@Select("select * from tbl_record where lawEnforcement_id=#{lawEnforcementId}")
+	@Select("select * from tbl_record where law_enforcement_id=#{lawEnforcementId}")
 	Record selectRecordByLawEnforcementId(int lawEnforcementId);
 }
