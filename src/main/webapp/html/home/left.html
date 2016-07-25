@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>导航菜单</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script language="JavaScript" src="../../script/jquery.js"></script>
+<script language="JavaScript" src="../../script/menu.js"></script>
+<link type="text/css" rel="stylesheet" href="../../style/blue/menu.css" />
+</head>
+<body style="margin: 0">
+<div id="Menu">
+    <ul id="MenuUl">
+        <li class="level1">
+            <div class="level1Style"><img src="../../style/images/MenuIcon/FUNC20056.gif" class="Icon" /> <a target="right" href="../boat/list.html">渔船信息管理</a></div>
+        </li>
+        <li class="level1">
+            <div onClick="menuClick(this);" class="level1Style"><img src="../../style/images/MenuIcon/FUNC20082.gif" class="Icon" /> 执法案由管理</div>
+            <ul style="display: none;" class="MenuLevel2">
+                <li class="level2">
+                    <div class="level2Style"><img src="../../style/images/MenuIcon/menu_arrow_single.gif" /> <a target="right" href="../case_type/list.html"> 案由种类管理</a></div>
+                </li>
+                <li class="level2">
+                    <div class="level2Style"><img src="../../style/images/MenuIcon/menu_arrow_single.gif" /> <a target="right" href="../case/list.html"> 案由管理</a></div>
+                </li>
+            </ul>
+        </li>
+        <li class="level1">
+            <div onClick="menuClick(this);" class="level1Style"><img src="../../style/images/MenuIcon/FUNC20056.gif" class="Icon" />执法办案管理</a></div>
+            <ul style="display: none;" class="MenuLevel2">
+                <li class="level2">
+                    <div class="level2Style"><img src="../../style/images/MenuIcon/menu_arrow_single.gif" /> <a target="right" href="../check_record/list.html"> 安全检查记录</a></div>
+                </li>
+                <li class="level2">
+                    <div class="level2Style"><img src="../../style/images/MenuIcon/menu_arrow_single.gif" /> <a target="right" href="../new_case/add1.html"> 新办违规案件</a></div>
+                </li>
+                <li class="level2">
+                    <div class="level2Style"><img src="../../style/images/MenuIcon/menu_arrow_single.gif" /> <a target="right" href="../new_case/list.html"> 待办违规案件</a></div>
+                </li>
+                <li class="level2">
+                    <div class="level2Style"><img src="../../style/images/MenuIcon/menu_arrow_single.gif" /> <a target="right" href="../new_case/examine.html"> 违规案件审批</a></div>
+                </li>
+                <li class="level2">
+                    <div class="level2Style"><img src="../../style/images/MenuIcon/menu_arrow_single.gif" /> <a target="right" href="../new_case/check.html"> 违规案件查看</a></div>
+                </li>
+            </ul>
+        </li>
+        <li class="level1">
+            <div onClick="menuClick(this);" class="level1Style"><img src="../../style/images/MenuIcon/FUNC20070.gif" class="Icon" />系统管理</div>
+            <ul style="display: none;" class="MenuLevel2">
+                <li class="level2">
+                    <div class="level2Style"><img src="../../style/images/MenuIcon/menu_arrow_single.gif" /> <a target="right" href="../role/list.html"> 角色管理</a></div>
+                </li>
+                <li class="level2">
+                    <div class="level2Style"><img src="../../style/images/MenuIcon/menu_arrow_single.gif" /> <a target="right" href="../user/list.html"> 用户管理</a></div>
+                </li>
+            </ul>
+        </li>
+        <li class="level1">
+            <div onClick="menuClick(this);" class="level1Style"><img src="../../style/images/MenuIcon/FUNC20077.gif" class="Icon" /> 个人设置</div>
+            <ul style="display: none;" class="MenuLevel2">
+                <li class="level2">
+                    <div class="level2Style"><img src="../../style/images/MenuIcon/menu_arrow_single.gif" /> <a target="right" href="../person_config/editUserInfoUI.html">个人信息</a></div>
+                </li>
+                <li class="level2">
+                    <div class="level2Style"><img src="../../style/images/MenuIcon/menu_arrow_single.gif" /> <a target="right" href="../person_config/editPasswordUI.html">密码修改</a></div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

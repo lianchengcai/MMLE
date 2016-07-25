@@ -1,0 +1,93 @@
+<html>
+<head>
+    <title>渔船信息列表</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script language="javascript" src="../../script/jquery.js"></script>
+    <script language="javascript" src="../../script/pageCommon.js" charset="utf-8"></script>
+    <script language="javascript" src="../../script/PageUtils.js" charset="utf-8"></script>
+    <script language="javascript" src="../../script/DemoData.js" charset="utf-8"></script>
+	<script language="javascript" src="../../script/DataShowManager.js" charset="utf-8"></script>
+    <link type="text/css" rel="stylesheet" href="../../style/blue/pageCommon.css" />
+    <script type="text/javascript">
+    </script>
+</head>
+<body>
+ 
+<div id="Title_bar">
+    <div id="Title_bar_Head">
+        <div id="Title_Head"></div>
+        <div id="Title"><!--页面标题-->
+            <img border="0" width="13" height="13" src="../../style/images/title_arrow.gif"/> 渔船信息管理
+        </div>
+        <div id="Title_End"></div>
+    </div>
+</div>
+
+<div id="MainArea">
+   <br>
+   渔船名称: <input type="text" id="boat_name" name="boat_name" style="width: 150px;">&nbsp;&nbsp;&nbsp;
+   渔船编号: <input type="text" id="boat_id" name="boat_id" style="width: 150px;">&nbsp;&nbsp;&nbsp;
+    渔船所属地: <input type="text" id="boat_location" name="boat_location" style="width: 100px;">&nbsp;&nbsp;&nbsp;
+    是否无证捕捞: <select id="fish_permit" name="fish_permit">
+                    <option value="1">是</option>
+                    <option value="0">否</option>
+                  </select>&nbsp;&nbsp;&nbsp;
+    是否黑名单: <select id="state" name="state">
+                    <option value="1">是</option>
+                    <option value="0">否</option>
+                </select>&nbsp;&nbsp;&nbsp;
+   <input type="button" value="查询">
+    <br><br>
+
+    <table cellspacing="0" cellpadding="7" class="TableStyle">
+       
+        <!-- 表头-->
+        <thead>
+            <tr align="CENTER" valign="MIDDLE" id="TableTitle">
+            	<td width="140px">渔船名称</td>
+                <td width="140px">渔船说明</td>
+                <td width="140px">渔船所属地</td>
+                <td width="140px">川籍港</td>
+                <td width="140px">无证捕捞</td>
+                <td width="140px">黑名单</td>
+                <td>相关操作</td>
+            </tr>
+        </thead>
+
+		<!--显示数据列表-->
+        <tbody id="TableData" class="dataContainer" datakey="roleList">
+			<tr class="TableDetail1 template" align="CENTER">
+				<td>闽龙港63516&nbsp;</td>
+				<td>15445411213&nbsp;</td>
+                <td>漳浦县&nbsp;</td>
+                <td>漳浦&nbsp;</td>
+                <td>是</td>
+                <td>是</td>
+				<td>
+                    <a href="checkUI.html">查看</a>
+                    <a href="editUI.html">修改</a>
+                    <a onClick="return delConfirm()" href="list.html">删除</a>
+				</td>
+			</tr>
+        </tbody>
+    </table>
+    
+    <!-- 其他功能超链接 -->
+    <div id="TableTail">
+        <div id="TableTail_inside">
+            <a href="addUI.html"><img src="../../style/images/createNew.png" /></a>
+        </div>
+    </div>
+</div>
+<br>
+    <table id="paging" style="width: 400px" align="center">
+        <tr style="height: 60px">
+            <td><input type="button" name="firtPage" value="首页"></td>
+            <td><input type="button" name="previousPage" value="上一页"></td>
+            <td>当前页码:第1页</td>
+            <td><input type="button" name="nextPage" value="下一页"></td>
+            <td><input type="button" name="endPage" value="尾页"></td>
+        </tr>
+    </table>
+</body>
+</html>

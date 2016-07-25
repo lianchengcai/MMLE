@@ -1,0 +1,92 @@
+<html>
+<head>
+	<title>新增渔船信息</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script language="javascript" src="../../script/jquery.js"></script>
+    <script language="javascript" src="../../script/pageCommon.js" charset="utf-8"></script>
+    <script language="javascript" src="../../script/PageUtils.js" charset="utf-8"></script>
+    <script language="javascript" src="../../script/DemoData.js" charset="utf-8"></script>
+    <script language="javascript" src="../../script/DataShowManager.js" charset="utf-8"></script>
+    <link type="text/css" rel="stylesheet" href="../../style/blue/pageCommon.css" />
+    <script type="text/javascript"> 
+    </script>
+</head>
+<body> 
+
+<!-- 标题显示 -->
+<div id="Title_bar">
+    <div id="Title_bar_Head">
+        <div id="Title_Head"></div>
+        <div id="Title"><!--页面标题-->
+            <img border="0" width="13" height="13" src="../style/images/title_arrow.gif"/> 新增渔船信息
+        </div>
+        <div id="Title_End"></div>
+    </div>
+</div>
+
+<!--显示表单内容-->
+<div id="MainArea">
+    <form action="list.html">
+        <div class="ItemBlock_Title1"><!-- 信息说明<DIV CLASS="ItemBlock_Title1">
+        	<IMG BORDER="0" WIDTH="4" HEIGHT="7" SRC="../style/blue/images/item_point.gif" /> 岗位信息 </DIV>  -->
+        </div>
+
+        <!-- 表单内容显示 -->
+        <div class="ItemBlockBorder">
+            <div class="ItemBlock">
+                <form>
+                    <table cellpadding="0" cellspacing="0" class="mainForm">
+                        <tr>
+                            <td width="100">渔船编号</td>
+                            <td><input type="text" name="boat_id" id="boat_id" style="width: 200px;" /> *</td>
+                            <td width="150"><td/>
+                            <td width="100">船名</td>
+                            <td><input type="text" name="boat_name" id="boat_name" style="width: 200px;" /> *</td>
+                        </tr>
+                        <tr>
+                            <td width="100">渔船所属地</td>
+                            <td><input type="text" name="home_port" id="home_port" style="width: 200px;" /> *</td>
+                            <td width="150"><td/>
+                            <td width="100">总吨位</td>
+                            <td><input type="text" name="total_weight" id="total_weight" style="width: 200px;" /> *</td>
+                        </tr>
+                        <tr>
+                            <td width="100">船长(米)</td>
+                            <td><input type="text" name="length" id="length" style="width: 200px;" /> *</td>
+                            <td width="150"><td/>
+                            <td width="100">船宽(米)</td>
+                            <td><input type="text" name="width" id="width" style="width: 200px;" /> *</td>
+                        </tr>
+                        <tr>
+                            <td width="100">捕捞许可证编号</td>
+                            <td><input type="text" name="fish_permit_no" id="fish_permit_no" style="width: 200px;" /> *</td>
+                            <td width="150"><td/>
+                            <td width="100">捕捞许可证有效期</td>
+                            <td><input type="date" name="fish_permit_time" id="fish_permit_time" style="width: 200px;" /> *</td>
+                        </tr>
+                        <tr>
+                            <td width="100">船检证书编号</td>
+                            <td><input type="text" name="substituting_no" id="substituting_no" style="width: 200px;" /> *</td>
+                            <td width="150"><td/>
+                            <td width="100">船检证书有效期</td>
+                            <td><input type="date" name="substituting_time" id="substituting_time" style="width: 200px;" /> *</td>
+                        </tr>
+                        <tr>
+                            <td width="100">船籍港</td>
+                            <td><input type="text" name="boat_location" id="boat_location" style="width: 200px;" /> *</td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+
+        <!-- 表单操作 -->
+        <div id="InputDetailBar">
+            <input type="image" src="../../style/images/save.png"/>
+            <a href="javascript:history.go(-1);"><img src="../../style/images/goBack.png"/></a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
