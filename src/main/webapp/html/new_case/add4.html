@@ -1,0 +1,80 @@
+<html>
+<head>
+    <title>询问笔录</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script language="javascript" src="../../script/jquery.js"></script>
+    <script language="javascript" src="../../script/pageCommon.js" charset="utf-8"></script>
+    <script language="javascript" src="../../script/PageUtils.js" charset="utf-8"></script>
+    <script language="javascript" src="../../script/DemoData.js" charset="utf-8"></script>
+    <script language="javascript" src="../../script/DataShowManager.js" charset="utf-8"></script>
+    <link type="text/css" rel="stylesheet" href="../../style/blue/pageCommon.css" />
+    <script type="text/javascript">
+    </script>
+</head>
+<body>
+
+<!-- 标题显示 -->
+<div id="Title_bar">
+    <div id="Title_bar_Head">
+        <div id="Title_Head"></div>
+        <div id="Title"><!--页面标题-->
+            <img border="0" width="13" height="13" src="../../style/images/title_arrow.gif"/>询问笔录
+        </div>
+        <div id="Title_End"></div>
+    </div>
+</div>
+
+<!--显示表单内容-->
+<div id="MainArea">
+        <div class="ItemBlock_Title1"><!-- 信息说明<DIV CLASS="ItemBlock_Title1">
+        	<IMG BORDER="0" WIDTH="4" HEIGHT="7" SRC="../style/blue/images/item_point.gif" /> 岗位信息 </DIV>  -->
+        </div>
+
+        <!-- 表单内容显示 -->
+        <div class="ItemBlockBorder">
+            <div class="ItemBlock">
+                    <table cellspacing="5" class="mainForm">
+                        <tr>
+                            <td width="300px">当事人基本情况：</td>
+                            <td><textarea style="width: 400px;height: 100px" name="parties_information"></textarea> </td>
+                        </tr>
+                        <tr>
+                            <td width="300px">案由名称：</td>
+                            <td><input type="text" name="case_name" id="case_name" style="width: 200px;" /> </td>
+                        </tr>
+                        <tr>
+                            <td width="300px">违法事实：</td>
+                            <td><input type="text" name="violate_content" id="violate_content" style="width: 400px;"/> </td>
+                        </tr>
+                        <tr>
+                            <td width="300px">证据：</td>
+                            <td><input type="text" name="evidence" id="evidence" style="width: 200px;" /> </td>
+                        </tr>
+                        <tr>
+                            <td width="300px">违反内容：</td>
+                            <td><input type="text" name="violate_rule" id="violate_rule" style="width: 400px;" /> </td>
+                         </tr>
+                        <tr>
+                            <td width="300px">法律依据：</td>
+                            <td><input type="text" name="basis" id="basis" style="width: 200px;" /> </td>
+                        </tr>
+                        <tr>
+                            <td width="300px">处罚决定：</td>
+                            <td><input type="text" name="penalty_decision" id="penalty_decision" style="width: 200px;" /> </td>
+                        </tr>
+                        <tr>
+                            <td width="300px">缴纳罚款地址：</td>
+                            <td><input type="text" name="location" id="location" style="width: 200px;" /> </td>
+                    </table>
+            </div>
+        </div>
+
+        <!-- 表单操作 -->
+        <div id="InputDetailBar">
+            <a href=check.html><img src="../../style/images/save.png"/></a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
