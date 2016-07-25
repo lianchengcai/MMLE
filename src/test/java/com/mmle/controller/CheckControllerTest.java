@@ -53,7 +53,7 @@ public class CheckControllerTest {
 		DTO data = new DTO();
 		Check check = new Check();
 		check.setTitle("违反");
-		check.setType("巡查");
+		//check.setType("巡查");
 		User user = new User();
 		user.setName("李");
 		check.setCheckMan(user);
