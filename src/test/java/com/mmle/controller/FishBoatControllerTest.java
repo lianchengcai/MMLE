@@ -61,6 +61,7 @@ public class FishBoatControllerTest {
 		fishBoat.setBoatName("名字测试");
 		fishBoat.setBoatLlocation("位置测试");
 		fishBoat.setHomePort("港口测试");
+		fishBoat.setFishPermitTime(new Date());
 		data.setFishBoat(fishBoat);
 		
 		fishBoatController.addFishBoat(data);

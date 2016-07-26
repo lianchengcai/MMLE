@@ -49,6 +49,7 @@ public class FishBoatController {
 		int currentPage=data.getCurrentPage();//当前页
 		int size=data.getSize();//页大小
 		FishBoat fishBoat = data.getFishBoat();
+		System.out.println(fishBoat.toString());
 		PageUtil<FishBoat> fishBoatPage = fishBoatService.getFishBoatPage(fishBoat, currentPage, size);
 		map.put("fishBoatPage", fishBoatPage);
 		
@@ -79,6 +80,16 @@ public class FishBoatController {
 		}else{
 			map.put("code", 0);
 		}
+		return map;
+	}
+	
+	@RequestMapping(value="getBoatById")
+	public @ResponseBody Map<String, Object> getBoatById(@RequestBody DTO data)throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		FishBoat fishBoat = data.getFishBoat();
+		
+		FishBoat returnBoat = fishBoatService.getFishBoatById(fishBoat.getBoatId());
+		map.put("fishBoat", returnBoat);
 		return map;
 	}
 	
