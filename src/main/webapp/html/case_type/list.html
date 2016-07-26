@@ -2,17 +2,17 @@
 <head>
     <title>案由类型列表</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link type="text/css" rel="stylesheet" href="../../style/blue/pageCommon.css" />
     <script language="javascript" src="../../script/jquery.js"></script>
     <script language="javascript" src="../../script/pageCommon.js" charset="utf-8"></script>
     <script language="javascript" src="../../script/PageUtils.js" charset="utf-8"></script>
     <script language="javascript" src="../../script/DemoData.js" charset="utf-8"></script>
     <script language="javascript" src="../../script/DataShowManager.js" charset="utf-8"></script>
-    <link type="text/css" rel="stylesheet" href="../../style/blue/pageCommon.css" />
-    <script type="text/javascript">
+    <script type="text/javascript"  src="../js/caseType.js">
     </script>
 </head>
 <body>
- 
+<div id ="list">
 <div id="Title_bar">
     <div id="Title_bar_Head">
         <div id="Title_Head"></div>
@@ -37,10 +37,7 @@
 		<!--显示数据列表-->
         <tbody id="TableData" class="dataContainer" datakey="departmentList">
 			<tr class="TableDetail1 template" align="center">
-				<td>渔业捕捞管理</td>
-				<td><a onClick="return window.confirm('您确定要删除吗？')" href="#">删除</a>
-					<a href="editUI.html">修改</a>
-				</td>
+				
 			</tr>
         </tbody>
     </table>
@@ -48,7 +45,7 @@
     <!-- 其他功能超链接 -->
     <div id="TableTail">
         <div id="TableTail_inside">
-            <a href="addUI.html"><img src="../../style/images/createNew.png" /></a>
+            <a onclick="addNew()"><img src="../../style/images/createNew.png" /></a>
         </div>
     </div>
 </div>
@@ -62,5 +59,6 @@
         <td><input type="button" name="endPage" value="尾页"></td>
     </tr>
 </table>
+</div>
 </body>
 </html>

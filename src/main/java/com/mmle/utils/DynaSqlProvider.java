@@ -10,7 +10,6 @@ import com.mmle.entity.Check;
 import com.mmle.entity.FishBoat;
 import com.mmle.entity.User;
 
-
 /**
  * @Title: DynaSqlProvider.java
  * @Package com.mmle.utils
@@ -33,21 +32,22 @@ public class DynaSqlProvider {
 				if (user.getPassword() != null) {
 					VALUES("password", "#{password}");
 				}
-				if (user.getRoleId()!= null) {
+				if (user.getRoleId() != null) {
 					VALUES("role_id", "#{roleId}");
 				}
-				if (user.getRemark()!= null) {
+				if (user.getRemark() != null) {
 					VALUES("remark", "#{remark}");
 				}
-				if (user.getSalt()!= null) {
+				if (user.getSalt() != null) {
 					VALUES("salt", "#{salt}");
 				}
-				if (user.getFlag()!= null) {
+				if (user.getFlag() != null) {
 					VALUES("flag", "#{flag}");
 				}
 			}
 		}.toString();
 	}
+
 	public String insertCaseType(final CaseType caseType) {
 		return new SQL() {
 			{
@@ -55,12 +55,13 @@ public class DynaSqlProvider {
 				if (caseType.getName() != null) {
 					VALUES("name", "#{name}");
 				}
-				if (caseType.getFlag()!= null) {
+				if (caseType.getFlag() != null) {
 					VALUES("flag", "#{flag}");
 				}
 			}
 		}.toString();
 	}
+
 	public String insertCase(final Case cas) {
 		return new SQL() {
 			{
@@ -74,18 +75,19 @@ public class DynaSqlProvider {
 				if (cas.getCaseType() != null) {
 					VALUES("case_type", "#{caseType.typeId}");
 				}
-				if (cas.getTypePunishment()!= null) {
+				if (cas.getTypePunishment() != null) {
 					VALUES("type_punishment", "#{typePunishment}");
 				}
-				if (cas.getViolateRule()!= null) {
+				if (cas.getViolateRule() != null) {
 					VALUES("violate_rule", "#{violateRule}");
 				}
-				if (cas.getFlag()!= null) {
+				if (cas.getFlag() != null) {
 					VALUES("flag", "#{flag}");
 				}
 			}
 		}.toString();
 	}
+
 	public String addCheck(final Check check) {
 		return new SQL() {
 			{
@@ -99,74 +101,75 @@ public class DynaSqlProvider {
 				if (check.getChiefEngineer() != null) {
 					VALUES("chief_engineer", "#{chiefEngineer}");
 				}
-				if (check.getCompass()!= null) {
+				if (check.getCompass() != null) {
 					VALUES("compass", "#{compass}");
 				}
-				if (check.getFishing()!= null) {
+				if (check.getFishing() != null) {
 					VALUES("fishing", "#{fishing}");
 				}
-				if (check.getNationality()!= null) {
+				if (check.getNationality() != null) {
 					VALUES("nationality", "#{nationality}");
 				}
-				if (check.getFlag()!= null) {
+				if (check.getFlag() != null) {
 					VALUES("flag", "#{flag}");
 				}
-				if (check.getRadar()!= null) {
+				if (check.getRadar() != null) {
 					VALUES("radar", "#{radar}");
 				}
-				if (check.getSailing()!= null) {
+				if (check.getSailing() != null) {
 					VALUES("sailing", "#{sailing}");
 				}
-				if (check.getSatelliteNavigation()!= null) {
+				if (check.getSatelliteNavigation() != null) {
 					VALUES("satelliteNavigation", "#{satelliteNavigation}");
 				}
-				if (check.getSsb()!= null) {
+				if (check.getSsb() != null) {
 					VALUES("ssb", "#{ssb}");
 				}
-				if (check.getBoat()!= null) {
+				if (check.getBoat() != null) {
 					VALUES("boat", "#{boat.boatId}");
 				}
-				if (check.getBoatImage()!= null) {
+				if (check.getBoatImage() != null) {
 					VALUES("boat_image", "#{boatImage}");
 				}
-				if (check.getCheckMan()!= null) {
+				if (check.getCheckMan() != null) {
 					VALUES("check_man", "#{checkMan.account}");
 				}
-				if (check.getCheckTime()!= null) {
+				if (check.getCheckTime() != null) {
 					VALUES("check_time", "#{checkTime}");
 				}
-				if (check.getManImage()!= null) {
+				if (check.getManImage() != null) {
 					VALUES("man_image", "#{manImage}");
 				}
-				if (check.getTitle()!= null) {
+				if (check.getTitle() != null) {
 					VALUES("title", "#{title}");
 				}
-				if (check.getType()!= null) {
+				if (check.getType() != null) {
 					VALUES("type", "#{type}");
 				}
-				if (check.getContent()!= null) {
+				if (check.getContent() != null) {
 					VALUES("content", "#{content}");
 				}
-				if (check.getLocation()!= null) {
+				if (check.getLocation() != null) {
 					VALUES("location", "#{location}");
 				}
-				if (check.getState()!= null) {
+				if (check.getState() != null) {
 					VALUES("state", "#{state}");
 				}
-				if (check.getCas()!= null) {
+				if (check.getCas() != null) {
 					VALUES("case_id", "#{cas.caseId}");
 				}
 			}
 		}.toString();
 	}
+
 	public String updateCaseInfo(final Case cas) {
 		return new SQL() {
 			{
 				UPDATE("tbl_case");
-				if (cas.getBasisPunishment()!= null) {
+				if (cas.getBasisPunishment() != null) {
 					SET("basis_punishment = #{basisPunishment}");
 				}
-				if (cas.getCaseName()!= null) {
+				if (cas.getCaseName() != null) {
 					SET("case_name = #{caseName}");
 				}
 				if (cas.getCaseType() != null) {
@@ -184,7 +187,8 @@ public class DynaSqlProvider {
 				WHERE("case_id = #{caseId}");
 			}
 		}.toString();
-	}	
+	}
+
 	public String updateCaseType(final CaseType caseType) {
 		return new SQL() {
 			{
@@ -198,15 +202,16 @@ public class DynaSqlProvider {
 				WHERE("type_id = #{typeId}");
 			}
 		}.toString();
-	}	
+	}
+
 	public String updateCheck(final Check check) {
 		return new SQL() {
 			{
 				UPDATE("tbl_check");
-				if (check.getBoatCheck()!= null) {
+				if (check.getBoatCheck() != null) {
 					SET(" boat_check= #{boatCheck}");
 				}
-				if (check.getBoater()!= null) {
+				if (check.getBoater() != null) {
 					SET("boater = #{boater}");
 				}
 				if (check.getChiefEngineer() != null) {
@@ -269,18 +274,18 @@ public class DynaSqlProvider {
 				WHERE("check_id = #{checkId}");
 			}
 		}.toString();
-	}	
-	
-	public String getCheck(final Map<String, Object> map){
+	}
+
+	public String getCheck(final Map<String, Object> map) {
 		Check check = (Check) map.get("check");
-		Integer offset = (Integer)map.get("offset");
-		Integer size = (Integer)map.get("size");
-		System.out.println(offset+" "+size);
+		Integer offset = (Integer) map.get("offset");
+		Integer size = (Integer) map.get("size");
+		System.out.println(offset + " " + size);
 		StringBuffer s = new StringBuffer();
 		s.append("select * from ");
 		s.append("tbl_check");
 		s.append(" where 1=1 ");
-		if (check!=null) {
+		if (check != null) {
 			if (check.getType() != null) {
 				s.append("and type LIKE '%");
 				s.append(check.getType());
@@ -290,14 +295,14 @@ public class DynaSqlProvider {
 				s.append("and title LIKE '%");
 				s.append(check.getTitle());
 				s.append("%' ");
-			} 
+			}
 			if (check.getCheckMan() != null) {
-				if (check.getCheckMan()!=null) {
+				if (check.getCheckMan() != null) {
 					s.append("and check_man LIKE '%");
 					s.append(check.getCheckMan());
 					s.append("%' ");
 				}
-			} 
+			}
 			if (check.getFlag() != null) {
 				s.append("and flag =");
 				s.append(check.getFlag());
@@ -309,12 +314,54 @@ public class DynaSqlProvider {
 				s.append(" ");
 			}
 		}
-		if(offset != null && size != null && size!=0 && size>offset){
+		if (offset != null && size != null && size != 0 && size > offset) {
 			s.append("limit ");
 			s.append(offset);
 			s.append(",");
 			s.append(size);
-			
+
+		}
+		System.out.println(s.toString());
+		return s.toString();
+	}
+
+	public String getCase(final Map<String, Object> map) {
+		Case cas = (Case) map.get("case");
+		Integer offset = (Integer) map.get("offset");
+		Integer size = (Integer) map.get("size");
+		System.out.println(offset + " " + size);
+		StringBuffer s = new StringBuffer();
+		s.append("select * from ");
+		s.append("tbl_case");
+		s.append(" where 1=1 ");
+		if (cas != null) {
+			if (cas.getCaseType() != null) {
+				if (cas.getCaseType().getTypeId() != null) {
+					s.append("and case_type =");
+					s.append(cas.getCaseType().getTypeId());
+					s.append(" ");
+				}
+			}
+			if (cas.getCaseName() != null) {
+				s.append("and case_name =");
+				s.append(cas.getCaseName());
+				s.append(" ");
+			}
+			if (cas.getCaseId() != null) {
+				s.append("and case_id =");
+				s.append(cas.getCaseId());
+				s.append(" ");
+			}
+
+		}
+		s.append("and flag =");
+		s.append(1);
+		s.append(" ");
+		if (offset != null && size != null && size != 0 && size > offset) {
+			s.append("limit ");
+			s.append(offset);
+			s.append(",");
+			s.append(size);
 		}
 		System.out.println(s.toString());
 		return s.toString();

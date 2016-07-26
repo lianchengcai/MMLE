@@ -16,11 +16,12 @@ import com.mmle.entity.CaseType;
 public interface ICaseService {
 	public Map<String, Object> getCaseType();
 	public Map<String, Object> addCaseInfo(Case cas);
-	public Map<String, Object> getCaseInfo(Case cas);
+	//public Map<String, Object> getCaseInfo(Case cas);
 	public Map<String, Object> deleteCaseInfo(Case cas);
 	public Map<String, Object> updateCaseInfo(Case cas);
 	public Map<String, Object> updateCaseType(CaseType caseType);
 	public Map<String, Object> addCaseType(CaseType caseType);
 	public Map<String, Object> deleteCaseType(CaseType caseType);
+	public Map<String, Object> getCaseInfo(Case cas,Integer currentPage,Integer size);
 
 }

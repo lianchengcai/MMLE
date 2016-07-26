@@ -53,7 +53,7 @@ public class CaseController {
 	public Map<String, Object> getCaseInfo(@RequestBody DTO data)throws Exception{
 		log.info("getCaseInfo:"+data.toString());
 		Case cas = data.getCas();
-		Map<String, Object> map = caseService.getCaseInfo(cas); 
+		Map<String, Object> map = caseService.getCaseInfo(cas,data.getCurrentPage(),data.getSize()); 
 		return map;
 	}
 	
@@ -80,6 +80,7 @@ public class CaseController {
 	public Map<String, Object> deleteCaseInfo(@RequestBody DTO data)throws Exception{
 		log.info("deleteCaseInfo:"+data.toString());
 		Case cas = data.getCas();
+		cas.setFlag(false);
 		Map<String, Object> map = caseService.deleteCaseInfo(cas); 
 		return map;
 	}

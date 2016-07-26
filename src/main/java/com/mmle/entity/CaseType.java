@@ -43,4 +43,10 @@ public class CaseType {
     public void setFlag(Boolean flag) {
         this.flag = flag;
     }
+
+	@Override
+	public String toString() {
+		return "CaseType [typeId=" + typeId + ", name=" + name + ", flag=" + flag + ", count=" + count + "]";
+	}
+    
 }

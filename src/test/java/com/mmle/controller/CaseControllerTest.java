@@ -47,7 +47,7 @@ public class CaseControllerTest {
 		mockMvc = webAppContextSetup(wac).build();
 	}
 
-	 @Test
+	// @Test
 	public void getCaseInfo() throws Exception {
 		DTO data = new DTO();
 		Case cas = new Case();
@@ -100,7 +100,7 @@ public class CaseControllerTest {
 		System.out.println(result.getResponse().getContentAsString());
 	}
 
-	// @Test
+   // @Test
 	public void deleteCaseInfo() throws Exception {
 		DTO data = new DTO();
 		Case cas = new Case();
@@ -199,7 +199,7 @@ public class CaseControllerTest {
 		System.out.println(result.getResponse().getContentAsString());
 	}
 
-	//@Test
+	@Test
 	public void deleteCaseType() throws Exception {
 		DTO data = new DTO();
 		CaseType caseType = new CaseType();

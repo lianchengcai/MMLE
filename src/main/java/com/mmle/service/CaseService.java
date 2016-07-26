@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.mmle.dao.CaseDao;
 import com.mmle.entity.Case;
 import com.mmle.entity.CaseType;
+import com.mmle.entity.Check;
 import com.mmle.serviceImple.ICaseService;
 
 /**
@@ -46,26 +47,32 @@ public class CaseService implements ICaseService {
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public Map<String, Object> getCaseInfo(Case cas) {
+	public Map<String, Object> getCaseInfo(Case cas,Integer currentPage,Integer size) {
 		List<Case> cases = new ArrayList<>();
-		if (cas != null) {
-			if (cas.getCaseType() != null) {
-				if (cas.getCaseType().getTypeId() != null) {
-					cases = caseDao.getCaseByTypeId(cas.getCaseType().getTypeId());
-				}
-				if (cas.getCaseType().getName() != null) {
-					cases = caseDao.getCaseByTypeId(caseDao.getCaseTypeByName(cas.getCaseType().getName()).getTypeId());
-				}
-			}
-			if (cas.getCaseName() != null) {
-				cases = caseDao.getCaseByName(cas.getCaseName());
-			}
-		} else {
-			cases = caseDao.getCase();
-		}
+		currentPage = currentPage != null ? currentPage : 1;
+		size = size != null ? size : 10;
+		Integer offset = (currentPage - 1) * size;
 		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> query = new HashMap<>();
+		query.put("offset", offset);
+		query.put("size", size);
+		Integer rowCount = 0;
+		Integer totalPage = 0;
+		query.put("case", cas);
+		cases = caseDao.getCase(query);
+		List<CaseType> caseTypes = caseDao.getCaseType();
+		rowCount = cases.size();
 		map.put("code", 1);
 		map.put("cases", cases);
+		map.put("currentPage", currentPage);
+		map.put("size", size);
+		map.put("caseTypes", caseTypes);
+		if (rowCount % size != 0) {
+			totalPage = rowCount / size + 1;
+		} else {
+			totalPage = rowCount / size;
+		}
+		map.put("totalPage", totalPage);
 		return map;
 	}
 
@@ -104,7 +111,8 @@ public class CaseService implements ICaseService {
 		Map<String, Object> map = new HashMap<>();
 		if (cas != null) {
 			if (caseDao.getCaseByCaseId(cas.getCaseId()) != null) {
-				if (caseDao.deleteCaseInfo(cas.getCaseId()) == 1) {
+				cas.setFlag(false);
+				if (caseDao.updateCaseInfo(cas) == 1) {
 					map.put("code", 1);
 				}
 			} else {
@@ -194,6 +202,8 @@ public class CaseService implements ICaseService {
 				if (caseDao.updateCaseType(caseType) == 1) {
 					map.put("code", 1);
 				}
+			}else{
+				map.put("code", 101);
 			}
 		}
 		return map;

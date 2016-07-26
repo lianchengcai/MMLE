@@ -204,7 +204,7 @@ public class CheckService implements ICheckService {
 		query.put("offset", offset);
 		query.put("size", size);
 		Integer rowCount = 0;
-		Integer totalPage;
+		Integer totalPage = 0;
 		query.put("check", check);
 		checks = checkDao.getCheck(query);
 		rowCount = checks.size();
