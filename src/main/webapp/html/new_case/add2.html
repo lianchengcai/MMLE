@@ -9,6 +9,61 @@
     <script language="javascript" src="../../script/DataShowManager.js" charset="utf-8"></script>
     <link type="text/css" rel="stylesheet" href="../../style/blue/pageCommon.css" />
     <script type="text/javascript">
+    
+    function getParam(paramName)
+    {
+            paramValue ="";
+            isFound =false;
+            if (this.location.search.indexOf("?") ==0&&this.location.search.indexOf("=")>1)
+            {
+                arrSource = unescape(this.location.search).substring(1,this.location.search.length).split("&");
+                i =0;
+                while (i < arrSource.length &&!isFound)
+                {
+                    if (arrSource[i].indexOf("=") >0)
+                    {
+                         if (arrSource[i].split("=")[0].toLowerCase()==paramName.toLowerCase())
+                         {
+                            paramValue = arrSource[i].split("=")[1];
+                            isFound =true;
+                         }
+                    }
+                    i++;
+                }   
+            }
+       return paramValue;
+    }
+    
+    function addExploration(method){
+    	var id = getParam('id');
+    	
+		var map={};
+  		var c = new Object();
+  		c.state = true;
+  		c.witnesses = document.getElementById("witnesses").value;
+  		c.account = document.getElementById("count2").value+"-"+document.getElementById("count1").value;
+  		c.accountName = document.getElementById("countName2").value+"-"+document.getElementById("countName1").value;
+  		c.situation = document.getElementById("situation").value;
+  		c.parties = document.getElementById("parties").value;
+  		c.explorationLocation = document.getElementById("location").value;
+  		c.lawEnforcementId = id;
+  		map.exploration=c;
+		 $.ajax({
+		 type: "POST",
+		 url: "http://localhost:8088/mmle/lawEnforcement/addExploration.do",
+		 dataType:"json",
+		 contentType: "application/json;charset=utf-8",
+		 data: JSON.stringify(map),
+		 success: function(data){
+			 if(data['code']==1)alert("添加成功！");
+ 				if(method==1){  location.href="check.html?id="+id;}
+ 				if(method==0){  location.href="add3.html?id="+id;}
+	   },
+	    error:function(){alert("服务器未正常响应，请重试");}
+	});  
+	}
+    
+    
     </script>
 </head>
 <body>
@@ -48,17 +103,32 @@
                         </tr>
                         <tr>
                             <td width="300px">当事人：</td>
-                            <td><input type="text" name="home_port" id="home_port" style="width: 200px;" /> </td>
+                            <td><input type="text" name="home_port" id="parties" style="width: 200px;" /> </td>
+                        </tr>
+                        <tr>
+                            <td width="300px">见证人：</td>
+                            <td><input type="text" name="home_port" id="witnesses" style="width: 200px;" /> </td>
                         </tr>
                         <tr>
                             <td width="300px">现场检查(勘察)情况：</td>
-                            <td><textarea style="width: 350px;height: 80px"></textarea></td>
+                            <td><textarea style="width: 350px;height: 80px" id="situation"></textarea></td>
                         </tr>
                         <tr>
-                        <td width="300px">执法人员：</td>
-                        <td><input type="text" name="process_man1" style="width: 200px;" /></td>
-                        <td width="200px">执法证件号：</td>
-                        <td><input type="text" name="fish_permit_no" style="width: 200px;" /></td>
+                        <td width="300px">执法人员1：</td>
+                        <td><input type="text" name="process_man1" id="countName1" style="width: 200px;" /></td>
+                        <td width="200px">执法证件号1：</td>
+                        <td><input type="text" name="fish_permit_no" id="count1" style="width: 200px;" /></td>
+                        
+                       
+                    </tr>
+                    
+                    <tr>
+                        <td width="300px">执法人员2：</td>
+                        <td><input type="text" name="process_man1" id="countName2" style="width: 200px;" /></td>
+                        <td width="200px">执法证件号2：</td>
+                        <td><input type="text" name="fish_permit_no" id="count2" style="width: 200px;" /></td>
+                        
+                       
                     </tr>
                     </table>
             </div>
@@ -66,8 +136,8 @@
 
         <!-- 表单操作 -->
         <div id="InputDetailBar">
-            <a href=javascript:void(0);><img src="../../style/images/save.png"/></a>
-            <a href="add3.html"><img src="../../style/images/next.png"/></a>
+             <a href="#" onclick="addExploration(1)"><img src="../../style/images/save.png"/></a>
+            <a href="#" onclick="addExploration(0)"><img src="../../style/images/next.png"/></a>
         </div>
     </form>
 </div>

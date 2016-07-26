@@ -8,10 +8,109 @@
     <script language="javascript" src="../../script/DemoData.js" charset="utf-8"></script>
 	<script language="javascript" src="../../script/DataShowManager.js" charset="utf-8"></script>
     <link type="text/css" rel="stylesheet" href="../../style/blue/pageCommon.css" />
+    <script type="text/javascript" src="/script/jquery.js"></script>
     <script type="text/javascript">
-    </script>
+    function deleteBoat(id){
+    	alert("asdf");
+    	var map={};
+    	var fb = new Object(); 
+    	fb.boatId=id;
+    	fb.flag=false;
+    	map.fishBoat=fb;
+    	$.ajax({
+			 type: "POST",
+			 url: "http://localhost:8088/mmle/fishBoat/delete.do",
+			 dataType:"json",
+			 contentType: "application/json;charset=utf-8",
+			 data: JSON.stringify(map),
+			 success: function(data){
+				 if(data['code']==1)alert("删除成功！");
+				 location.reload();
+			 },error:function(){alert("服务器未正常响应，请重试");}
+		});  
+    }
+    
+    function check(id){
+   	 location.href="checkUI.html?boatId="+id;
+   }
+    function modify(id){
+      	 location.href="editUI.html?boatId="+id;
+      }
+    function conditions(){
+    	var map={};
+	   	map.currentPage=1;
+	   	map.size=20;
+		var fb = new Object(); 
+		boatName=document.getElementById("boat_name").value;
+		if(boatName!="")fb.boatName=boatName;
+		boatId = document.getElementById("boat_id").value;
+		if(boatId!="")fb.boatId=boatId;
+		boatLlocation = document.getElementById("boat_location").value;
+		if(boatLlocation!="")fb.boatLlocation=boatLlocation;
+		var ifPermit = $("#fish_permit").get(0).selectedIndex;
+		state = $("#state").get(0).selectedIndex;
+		if(state==2)fb.state = true;
+		if(state==1)fb.state = false;
+		fb.flag=true;
+		map.fishBoat=fb;
+		return map;
+    }
+   function all(){
+	   var map={};
+	   	map.currentPage=1;
+	   	map.size=20;
+			var fb = new Object(); 
+			map.fishBoat=fb;
+			fb.flag=true;
+			return map;
+   }
+   function getBoatPage(map){
+   	
+			 $.ajax({
+			 type: "POST",
+			 url: "http://localhost:8088/mmle/fishBoat/getPageList.do",
+			 dataType:"json",
+			 contentType: "application/json;charset=utf-8",
+			 data: JSON.stringify(map),
+			 success: function(data){
+				 var html="";
+				 var fishBoatPage = data['fishBoatPage'];
+				 if(fishBoatPage!=null){
+				 var obj = eval(fishBoatPage['list']);
+			        
+			        for(var i=0;i<obj.length;i++){
+			            html+=("<tr class='TableDetail1 template'>"); 
+			            html+=("<td>"+obj[i].boatId+"&nbsp;</td>");
+			            html+=("<td>"+obj[i].boatName+"&nbsp;</td>");
+			            html+=("<td>"+obj[i].boatLlocation+"&nbsp;</td>");
+			            html+=("<td>"+obj[i].homePort+"&nbsp;</td>");
+			            html+=("<td>是</td>");
+			            if(obj[i].state==0){
+			            	html+=("<td>是</td>");
+			            }else{
+			            	html+=("<td>否</td>");
+			            }
+			            html+=("<td>");
+			            html+=("<a href='"+"#"+"' onclick='check("+obj[i].boatId+")'>查看</a>");
+			            html+=("&nbsp")
+			            html+=("<a href='"+"#"+"' onclick='modify("+obj[i].boatId+")'>修改</a>");
+			            html+=("&nbsp")
+			            html+=("<a href='"+"#"+"' onclick='deleteBoat("+obj[i].boatId+")'>删除</a>");
+			            html+=("&nbsp")
+			            html+=("</td>");
+			            html+=("</tr>"); 
+			        }
+				 }
+			        document.getElementById("TableData").innerHTML=html;
+				 },error:function(){alert("服务器未正常响应，请重试");}
+		});  
+ }
+   
+   </script>
+    	
+   
 </head>
-<body>
+<body onload="getBoatPage(all())">
  
 <div id="Title_bar">
     <div id="Title_bar_Head">
@@ -25,18 +124,20 @@
 
 <div id="MainArea">
    <br>
-   渔船名称: <input type="text" id="boat_name" name="boat_name" style="width: 150px;">&nbsp;&nbsp;&nbsp;
    渔船编号: <input type="text" id="boat_id" name="boat_id" style="width: 150px;">&nbsp;&nbsp;&nbsp;
+   渔船名称: <input type="text" id="boat_name" name="boat_name" style="width: 150px;">&nbsp;&nbsp;&nbsp;
     渔船所属地: <input type="text" id="boat_location" name="boat_location" style="width: 100px;">&nbsp;&nbsp;&nbsp;
     是否无证捕捞: <select id="fish_permit" name="fish_permit">
+    				<option value="0"></option>
                     <option value="1">是</option>
-                    <option value="0">否</option>
+    				<option value="2">否</option>
                   </select>&nbsp;&nbsp;&nbsp;
     是否黑名单: <select id="state" name="state">
-                    <option value="1">是</option>
-                    <option value="0">否</option>
+    				<option value="0"></option>
+					<option value="1">是</option>
+    				<option value="2">否</option>
                 </select>&nbsp;&nbsp;&nbsp;
-   <input type="button" value="查询">
+   <input type="button" value="查询" onclick="getBoatPage(conditions())">
     <br><br>
 
     <table cellspacing="0" cellpadding="7" class="TableStyle">
@@ -44,8 +145,8 @@
         <!-- 表头-->
         <thead>
             <tr align="CENTER" valign="MIDDLE" id="TableTitle">
-            	<td width="140px">渔船名称</td>
-                <td width="140px">渔船说明</td>
+            	<td width="140px">渔船编号</td>
+                <td width="140px">渔船名称</td>
                 <td width="140px">渔船所属地</td>
                 <td width="140px">川籍港</td>
                 <td width="140px">无证捕捞</td>
@@ -56,8 +157,8 @@
 
 		<!--显示数据列表-->
         <tbody id="TableData" class="dataContainer" datakey="roleList">
-			<tr class="TableDetail1 template" align="CENTER">
-				<td>闽龙港63516&nbsp;</td>
+			 <tr class="TableDetail1 template" id="showDataTable" align="CENTER">
+				<!-- <td>闽龙港63516&nbsp;</td>
 				<td>15445411213&nbsp;</td>
                 <td>漳浦县&nbsp;</td>
                 <td>漳浦&nbsp;</td>
@@ -67,8 +168,8 @@
                     <a href="checkUI.html">查看</a>
                     <a href="editUI.html">修改</a>
                     <a onClick="return delConfirm()" href="list.html">删除</a>
-				</td>
-			</tr>
+				</td> -->
+			</tr> 
         </tbody>
     </table>
     
@@ -84,9 +185,9 @@
         <tr style="height: 60px">
             <td><input type="button" name="firtPage" value="首页"></td>
             <td><input type="button" name="previousPage" value="上一页"></td>
-            <td>当前页码:第1页</td>
+            <td>当前页码:第<span id="pagenum">1</span>页</td>
             <td><input type="button" name="nextPage" value="下一页"></td>
-            <td><input type="button" name="endPage" value="尾页"></td>
+            <td><input type="button" name="endPage" value="尾页" ></td>
         </tr>
     </table>
 </body>

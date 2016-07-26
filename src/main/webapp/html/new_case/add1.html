@@ -8,8 +8,100 @@
     <script language="javascript" src="../../script/DemoData.js" charset="utf-8"></script>
     <script language="javascript" src="../../script/DataShowManager.js" charset="utf-8"></script>
     <link type="text/css" rel="stylesheet" href="../../style/blue/pageCommon.css" />
+    
+     <script type="text/javascript"> 
+     
+     function caseInfo(id){
+    	var map={};
+  		var c = new Object();
+  		var ct = new Object();
+  		ct.typeId=id;
+  		c.caseType=ct;
+  		map.cas=c
+     	$.ajax({
+ 			 type: "POST",
+ 			 url: "http://localhost:8088/mmle/getCaseInfo.do",
+ 			 dataType:"json",
+ 			 contentType: "application/json;charset=utf-8",
+ 			 data: JSON.stringify(map),
+ 			 success: function(data){
+ 				var html="";
+ 				 var obj = eval(data['cases']);
+ 				 for(var i=0;i<obj.length;i++){
+ 					 html+=("<option value='"+obj[i].caseId+"'>"+obj[i].caseName+"</option>"); 
+ 				 }
+ 				document.getElementById("case").innerHTML=html;
+ 			 },error:function(){alert("服务器未正常响应，请重试");}
+ 		});  
+     }
+     
+     function changeCaseInfo(){
+    	 var  myselect = document.getElementById("case_type");
+    	 var index=myselect.selectedIndex ;
+    	 var svalue = myselect.options[index].value;
+    	 caseInfo(svalue);
+     }
+     
+		function caseType(){
+			var map={};
+			 $.ajax({
+			 type: "POST",
+			 url: "http://localhost:8088/mmle/getCaseType.do",
+			 dataType:"json",
+			 contentType: "application/json;charset=utf-8",
+			 data: JSON.stringify(map),
+			 success: function(data){
+				 var html="";
+				 var obj = data.caseTypes;
+				 if(obj!=null){
+			        for(var i=0;i<obj.length;i++){
+			            html+=("<option value='"+obj[i].typeId+"'>"+obj[i].name+"</option>"); 
+			            if(i==0){
+			            	caseInfo(obj[i].typeId);
+			            }
+			        }
+				 }
+			        document.getElementById("case_type").innerHTML=html;
+		   },
+		    error:function(){alert("服务器未正常响应，请重试");}
+		});  
+		}
+		
+		function addLawProduce(method){
+			var descript = document.getElementById("descript").value;
+			
+			var  myselect = document.getElementById("case");
+	    	var index=myselect.selectedIndex ;
+	    	var svalue = myselect.options[index].value;
+	    	
+			var map={};
+	  		var c = new Object();
+	  		c.caseName=descript;
+	  		c.caseId=svalue;
+	  		c.lawEnforcementMan = "88888888";
+	  		map.lawEnforcement=c;
+			 $.ajax({
+			 type: "POST",
+			 url: "http://localhost:8088/mmle/lawEnforcement/add.do",
+			 dataType:"json",
+			 contentType: "application/json;charset=utf-8",
+			 data: JSON.stringify(map),
+			 success: function(data){
+				 if(data['code']==1)alert("添加成功！");
+				 var id = data['id'];
+	 				if(method==1){  location.href="check.html?id="+id;}
+	 				if(method==0){  location.href="add2.html?id="+id;}
+		   },
+		    error:function(){alert("服务器未正常响应，请重试");}
+		});  
+		}
+		
+
+		
+    </script>
+    
 </head>
-<body>
+<body onload="caseType()">
 
 <!-- 标题显示 -->
 <div id="Title_bar">
@@ -34,19 +126,19 @@
             <div class="ItemBlock">
                 <table cellpadding="0" cellspacing="0" class="mainForm">
                     <tr><td>案由类型</td>
-                        <td><select name="case_type">
+                        <td><select id="case_type" name="case_type" onchange="changeCaseInfo()">
                             <option value="1">渔业捕捞管理</option>
                             <option value="2">船员管理</option>
                         </select> *</td>
                     <tr><td>案由名称</td>
-                        <td><select name="case">
+                        <td><select id ="case" name="case">
                             <option value="1">捕捞的渔获物中的幼鱼超过规定比例</option>
                             <option value="2">无证捕捞</option>
                             <option value="3">冒用、租借、涂改船员证书</option>
                             <option value="4">船舶未配齐船务船员</option>
                         </select> *</td>
-                    <tr><td>案件描述</td>
-                        <td><textarea name="descript" style="width: 400px;height: 50px"></textarea></td>
+                    <tr><td>案件简述</td>
+                        <td><textarea id="descript" name="descript" style="width: 400px;height: 50px"></textarea></td>
                     </tr>
                 </table>
             </div>
@@ -54,8 +146,8 @@
         <br><br><br>
         <!-- 表单操作 -->
         <div align="center">
-            <a href=javascript:void(0);><img src="../../style/images/save.png"/></a>
-            <a href="add2.html"><img src="../../style/images/next.png"/></a>
+             <a href="#" onclick="addLawProduce(1)"><img src="../../style/images/save.png"/></a>
+            <a href="#" onclick="addLawProduce(0)"><img src="../../style/images/next.png"/></a>
         </div>
     </form>
 </div>

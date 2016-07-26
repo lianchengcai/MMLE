@@ -139,7 +139,7 @@ public class LawEnforcementDynaSql {
 			s.append(lawEnforcement.getFlag());
 			s.append(" ");
 		}
-		if(start != null && start!=0  && end != null && end!=0 && end>start){
+		if(start != null && end != null && end!=0 && end>start){
 			s.append("limit ");
 			s.append(start);
 			s.append(",");

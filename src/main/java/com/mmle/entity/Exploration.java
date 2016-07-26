@@ -20,6 +20,8 @@ public class Exploration {
     private String parties;//当事人
 
     private String situation;//现场勘查情况
+    
+    private String accountName;//执法人名2个；
 
     private String account;//执行证件号即执法人员工号 ，2个，以-拼接。
 
@@ -119,13 +121,24 @@ public class Exploration {
 		this.witnesses = witnesses;
 	}
 
+	public String getAccountName() {
+		return accountName;
+	}
+
+	public void setAccountName(String accountName) {
+		this.accountName = accountName;
+	}
+
 	@Override
 	public String toString() {
 		return "Exploration [explorationId=" + explorationId + ", explorationStartTime=" + explorationStartTime
 				+ ", explorationEndTime=" + explorationEndTime + ", explorationLocation=" + explorationLocation
-				+ ", parties=" + parties + ", situation=" + situation + ", account=" + account + ", lawEnforcementId="
-				+ lawEnforcementId + ", state=" + state + ", flag=" + flag + ", witnesses=" + witnesses + "]";
+				+ ", parties=" + parties + ", situation=" + situation + ", accountName=" + accountName + ", account="
+				+ account + ", lawEnforcementId=" + lawEnforcementId + ", state=" + state + ", flag=" + flag
+				+ ", witnesses=" + witnesses + "]";
 	}
+
+	
 
 
 }

@@ -39,10 +39,16 @@ public class FishBoatService implements IFishBoatService{
 		if(count>0){
 			Integer start =  fishBoatPage.getDataStart();
 			Integer end = fishBoatPage.getDataEnd();
+			System.out.println("起始数据："+start);
+			System.out.println("结束数据："+end);
 			List<FishBoat> fishBoatList = fishBoatDao.selectFishBoatByConditions(fishBoat,start, end);
 			fishBoatPage.setList(fishBoatList);
 			return fishBoatPage;
 		}
 		return null;
+	}
+
+	public FishBoat getFishBoatById(String boatId) {
+		return fishBoatDao.selectFishBoatById(boatId);
 	}
 }

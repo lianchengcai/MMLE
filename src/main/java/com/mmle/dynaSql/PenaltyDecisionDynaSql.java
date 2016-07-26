@@ -44,6 +44,9 @@ public class PenaltyDecisionDynaSql {
 				if (penaltyDecision.getLocation() != null) {
 					VALUES("location", "#{location}");
 				}
+				if (penaltyDecision.getPenaltyDecision() != null) {
+					VALUES("penalty_decision", "#{penaltyDecision}");
+				}
 				if (penaltyDecision.getDate() != null) {
 					VALUES("date", "#{date}");
 				}
@@ -78,6 +81,9 @@ public class PenaltyDecisionDynaSql {
 				}
 				if (penaltyDecision.getLocation() != null) {
 					SET("location = #{location}");
+				}
+				if (penaltyDecision.getPenaltyDecision() != null) {
+					SET("penalty_decision = #{penaltyDecision}");
 				}
 				if (penaltyDecision.getDate() != null) {
 					SET("date = #{date}");

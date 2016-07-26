@@ -41,6 +41,9 @@ public class ExplorationDynaSql {
 				if (exploration.getSituation() != null) {
 					VALUES("situation", "#{situation}");
 				}
+				if (exploration.getAccountName() != null) {
+					VALUES("account_name", "#{accountName}");
+				}
 				if (exploration.getAccount() != null) {
 					VALUES("account", "#{account}");
 				}
@@ -79,6 +82,9 @@ public class ExplorationDynaSql {
 				}
 				if (exploration.getSituation() != null) {
 					SET("situation = #{situation}");
+				}
+				if (exploration.getAccountName() != null) {
+					SET("account_name = #{accountName}");
 				}
 				if (exploration.getAccount() != null) {
 					SET("account = #{account}");
