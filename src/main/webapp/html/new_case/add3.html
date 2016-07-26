@@ -9,6 +9,72 @@
     <script language="javascript" src="../../script/DataShowManager.js" charset="utf-8"></script>
     <link type="text/css" rel="stylesheet" href="../../style/blue/pageCommon.css" />
     <script type="text/javascript">
+    
+    function getParam(paramName)
+    {
+            paramValue ="";
+            isFound =false;
+            if (this.location.search.indexOf("?") ==0&&this.location.search.indexOf("=")>1)
+            {
+                arrSource = unescape(this.location.search).substring(1,this.location.search.length).split("&");
+                i =0;
+                while (i < arrSource.length &&!isFound)
+                {
+                    if (arrSource[i].indexOf("=") >0)
+                    {
+                         if (arrSource[i].split("=")[0].toLowerCase()==paramName.toLowerCase())
+                         {
+                            paramValue = arrSource[i].split("=")[1];
+                            isFound =true;
+                         }
+                    }
+                    i++;
+                }   
+            }
+       return paramValue;
+    }
+    
+    function addRecord(method){
+    	var id = getParam('id');
+    	
+		var map={};
+  		var c = new Object();
+  		c.location = document.getElementById("location").value;
+  		c.recorder = document.getElementById("recorder").value;
+  		c.ask = document.getElementById("ask1").value+"-"+document.getElementById("ask2").value;
+  		c.account = document.getElementById("count2").value+"-"+document.getElementById("count1").value;
+  		c.departmentName = document.getElementById("departmentName").value;
+  		c.violateRule = document.getElementById("violate_rule").value;
+  		c.content = document.getElementById("content1").value;
+  		c.asked = document.getElementById("asked").value;
+  		
+  		var  myselect = document.getElementById("ifconfire");
+   		var index=myselect.selectedIndex ;
+   		var svalue = myselect.options[index].value;
+   		if(svalue==1){
+  			c.feedbackOne = true;
+   		}else{
+   			c.feedbackOne = false;
+   		}
+  		c.feedbackTwo = document.getElementById("answer2").value;
+  		c.lawEnforcementId = id;
+  		map.record=c;
+		 $.ajax({
+		 type: "POST",
+		 url: "http://localhost:8088/mmle/lawEnforcement/addRecord.do",
+		 dataType:"json",
+		 contentType: "application/json;charset=utf-8",
+		 data: JSON.stringify(map),
+		 success: function(data){
+			 if(data['code']==1)alert("添加成功！");
+			 var id = data['id'];
+ 				if(method==1){  location.href="check.html?id="+id;}
+ 				if(method==0){  location.href="add4.html?id="+id;}
+	   },
+	    error:function(){alert("服务器未正常响应，请重试");}
+	});  
+	}
+    
     </script>
 </head>
 <body>
@@ -47,47 +113,57 @@
                             <td><input type="text" name="location" id="location" style="width: 200px;" /> </td>
                         </tr>
                         <tr>
-                            <td width="300px">询问人：</td>
-                            <td><input type="text" name="ask" id="ask" style="width: 200px;" /> </td>
-                            <td width="100px"></td>
                             <td width="300px">记录人：</td>
-                            <td><input type="text" name="recorder" id="recorder" style="width: 200px;" /> </td>
+                            <td><input type="text" name="location" id="recorder" style="width: 200px;" /> </td>
+                        </tr>
+                         <tr>
+                            <td width="300px">单位名称：</td>
+                            <td><input type="text" name="departmentName" id="departmentName" style="width: 200px;" /> </td>
+                        </tr>
+                         <tr>
+                            <td width="300px">被询问人：</td>
+                            <td><input type="text" name="asked" id="asked" style="width: 200px;" /> </td>
                         </tr>
                         <tr>
-                            <td width="300px">我们单位名称：</td>
-                            <td><input type="text" name="department_name" id="department_name" style="width: 200px;" /> </td>
+                            <td width="300px">询问人1：</td>
+                            <td><input type="text" name="ask" id="ask1" style="width: 200px;" /> </td>
                             <td width="100px"></td>
-                            <td width="300px">证件号码：</td>
-                            <td><input type="text" name="account" id="account" style="width: 200px;" /> </td>
+                            <td width="300px">证件号码1：</td>
+                            <td><input type="text" name="recorder" id="count1" style="width: 200px;" /> </td>
+                        </tr>
+                        <tr>
+                            <td width="300px">询问人2：</td>
+                            <td><input type="text" name="ask" id="ask2" style="width: 200px;" /> </td>
+                            <td width="100px"></td>
+                            <td width="300px">证件号码2：</td>
+                            <td><input type="text" name="recorder" id="count2" style="width: 200px;" /> </td>
                         </tr>
                         <tr>
                             <td width="300px">违反条约：</td>
                             <td><input type="text" name="violate_rule" id="violate_rule" style="width: 200px;" /> </td>
                             <td width="100px"></td>
-                            <td width="300px">内容：</td>
+                            <td width="300px">询问内容：</td>
                             <td><input type="text" name="content1" id="content1" style="width: 200px;" /> </td>
                         </tr>
                         <tr>
-                        <td width="300px">回答1：</td>
-                        <td><select style="width: 200px">
-                            <option>是</option>
-                            <option>否</option>
+                        <td width="300px">以上内容被询问人是否确认：</td>
+                        <td><select id="ifconfire" style="width: 200px">
+                            <option value="1">是</option>
+                            <option value="2">否</option>
                             <select/></td>
                         <td width="100px"></td>
-                        <td width="200px">回答2：</td>
-                        <td><input type="text" name="answer2" style="width: 200px;" /></td>
+                        <td width="200px">被询问人身份信息：</td>
+                        <td><input type="text" name="answer2" id="answer2" style="width: 200px;" /></td>
                     </tr>
-                        <tr>
-                            <td width="300px">被询问人：</td>
-                            <td><input type="text" name="asked" id="asked" style="width: 200px;" /> </td>
+                       
                     </table>
             </div>
         </div>
 
         <!-- 表单操作 -->
         <div id="InputDetailBar">
-             <a href=check.html><img src="../../style/images/save.png"/></a>
-            <a href="add4.html"><img src="../../style/images/next.png"/></a>
+             <a href="#" onclick="addRecord(1)"><img src="../../style/images/save.png"/></a>
+            <a href="#" onclick="addRecord(0)"><img src="../../style/images/next.png"/></a>
         </div>
     </form>
 </div>

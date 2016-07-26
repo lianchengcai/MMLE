@@ -9,6 +9,62 @@
     <script language="javascript" src="../../script/DataShowManager.js" charset="utf-8"></script>
     <link type="text/css" rel="stylesheet" href="../../style/blue/pageCommon.css" />
     <script type="text/javascript">
+    
+    function getParam(paramName)
+    {
+            paramValue ="";
+            isFound =false;
+            if (this.location.search.indexOf("?") ==0&&this.location.search.indexOf("=")>1)
+            {
+                arrSource = unescape(this.location.search).substring(1,this.location.search.length).split("&");
+                i =0;
+                while (i < arrSource.length &&!isFound)
+                {
+                    if (arrSource[i].indexOf("=") >0)
+                    {
+                         if (arrSource[i].split("=")[0].toLowerCase()==paramName.toLowerCase())
+                         {
+                            paramValue = arrSource[i].split("=")[1];
+                            isFound =true;
+                         }
+                    }
+                    i++;
+                }   
+            }
+       return paramValue;
+    }
+    
+    function addPenaltyDecision(method){
+    	var id = getParam('id');
+    	
+		var map={};
+  		var c = new Object();
+  		c.partiesInformation = document.getElementById("parties_information").value;
+  		c.violateContent = document.getElementById("violate_content").value;
+  		c.evidence = document.getElementById("evidence").value;
+  		c.violateRule = document.getElementById("violate_rule").value;
+  		c.basis = document.getElementById("basis").value;
+  		c.penaltyDecision = document.getElementById("penalty_decision").value;
+  		c.location = document.getElementById("location").value;
+  		c.lawEnforcementId = id;
+  		alert(c.location);
+  		map.penaltyDecision=c;
+		 $.ajax({
+		 type: "POST",
+		 url: "http://localhost:8088/mmle/lawEnforcement/addPenaltyDecision.do",
+		 dataType:"json",
+		 contentType: "application/json;charset=utf-8",
+		 data: JSON.stringify(map),
+		 success: function(data){
+			 if(data['code']==1)alert("添加成功！");
+			 var id = data['id'];
+ 				if(method==1){  location.href="check.html"}
+ 				if(method==0){  location.href="add4.html?id="+id;}
+	   },
+	    error:function(){alert("服务器未正常响应，请重试");}
+	});  
+	}
+    
     </script>
 </head>
 <body>
@@ -36,11 +92,7 @@
                     <table cellspacing="5" class="mainForm">
                         <tr>
                             <td width="300px">当事人基本情况：</td>
-                            <td><textarea style="width: 400px;height: 100px" name="parties_information"></textarea> </td>
-                        </tr>
-                        <tr>
-                            <td width="300px">案由名称：</td>
-                            <td><input type="text" name="case_name" id="case_name" style="width: 200px;" /> </td>
+                            <td><textarea style="width: 400px;height: 100px" id="parties_information"></textarea> </td>
                         </tr>
                         <tr>
                             <td width="300px">违法事实：</td>
@@ -71,7 +123,7 @@
 
         <!-- 表单操作 -->
         <div id="InputDetailBar">
-            <a href=check.html><img src="../../style/images/save.png"/></a>
+            <a href="#" onclick="addPenaltyDecision()"><img src="../../style/images/save.png"/></a>
         </div>
     </form>
 </div>

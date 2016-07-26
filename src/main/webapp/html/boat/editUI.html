@@ -10,6 +10,12 @@
     <link type="text/css" rel="stylesheet" href="../../style/blue/pageCommon.css" />
    <script type="text/javascript">
    
+   function changedt(string){
+	   var arr = string.split(" ");
+	   var arr2 = arr[0].split("-");
+	   return arr2; 
+   }
+   
     function getParam(paramName)
     {
             paramValue ="";
@@ -55,9 +61,13 @@
 					document.getElementById("length").value = fishBoat.length;
 					document.getElementById("width").value = fishBoat.width;
 					document.getElementById("fish_permit_no").value = fishBoat.fishPermitNo;
-					document.getElementById("fish_permit_time").value = fishBoat.fishPermitTime;
+					var fishPermitTime = changedt(fishBoat.fishPermitTime);
+					var strdate = fishPermitTime[0]+"-"+fishPermitTime[1]+"-"+fishPermitTime[2];
+					document.getElementById("fish_permit_time").value = strdate;
 					document.getElementById("substituting_no").value = fishBoat.substitutingNo;
-					document.getElementById("substituting_time").value = fishBoat.substitutingTime;
+					var substitutingTime = changedt(fishBoat.substitutingTime);
+					var strt = substitutingTime[0]+"-"+substitutingTime[1]+"-"+substitutingTime[2]
+					document.getElementById("substituting_time").value = strt;
 					document.getElementById("boat_location").value = fishBoat.boatLlocation;
 					document.getElementById("create_time").value = fishBoat.createTime;
 					},

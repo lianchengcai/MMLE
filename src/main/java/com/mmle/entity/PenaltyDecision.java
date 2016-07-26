@@ -20,6 +20,8 @@ public class PenaltyDecision {
     private String violateRule;//违反条款
 
     private String basis;;//违反条款依据
+    
+    private String penaltyDecision;//处罚决定
 
     private String location;//缴纳罚款位置
 
@@ -109,14 +111,20 @@ public class PenaltyDecision {
 		this.flag = flag;
 	}
 
+	public String getPenaltyDecision() {
+		return penaltyDecision;
+	}
+
+	public void setPenaltyDecision(String penaltyDecision) {
+		this.penaltyDecision = penaltyDecision;
+	}
+
 	@Override
 	public String toString() {
 		return "PenaltyDecision [id=" + id + ", partiesInformation=" + partiesInformation + ", violateContent="
 				+ violateContent + ", evidence=" + evidence + ", violateRule=" + violateRule + ", basis=" + basis
-				+ ", location=" + location + ", date=" + date + ", lawEnforcementId=" + lawEnforcementId + ", flag="
-				+ flag + "]";
+				+ ", penaltyDecision=" + penaltyDecision + ", location=" + location + ", date=" + date
+				+ ", lawEnforcementId=" + lawEnforcementId + ", flag=" + flag + "]";
 	}
 
-
-   
 }
