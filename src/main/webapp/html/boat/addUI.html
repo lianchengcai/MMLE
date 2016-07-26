@@ -11,7 +11,7 @@
 	<script type="text/javascript" src="/script/jquery.js"></script>
     <script type="text/javascript"> 
     
-    function changeTime(str){
+    function chaTime(str){
     	var arr = str.split("-");  
     	var date = new Date(arr[0],parseInt(arr[1])-1,arr[2]);  
     	alert(date);
@@ -47,7 +47,7 @@
 						alert("添加成功！");
 					 }
 			   },
-			    error:function(){alert("服务器未正常响应，请重试");}
+			    error:function(msg){alert("服务器未正常响应，请重试"+msg);}
 			});  
 		}
     </script>
