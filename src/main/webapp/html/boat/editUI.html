@@ -8,10 +8,66 @@
     <script language="javascript" src="../../script/DemoData.js" charset="utf-8"></script>
     <script language="javascript" src="../../script/DataShowManager.js" charset="utf-8"></script>
     <link type="text/css" rel="stylesheet" href="../../style/blue/pageCommon.css" />
-    <script type="text/javascript">
+   <script type="text/javascript">
+   
+    function getParam(paramName)
+    {
+            paramValue ="";
+            isFound =false;
+            if (this.location.search.indexOf("?") ==0&&this.location.search.indexOf("=")>1)
+            {
+                arrSource = unescape(this.location.search).substring(1,this.location.search.length).split("&");
+                i =0;
+                while (i < arrSource.length &&!isFound)
+                {
+                    if (arrSource[i].indexOf("=") >0)
+                    {
+                         if (arrSource[i].split("=")[0].toLowerCase()==paramName.toLowerCase())
+                         {
+                            paramValue = arrSource[i].split("=")[1];
+                            isFound =true;
+                         }
+                    }
+                    i++;
+                }   
+            }
+       return paramValue;
+    }
+    
+		function getMessage(){
+			var boatId = getParam('boatId');
+			var map={};
+			var fb = new Object(); 
+			fb.boatId=boatId;
+			map.fishBoat=fb;
+			$.ajax({
+				type: "POST",
+				url: "http://localhost:8088/mmle/fishBoat/getBoatById.do",
+				dataType:"json",
+				contentType: "application/json;charset=utf-8",
+				data: JSON.stringify(map),
+				success: function(data){
+					var fishBoat = data['fishBoat'];
+					document.getElementById("boat_id").value = fishBoat.boatId;
+					document.getElementById("boat_name").value = fishBoat.boatId;
+					document.getElementById("home_port").value = fishBoat.homePort;
+					document.getElementById("total_weight").value = fishBoat.totalWeight;
+					document.getElementById("length").value = fishBoat.length;
+					document.getElementById("width").value = fishBoat.width;
+					document.getElementById("fish_permit_no").value = fishBoat.fishPermitNo;
+					document.getElementById("fish_permit_time").value = fishBoat.fishPermitTime;
+					document.getElementById("substituting_no").value = fishBoat.substitutingNo;
+					document.getElementById("substituting_time").value = fishBoat.substitutingTime;
+					document.getElementById("boat_location").value = fishBoat.boatLlocation;
+					document.getElementById("create_time").value = fishBoat.createTime;
+					},
+				error:function(){alert("服务器未正常响应，请重试");}
+				});  
+		}
+    
     </script>
 </head>
-<body>
+<body onload="getMessage()">
 
 <!-- 标题显示 -->
 <div id="Title_bar">
@@ -23,7 +79,6 @@
         <div id="Title_End"></div>
     </div>
 </div>
-
 <!--显示表单内容-->
 <div id="MainArea">
     <form action="list.html">
