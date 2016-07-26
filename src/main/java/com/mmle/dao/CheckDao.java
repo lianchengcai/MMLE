@@ -40,7 +40,7 @@ public interface CheckDao {
 	@Results({
 		//这两个映射要看其他人的方法怎么写
 		@Result(property="boat",column="boat",one=@One(select="com.mmle.dao.IFishBoatDao.selectFishBoatById")),
-		//@Result(property="checkMan",column="check_man",one=@One(select="com.mmle.dao.UserDao.getUserById")),
+		@Result(property="cas",column="case_id",one=@One(select="com.mmle.dao.CaseDao.getCaseByCaseId")),
 	})
 	List<Check> getCheckByType(Map<String, Object> query);
 
@@ -48,7 +48,7 @@ public interface CheckDao {
 	@Results({
 		//这两个映射要看其他人的方法怎么写
 		@Result(property="boat",column="boat",one=@One(select="com.mmle.dao.IFishBoatDao.selectFishBoatById")),
-		//@Result(property="checkMan",column="check_man",one=@One(select="com.mmle.dao.UserDao.getUserById")),
+		@Result(property="cas",column="case_id",one=@One(select="com.mmle.dao.CaseDao.getCaseByCaseId")),
 	})
 	List<Check> getCheckByTitle(Map<String, Object> query);
 
@@ -56,7 +56,7 @@ public interface CheckDao {
 	@Results({
 		//这两个映射要看其他人的方法怎么写
 		@Result(property="boat",column="boat",one=@One(select="com.mmle.dao.IFishBoatDao.selectFishBoatById")),
-		//@Result(property="checkMan",column="check_man",one=@One(select="com.mmle.dao.UserDao.getUserById")),
+		@Result(property="cas",column="case_id",one=@One(select="com.mmle.dao.CaseDao.getCaseByCaseId")),
 	})
 	List<Check> getcheckByCheckMan(Map<String, Object> query);
 
@@ -66,14 +66,14 @@ public interface CheckDao {
 	@Select("select count(*) from tbl_check where title like concat('%', #{title}, '%')")
 	int getCheckCountByTitle(String title);
 
-	@Select("select * from tbl_check where check_man =#{account} ")
+	@Select("select count(*) from tbl_check where check_man =#{account} ")
 	int getcheckCountByCheckMan(String account);
 
 	@Select("select * from tbl_check")
 	@Results({
 		//这两个映射要看其他人的方法怎么写
 		@Result(property="boat",column="boat",one=@One(select="com.mmle.dao.IFishBoatDao.selectFishBoatById")),
-		//@Result(property="checkMan",column="check_man",one=@One(select="com.mmle.dao.UserDao.getUserById")),
+		@Result(property="cas",column="case_id",one=@One(select="com.mmle.dao.CaseDao.getCaseByCaseId")),
 	})
 	List<Check> getAllCheck();
 
@@ -87,7 +87,7 @@ public interface CheckDao {
 	@Results({
 		//这两个映射要看其他人的方法怎么写
 		@Result(property="boat",column="boat",one=@One(select="com.mmle.dao.IFishBoatDao.selectFishBoatById")),
-		//@Result(property="checkMan",column="check_man",one=@One(select="com.mmle.dao.UserDao.getUserById")),
+		@Result(property="cas",column="case_id",one=@One(select="com.mmle.dao.CaseDao.getCaseByCaseId")),
 	})
 	List<Check> getCheck(Map<String, Object> query);
 }

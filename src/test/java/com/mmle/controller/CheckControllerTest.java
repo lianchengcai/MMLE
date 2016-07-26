@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mmle.entity.Case;
@@ -51,13 +52,15 @@ public class CheckControllerTest {
 	@Test
 	public void getCheck() throws Exception {
 		DTO data = new DTO();
-		Check check = new Check();
-		check.setTitle("违反");
-		//check.setType("巡查");
-		User user = new User();
-		user.setName("李");
-		check.setCheckMan(user);
-		data.setCheck(check);
+//		Check check = new Check();
+//		check.setTitle("违反");
+//		//check.setType("巡查");
+//		User user = new User();
+//		user.setName("李");
+//		check.setCheckMan(user);
+//		data.setCheck(check);
+		data.setCurrentPage(1);
+		data.setSize(2);
 		ObjectMapper mapper = new ObjectMapper();
 		// mapper.configure(SerializationConfig.Feature.INDENT_OUTPUT,
 		// Boolean.TRUE);
@@ -81,7 +84,6 @@ public class CheckControllerTest {
 		DTO data = new DTO();
 		Check check = new Check();
 		check.setBoatCheck(true);
-		check.setBoatImage("F:\\照片。\\160620\\00001370.jpg");
 		data.setCheck(check);
 		ObjectMapper mapper = new ObjectMapper();
 		// mapper.configure(SerializationConfig.Feature.INDENT_OUTPUT,
@@ -132,9 +134,7 @@ public class CheckControllerTest {
 		check.setCheckId(1);
 		check.setTitle("违反条款8");
 		check.setType("水上安全检查");
-		User user = new User();
-		user.setName("吴昂");
-		check.setCheckMan(user);
+		check.setCheckMan("吴昂");
 		data.setCheck(check);
 		ObjectMapper mapper = new ObjectMapper();
 		// mapper.configure(SerializationConfig.Feature.INDENT_OUTPUT,

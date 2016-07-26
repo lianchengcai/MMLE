@@ -153,6 +153,9 @@ public class DynaSqlProvider {
 				if (check.getState()!= null) {
 					VALUES("state", "#{state}");
 				}
+				if (check.getCas()!= null) {
+					VALUES("case_id", "#{cas.caseId}");
+				}
 			}
 		}.toString();
 	}
@@ -270,9 +273,9 @@ public class DynaSqlProvider {
 	
 	public String getCheck(final Map<String, Object> map){
 		Check check = (Check) map.get("check");
-		System.out.println(check);
 		Integer offset = (Integer)map.get("offset");
 		Integer size = (Integer)map.get("size");
+		System.out.println(offset+" "+size);
 		StringBuffer s = new StringBuffer();
 		s.append("select * from ");
 		s.append("tbl_check");
@@ -289,9 +292,9 @@ public class DynaSqlProvider {
 				s.append("%' ");
 			} 
 			if (check.getCheckMan() != null) {
-				if (check.getCheckMan().getName()!=null) {
+				if (check.getCheckMan()!=null) {
 					s.append("and check_man LIKE '%");
-					s.append(check.getCheckMan().getName());
+					s.append(check.getCheckMan());
 					s.append("%' ");
 				}
 			} 
@@ -300,13 +303,18 @@ public class DynaSqlProvider {
 				s.append(check.getFlag());
 				s.append(" ");
 			}
-			if(offset != null && offset!=0  && size != null && size!=0 && size>offset){
-				s.append("limit ");
-				s.append(offset);
-				s.append(",");
-				s.append(size);
-				
+			if (check.getCheckId() != null) {
+				s.append("and check_id =");
+				s.append(check.getCheckId());
+				s.append(" ");
 			}
+		}
+		if(offset != null && size != null && size!=0 && size>offset){
+			s.append("limit ");
+			s.append(offset);
+			s.append(",");
+			s.append(size);
+			
 		}
 		System.out.println(s.toString());
 		return s.toString();

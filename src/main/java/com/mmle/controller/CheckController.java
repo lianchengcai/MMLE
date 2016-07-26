@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mmle.entity.Check;
 import com.mmle.serviceImple.ICheckService;
 import com.mmle.utils.DTO;
 
@@ -31,13 +33,15 @@ public class CheckController {
 	@Resource
 	ICheckService checkService ;
 	
-	private static Logger log = (Logger) LoggerFactory.getLogger(CaseController.class);
+	private static Logger log = (Logger) LoggerFactory.getLogger(CheckController.class);
 
 	@RequestMapping("addCheck")
 	@ResponseBody
-	public Map<String, Object> addCheck(@RequestBody DTO data,@RequestParam MultipartFile[] pic){
+	public Map<String, Object> addCheck(@RequestBody DTO data,@RequestParam MultipartFile[] pic,HttpServletRequest request){
 		log.info("addCheck:"+data.toString()+pic.toString());
-		Map<String, Object> map = checkService.addCheck(data.getCheck(),pic);
+		String path = request.getServletContext().getRealPath("/images");
+		
+		Map<String, Object> map = checkService.addCheck(data.getCheck(),pic,path);
 		return map;
 	}
 	
@@ -46,6 +50,7 @@ public class CheckController {
 	public Map<String, Object> getCheck(@RequestBody DTO data){
 		log.info("getCheck:"+data.toString());
 		Map<String, Object> map = checkService.getCheck2(data.getCheck(),data.getSize(),data.getCurrentPage());
+		log.info("getCheck:"+map);
 		return map;
 	}
 	

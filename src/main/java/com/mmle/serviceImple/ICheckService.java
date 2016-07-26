@@ -2,6 +2,8 @@ package com.mmle.serviceImple;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mmle.entity.Check;
@@ -15,7 +17,7 @@ import com.mmle.entity.Check;
  * @version V1.0   
  */
 public interface ICheckService {
-	public Map<String, Object> addCheck(Check check, MultipartFile[] multipartFiles);
+	public Map<String, Object> addCheck(Check check, MultipartFile[] multipartFiles, String path);
 
 	public Map<String, Object> getCheck(Check check, Integer size, Integer currentPage);
 

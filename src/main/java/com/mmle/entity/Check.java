@@ -7,11 +7,9 @@ public class Check {
 
     private String type;
 
-   // private Integer boat;
     private FishBoat boat;
 
-    //private Integer checkMan;
-    private User checkMan;
+    private String checkMan;
 
     private Date checkTime;
 
@@ -20,6 +18,8 @@ public class Check {
     private String boatImage;
 
     private String manImage;
+    
+    private Case cas;
 
     private Boolean nationality;
 
@@ -49,8 +49,15 @@ public class Check {
     
     private Boolean state;
     
-    
-    public Boolean getState() {
+    public Case getCas() {
+		return cas;
+	}
+
+	public void setCas(Case cas) {
+		this.cas = cas;
+	}
+
+	public Boolean getState() {
 		return state;
 	}
 
@@ -90,14 +97,6 @@ public class Check {
         this.type = type;
     }
 
-//    public Integer getBoat() {
-//        return boat;
-//    }
-//
-//    public void setBoat(Integer boat) {
-//        this.boat = boat;
-//    }
-    
 
     public FishBoat getBoat() {
 		return boat;
@@ -107,11 +106,11 @@ public class Check {
 		this.boat = boat;
 	}
 
-	public User getCheckMan() {
+	public String getCheckMan() {
         return checkMan;
     }
 
-    public void setCheckMan(User checkMan) {
+    public void setCheckMan(String checkMan) {
         this.checkMan = checkMan;
     }
 
@@ -239,12 +238,13 @@ public class Check {
 	public String toString() {
 		return "Check [checkId=" + checkId + ", type=" + type + ", boat=" + boat + ", checkMan=" + checkMan
 				+ ", checkTime=" + checkTime + ", title=" + title + ", boatImage=" + boatImage + ", manImage="
-				+ manImage + ", nationality=" + nationality + ", boatCheck=" + boatCheck + ", fishing=" + fishing
-				+ ", sailing=" + sailing + ", boater=" + boater + ", chiefEngineer=" + chiefEngineer
+				+ manImage + ", cas=" + cas + ", nationality=" + nationality + ", boatCheck=" + boatCheck + ", fishing="
+				+ fishing + ", sailing=" + sailing + ", boater=" + boater + ", chiefEngineer=" + chiefEngineer
 				+ ", satelliteNavigation=" + satelliteNavigation + ", radar=" + radar + ", ssb=" + ssb + ", compass="
 				+ compass + ", flag=" + flag + ", content=" + content + ", location=" + location + ", state=" + state
 				+ "]";
 	}
+
 
 
 }

@@ -1,80 +1,461 @@
 <html>
 <head>
-    <title>安全记录列表</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script language="javascript" src="../../script/jquery.js"></script>
-    <script language="javascript" src="../../script/pageCommon.js" charset="utf-8"></script>
-    <script language="javascript" src="../../script/PageUtils.js" charset="utf-8"></script>
-    <script language="javascript" src="../../script/DemoData.js" charset="utf-8"></script>
-    <script language="javascript" src="../../script/DataShowManager.js" charset="utf-8"></script>
-    <link type="text/css" rel="stylesheet" href="../../style/blue/pageCommon.css" />
-    <script type="text/javascript">
-    </script>
+<title>安全记录列表</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+	.detail input {
+		readonly:expression(this.readOnly=true);
+	}
+</style>
+<script language="javascript" src="../../script/jquery.js"></script>
+<script language="javascript" src="../../script/pageCommon.js"
+	charset="utf-8"></script>
+<script language="javascript" src="../../script/PageUtils.js"
+	charset="utf-8"></script>
+<script language="javascript" src="../../script/DemoData.js"
+	charset="utf-8"></script>
+<script language="javascript" src="../../script/DataShowManager.js"
+	charset="utf-8"></script>
+<link type="text/css" rel="stylesheet"
+	href="../../style/blue/pageCommon.css" />
+<script type="text/javascript">
+	$(document).ready(function() {
+		alert("123");
+		$("#detail").hide();
+		$("#change").hide();
+		query();
+	});
+	function find(checkId) {
+		alert(checkId);
+		var data = new Object();
+		var check = new Object();
+		data.check = check;
+		check.checkId = checkId;
+		$("#list").hide();
+		$("#detail").show();
+		$.ajax({
+			url : "http://127.0.0.1:8082/mmle/getCheck.do",
+			type : "post",
+			async : false,
+			contentType : "application/json",
+			data : JSON.stringify(data),
+			dataType : "json",
+			success : function(json) {
+				alert(JSON.stringify(json));
+				var checks = json.checks;
+				check = checks[0];
+				var boatImage = check.boatImage;
+				var manImage = check.manImage;
+				if (boatImage != null) {
+					$("#boatImage").attr("src", "../../" + boatImage);
+				}
+				if (manImage != null) {
+					$("#manImage").attr("src", "../../" + manImage);
+					alert(manImage);
+				}
+				$("#type").val(check.type);
+				$("#boat").val(check.boat.boatName);
+				$("#checkMan").val(check.checkMan);
+				$("#checkTime").val(check.checkTime);
+				$("#title1").val(check.title);
+				if (check.nationality) {
+					$("#nationality").val("是");
+				} else {
+					$("#nationality").val("否");
+				}
+				if (check.boatCheck) {
+					$("#boatCheck").val("是");
+				} else {
+					$("#boatCheck").val("否");
+				}
+				if (check.fishing) {
+					$("#fishing").val("是");
+				} else {
+					$("#fishing").val("否");
+				}
+				if (check.sailing) {
+					$("#sailing").val("是");
+				} else {
+					$("#sailing").val("否");
+				}
+				if (check.boater) {
+					$("#boater").val("是");
+				} else {
+					$("#boater").val("否");
+				}
+				if (check.chiefEngineer) {
+					$("#chiefEngineer").val("是");
+				} else {
+					$("#chiefEngineer").val("否");
+				}
+				if (check.satelliteNavigation) {
+					$("#satelliteNavigation").val("是");
+				} else {
+					$("#satelliteNavigation").val("否");
+				}
+				if (check.radar) {
+					$("#radar").val("是");
+				} else {
+					$("#radar").val("否");
+				}
+				if (check.ssb) {
+					$("#ssb").val("是");
+				} else {
+					$("#ssb").val("否");
+				}
+				if (check.compass) {
+					$("#compass").val("是");
+				} else {
+					$("#compass").val("否");
+				}
+			}
+		});
+	}
+	function change(checkId) {
+		alert(checkId);
+		var data = new Object();
+		var check = new Object();
+		data.check = check;
+		check.checkId = checkId;
+		$("#list").hide();
+		$("#change").show();
+		$.ajax({
+			url : "http://127.0.0.1:8082/mmle/getCheck.do",
+			type : "post",
+			async : false,
+			contentType : "application/json",
+			data : JSON.stringify(data),
+			dataType : "json",
+			success : function(json) {
+				alert(JSON.stringify(json));
+				var checks = json.checks;
+				check = checks[0];
+				var boat = check.boat;
+				var cas = check.cas;
+				$("#boat1").text(boat.boatName);
+				$("#boat3").text(boat.boatName);
+				$("#content1").text(check.content);
+				$("#rule").text(cas.violateRule);
+				$("#base").text(cas.basisPunishment);
+				$("#content2").text(check.content);
+		       var dt = new Date();
+		       var y = dt.getFullYear();
+		       var h=dt.getMonth()+1;
+		       var m=dt.getDate();
+		       alert(y+"年"+h+"月"+m+"日");
+		       $("#time").html(y+"年"+h+"月"+m+"日");  
+			}
+		});
+	}
+	function query() {
+		alert();
+		var data = new Object();
+		data.currentPage = $("#currentPage").text();
+		data.size = 10;
+		var type = $("#type_but").val();
+		var title = $("#title_but").val();
+		var checkMan = $("#checkMan_but").val();
+		var check = new Object();
+		data.check = check;
+		alert(type);
+		if (type != null && type != "") {
+			check.type = type;
+		}
+		if (title != null && title != "") {
+			alert(title);
+			check.title = title;
+		}
+		if (checkMan != null && checkMan != "") {
+			check.checkMan = checkMan;
+		}
+		alert(checkMan);
+		$
+				.ajax({
+					url : "http://127.0.0.1:8082/mmle/getCheck.do",
+					type : "post",
+					async : false,
+					contentType : "application/json",
+					data : JSON.stringify(data),
+					dataType : "json",
+					success : function(json) {
+						alert(JSON.stringify(json));
+						alert(json.checks.length);
+						var checks = json.checks;
+						var html = "";
+						for (var i = 0; i < checks.length; i++) {
+							var boat = checks[i].boat;
+							html += ("<tr class='TableDetail1 template' align='center'>");
+							html += ("<td>" + checks[i].type + "</td>");
+							if (boat != null) {
+								if (boat.boatName != null)
+									html += ("<td>" + boat.boatName + "</td>");
+							} else {
+								html += ("<td></td>");
+							}
+							html += ("<td>" + checks[i].title + "</td>");
+							html += ("<td>" + checks[i].checkMan + "</td>");
+							html += ("<td>" + checks[i].content + "</td>");
+							html += ("<td>" + checks[i].location + "</td>");
+							html += ("<td>" + checks[i].checkTime + "</td>");
+							html += ("<td>");
+							html += ("<a onclick='find(" + checks[i].checkId + ")'>查看详情</a>");
+							if (!checks[i].state) {
+								html += ("&nbsp;");
+								html += ("<a onclick='change(" + checks[i].checkId + ")'>查看通知单</a>");
+							}
+							html += ("</td>");
+							html += ("</tr>");
+						}
+						$("#TableData").html(html);
+					}
+				})
+	}
+</script>
 </head>
 <body>
- 
-<div id="Title_bar">
-    <div id="Title_bar_Head">
-        <div id="Title_Head"></div>
-        <div id="Title"><!--页面标题-->
-            <img border="0" width="13" height="13" src="../../style/images/title_arrow.gif"/> 安全记录列表
-        </div>
-        <div id="Title_End"></div>
-    </div>
-</div>
+		<div id="list">
+		<div id="Title_bar">
+			<div id="Title_bar_Head">
+				<div id="Title_Head"></div>
+				<div id="Title">
+					<!--页面标题-->
+					<img border="0" width="13" height="13"
+						src="../../style/images/title_arrow.gif" /> 安全记录列表
+				</div>
+				<div id="Title_End"></div>
+			</div>
+		</div>
 
-<div id="MainArea">
-    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    类别: <input type="text" id="type_but" name="type_but" style="width: 150px;">&nbsp;&nbsp;&nbsp;
-    标题: <input type="text" id="title_but" name="title_but" style="width: 150px;">&nbsp;&nbsp;&nbsp;
-    检查人员: <input type="text" id="check_man_but" name="check_man_but" style="width: 100px;">&nbsp;&nbsp;&nbsp;
-</select>&nbsp;&nbsp;&nbsp;
-    <input type="button" value="查询">
-    <br><br>
-    <table cellspacing="0" cellpadding="0" class="TableStyle">
-       
-        <!-- 表头-->
-        <thead>
-            <tr align=center valign=middle id=TableTitle>
-                <td width="120px">类别</td>
-                <td width="100px">对象</td>
-                <td width="100px">标题</td>
-                <td width="100px">检查人员</td>
-                <td width="280px">描述</td>
-                <td width="140px">位置</td>
-                <td width="140px">检查日期</td>
-                <td>相关操作</td>
-            </tr>
-        </thead>
+		<div id="MainArea">
+			<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			类别: <input type="text" id="type_but" name="type_but"
+				style="width: 150px;">&nbsp;&nbsp;&nbsp; 标题: <input
+				type="text" id="title_but" name="title_but" style="width: 150px;">&nbsp;&nbsp;&nbsp;
+			检查人员: <input type="text" id="check_man_but" name="check_man_but"
+				style="width: 100px;">&nbsp;&nbsp;&nbsp; </select>&nbsp;&nbsp;&nbsp;
+			<input type="button" value="查询" id="sele" onclick="query();" /> <br>
+			<br>
+			<table cellspacing="0" cellpadding="0" class="TableStyle">
 
-		<!--显示数据列表-->
-        <tbody id="TableData" class="dataContainer" datakey="departmentList">
-			<tr class="TableDetail1 template" align="center">
-				<td>水上安全检查</td>
-                <td>闽漳渔110</td>
-                <td>日常检查</td>
-                <td>超级管理员</td>
-                <td>违反渔业安全管理条例</td>
-                <td>113.114.1145</td>
-                <td>2016-6-16 23：59</td>
-				<td>
-                    <a href="detail_info.html">查看详情</a>&nbsp;
-					<a href="info.html">查看通知单</a>
+				<!-- 表头-->
+				<thead>
+					<tr align=center valign=middle id=TableTitle>
+						<td width="120px">类别</td>
+						<td width="100px">对象</td>
+						<td width="100px">标题</td>
+						<td width="100px">检查人员</td>
+						<td width="280px">描述</td>
+						<td width="140px">位置</td>
+						<td width="140px">检查日期</td>
+						<td>相关操作</td>
+					</tr>
+				</thead>
+
+				<!--显示数据列表-->
+				<tbody id="TableData" class="dataContainer" datakey="departmentList">
+					<tr class="TableDetail1 template" align="center">
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+		<br>
+		<table id="paging" style="width: 400px" align="center">
+			<tr style="height: 60px">
+				<td><input type="button" name="firtPage" value="首页"></td>
+				<td><input type="button" name="previousPage" value="上一页"></td>
+				<td>当前页码:第<span id="currentPage">1</span>页
 				</td>
+				<td><input type="button" name="nextPage" value="下一页"></td>
+				<td><input type="button" name="endPage" value="尾页"></td>
 			</tr>
-        </tbody>
-    </table>
+		</table>
+	</div>
+	<div id="detail">
+		<div id="Title_bar">
+			<div id="Title_bar_Head">
+				<div id="Title_Head"></div>
+				<div id="Title">
+					<!--页面标题-->
+					<img border="0" width="13" height="13"
+						src="../../style/images/title_arrow.gif" /> 检查表单信息
+				</div>
+				<div id="Title_End"></div>
+			</div>
+		</div>
+		<div class="ItemBlockBorder">
+			<div class="ItemBlock">
+				<form>
+					<table cellpadding="0" cellspacing="0" class="mainForm">
+						<tr>
+							<td width="120">船只照片</td>
+							<td><img id="boatImage" style="width: 150px; height: 150px"
+								alt="没有船只图片"></td>
+							<td width="150">
+							<td />
+							<td width="100">船员照片</td>
+							<td><img id="manImage" style="width: 150px; height: 150px"
+								alt="没有船员照片"></td>
+						</tr>
+						<tr>
+							<td width="120">类别</td>
+							<td><input type="text" name="type" id="type"
+								style="width: 200px;" /></td>
+							<td width="150">
+							<td />
+							<td width="100">对象</td>
+							<td><input type="text" id="boat" name="boat"
+								style="width: 200px;" /></td>
+						</tr>
+						<tr>
+							<td width="120">检查人员</td>
+							<td><input type="text" name="check_man" id="checkMan"
+								style="width: 200px;" /></td>
+							<td width="150">
+							<td />
+							<td width="100">检查时间</td>
+							<td><input type="text" name="check_time" id="checkTime"
+								style="width: 200px;" /></td>
+						</tr>
+						<tr>
+							<td width="120">标题</td>
+							<td><input type="text" name="title1" id="title1"
+								style="width: 200px;" /></td>
+						</tr>
+						<tr>
+							<td width="120">国际证书是否有效</td>
+							<td><input type="text" name="nationality" id="nationality"
+								style="width: 200px;" /></td>
+							<td width="150">
+							<td />
+							<td width="100">船检证书是否有效</td>
+							<td><input type="text" name="boat_check" id="boatCheck"
+								style="width: 200px;" /></td>
+						</tr>
+						<tr>
+							<td width="120">捕捞许可是否有效</td>
+							<td><input type="text" name="fishing" id="fishing"
+								style="width: 200px;" /></td>
+							<td width="150">
+							<td />
+							<td width="100">航行签证是否有效</td>
+							<td><input type="text" name="sailing" id="sailing"
+								style="width: 200px;" /></td>
+						</tr>
+						<tr>
+							<td width="120">船长证书是否有效</td>
+							<td><input type="text" name="boater" id="boater"
+								style="width: 200px;" /></td>
+							<td width="150">
+							<td />
+							<td width="100">轮机长证是否有效</td>
+							<td><input type="text" name="chief_engineer"
+								id="chiefEngineer" style="width: 200px;" /></td>
+						</tr>
+						<tr>
+							<td width="120">卫星导航设备是否有效</td>
+							<td><input type="text" name="satellite_navigation"
+								id="satelliteNavigation" style="width: 200px;" /></td>
+							<td width="150">
+							<td />
+							<td width="100">雷达设备是否有效</td>
+							<td><input type="text" name="radar" id="radar"
+								style="width: 200px;" /></td>
+						</tr>
+						<tr>
+							<td width="100">单边带设备是否有效</td>
+							<td><input type="text" name="ssb" id="ssb"
+								style="width: 200px;" /></td>
+							<td width="150">
+							<td />
+							<td width="100">罗经设备是否有效</td>
+							<td><input type="text" name="compass" id="compass"
+								style="width: 200px;" /></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+		<br> <br> <br>
+		<div id="InputDetailBar">
+			<div align="center">
+				<a href="list.html"><img src="../../style/images/goBack.png" /></a>
+			</div>
+		</div>
+	</div>
+	<div id="change">
+		<div id="Title_bar">
+			<div id="Title_bar_Head">
+				<div id="Title_Head"></div>
+				<div id="Title">
+					<!--页面标题-->
+					<img border="0" width="13" height="13"
+						src="../../style/images/title_arrow.gif" /> 整改通知单信息
+				</div>
+				<div id="Title_End"></div>
+			</div>
+		</div>
+		<h1 style="text-align: center">整改通知单表单</h1>
+		<br>
+		<br>
+		<br>
+		<table align="center" width="500px" cellpadding="5">
+			<tr style="width: 100%">
+				<td><div style="font-size: larger">
+						<u id="boat1"></u>：
+					</div></td>
+			</tr>
+			<tr style="width: 100%">
+				<td><div style="font-size: larger">
+						&nbsp;&nbsp;你（单位）<u id = "content1"> </u>：
+					</div></td>
+			</tr>
+			<tr style="width: 100%">
+				<td><div style="font-size: larger">
+						的行为，违反了<u id="rule"></u>
+					</div></td>
+			</tr>
+			<tr style="width: 100%">
+				<td><div style="font-size: larger">
+						依据<u id="base"></u>
+					</div></td>
+			</tr>
+			<tr style="width: 100%">
+				<td><div style="font-size: larger">
+						规定，本机关责令你（单位）<u id="boat3"></u>
+					</div></td>
+			</tr>
+			<tr style="width: 100%">
+				<td><div style="font-size: larger">
+						改正下列违法行为<u id="content2"></u>
+					</div></td>
+			</tr>
+			<tr style="width: 100%">
+				<td><div style="font-size: larger">&nbsp;&nbsp;逾期不改正的，本机关将依法处置。</div></td>
+			</tr>
+			<tr style="width: 100%">
+				<td></td>
+			</tr>
+			<tr style="width: 100%">
+				<td></td>
+			</tr>
+			<tr style="width: 100%">
+				<td><p align="right" id="time"></p></td>
+			</tr>
+		</table>
+		<br>
+		<br>
+		<br>
+		<div id="InputDetailBar">
+			<div align="center">
+				<a href="list.html"><img
+					src="../../style/images/goBack.png" /></a> <a href="javascript:void(0)"><img
+					src="../../style/images/print.png" /></a>
+			</div>
+		</div>
 
-</div>
-<br>
-    <table id="paging" style="width: 400px" align="center">
-    <tr style="height: 60px">
-        <td><input type="button" name="firtPage" value="首页"></td>
-        <td><input type="button" name="previousPage" value="上一页"></td>
-        <td>当前页码:第1页</td>
-        <td><input type="button" name="nextPage" value="下一页"></td>
-        <td><input type="button" name="endPage" value="尾页"></td>
-    </tr>
-</table>
+	
+	</div>
+	
 </body>
 </html>
