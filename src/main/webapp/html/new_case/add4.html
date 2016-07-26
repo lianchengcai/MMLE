@@ -36,7 +36,7 @@
     
     function addPenaltyDecision(method){
     	var id = getParam('id');
-    	
+    	alert(id);
 		var map={};
   		var c = new Object();
   		c.partiesInformation = document.getElementById("parties_information").value;
@@ -45,9 +45,8 @@
   		c.violateRule = document.getElementById("violate_rule").value;
   		c.basis = document.getElementById("basis").value;
   		c.penaltyDecision = document.getElementById("penalty_decision").value;
-  		c.location = document.getElementById("location").value;
+  		c.location = document.getElementById("location").value; 
   		c.lawEnforcementId = id;
-  		alert(c.location);
   		map.penaltyDecision=c;
 		 $.ajax({
 		 type: "POST",
@@ -57,11 +56,9 @@
 		 data: JSON.stringify(map),
 		 success: function(data){
 			 if(data['code']==1)alert("添加成功！");
-			 var id = data['id'];
  				if(method==1){  location.href="check.html"}
- 				if(method==0){  location.href="add4.html?id="+id;}
 	   },
-	    error:function(){alert("服务器未正常响应，请重试");}
+	    error:function(msg){alert("服务器未正常响应，请重试"+msg);}
 	});  
 	}
     
@@ -123,7 +120,7 @@
 
         <!-- 表单操作 -->
         <div id="InputDetailBar">
-            <a href="#" onclick="addPenaltyDecision()"><img src="../../style/images/save.png"/></a>
+            <a href="#" onclick="addPenaltyDecision(1)"><img src="../../style/images/save.png"/></a>
         </div>
     </form>
 </div>

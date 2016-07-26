@@ -9,9 +9,56 @@
     <script language="javascript" src="../../script/DataShowManager.js" charset="utf-8"></script>
     <link type="text/css" rel="stylesheet" href="../../style/blue/pageCommon.css" />
     <script type="text/javascript">
+    
+    function getPage(){
+    	var map={};
+    	var fb = new Object(); 
+    	fb.lawEnforcementMan="88888888";
+    	map.lawEnMessage=fb;
+
+		 $.ajax({
+		 type: "POST",
+		 url: "http://localhost:8088/mmle/lawEnforcement/getPage.do",
+		 dataType:"json",
+		 contentType: "application/json;charset=utf-8",
+		 data: JSON.stringify(map),
+		 success: function(data){
+			 var html="";
+			 var lawEnMessagePage = data['lawEnMessagePage'];
+			 if(lawEnMessagePage!=null){
+			 var obj = eval(lawEnMessagePage['list']);
+			 for(var i=0;i<obj.length;i++){
+		        	html+=("<tr class='TableDetail1 template'>"); 
+		            html+=("<td>"+obj[i].id+"</td>");
+		            html+=("<td>"+obj[i].casName+"</td>");
+		            html+=("<td>"+obj[i].caseName+"</td>");
+		            if(obj[i].exploration==true){
+		            	html+=("<td>"+"完成"+"</td>");
+		            }else{
+		            	html+=("<td><a href='add2.html?id="+obj[i].id+"'>未完成</a></td>");
+		            }
+		            if(obj[i].record==true){
+		            	html+=("<td>"+"完成"+"</td>");
+		            }else{
+		            	html+=("<td><a href='add3.html?id="+obj[i].id+"'>未完成</a></td>");
+		            }
+		            if(obj[i].penaltyDecision==true){
+		            	html+=("<td>"+"完成"+"</td>");
+		            }else{
+		            	html+=("<td><a href='add4.html?id="+obj[i].id+"'>未完成</a></td>");
+		            }
+	                html+=("</tr>"); 
+		        }
+		        
+			 }
+		        document.getElementById("TableData").innerHTML=html;
+			 },error:function(){alert("服务器未正常响应，请重试");}
+	});  
+}
+    
     </script>
 </head>
-<body>
+<body onload="getPage()">
  
 <div id="Title_bar">
     <div id="Title_bar_Head">

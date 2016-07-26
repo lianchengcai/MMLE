@@ -92,5 +92,6 @@ public class FishBoatController {
 		map.put("fishBoat", returnBoat);
 		return map;
 	}
+
 	
 }
