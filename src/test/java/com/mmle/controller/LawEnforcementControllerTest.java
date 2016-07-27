@@ -144,7 +144,7 @@ public class LawEnforcementControllerTest {
 	public void selectlawEnforcement() throws Exception {
 		DTO data = new DTO();
 		LawEnforcement lawEnforcement = new LawEnforcement();
-		lawEnforcement.setLawEnforcementMan("50009998");
+		lawEnforcement.setId(50);
 		data.setLawEnforcement(lawEnforcement);
 	
 		ObjectMapper mapper = new ObjectMapper();
@@ -169,6 +169,21 @@ public class LawEnforcementControllerTest {
 		System.out.println("Java2Json: " + json);
 		
 		Map<String, Object> map = lawEnforcementController.getPage(data);
+		
+		
+		System.out.println(JSONObject.fromObject(map).toString());
+	}
+	
+	@Test
+	public void updatelawEnMessage() throws Exception {
+		DTO data = new DTO();
+		LawEnforcement lawEnforcement = new LawEnforcement();
+		lawEnforcement.setId(50);
+		lawEnforcement.setReason("为什么！");
+		lawEnforcement.setPass(true);
+		data.setLawEnforcement(lawEnforcement);
+		
+		Map<String, Object> map = lawEnforcementController.updateLawEnforcement(data);
 		
 		
 		System.out.println(JSONObject.fromObject(map).toString());

@@ -9,6 +9,39 @@
     <script language="javascript" src="../../script/DataShowManager.js" charset="utf-8"></script>
     <link type="text/css" rel="stylesheet" href="../../style/blue/pageCommon.css" />
     <script type="text/javascript">
+    
+    function getPage(){
+    	var map={};
+    	var fb = new Object(); 
+    	fb.="88888888";
+    	map.lawEnMessage=fb;
+
+		 $.ajax({
+		 type: "POST",
+		 url: "http://localhost:8088/mmle/lawEnforcement/getPage.do",
+		 dataType:"json",
+		 contentType: "application/json;charset=utf-8",
+		 data: JSON.stringify(map),
+		 success: function(data){
+			 var html="";
+			 var lawEnMessagePage = data['lawEnMessagePage'];
+			 if(lawEnMessagePage!=null){
+			 var obj = eval(lawEnMessagePage['list']);
+			 for(var i=0;i<obj.length;i++){
+		        	html+=("<tr class='TableDetail1 template'>"); 
+		            html+=("<td>"+obj[i].id+"</td>");
+		            html+=("<td>"+obj[i].casName+"</td>");
+		            html+=("<td>"+obj[i].caseName+"</td>");
+		            html+=("<td><a href='examine_info.html?id="+obj[i].id+"'>审批</a></td>");
+	                html+=("</tr>"); 
+		        }
+		        
+			 }
+		        document.getElementById("TableData").innerHTML=html;
+			 },error:function(){alert("服务器未正常响应，请重试");}
+	});  
+}
+    
     </script>
 </head>
 <body>
