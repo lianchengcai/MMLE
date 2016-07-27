@@ -63,7 +63,7 @@ public interface ILawEnforcementDao {
 	@SelectProvider(type = LawEnforcementDynaSql.class, method = "selectLawEnforcement")
 	List<LawEnMessage> selectLawEnMessageByConditions(@Param("lawEnforcement") LawEnforcement lawEnforcement,@Param("start") Integer start,@Param("end") Integer end);
 
-	@SelectProvider(type = LawEnforcementDynaSql.class, method = "selectLawEnforcement")
+	@SelectProvider(type = LawEnforcementDynaSql.class, method = "selectLawEnforcementCount")
 	int selectLawEnMessageCount(LawEnforcement lawEnforcement);
 	
 }

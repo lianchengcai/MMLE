@@ -107,6 +107,7 @@ public class LawEnforcementController {
 	public @ResponseBody Map<String, Object> updateLawEnforcement(@RequestBody DTO data)throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
 		LawEnforcement lawEnforcement = data.getLawEnforcement();
+		System.out.println(lawEnforcement.toString());
 		if(lawEnforcementService.update(lawEnforcement)){
 			map.put("code", 1);
 		}else{

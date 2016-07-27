@@ -64,8 +64,8 @@ public class LawEnforcementService implements ILawEnforcementService{
 	}
 
 	public PageUtil<LawEnforcementExtend> getLawEnforcementPage(LawEnforcement lawEnforcement, int currentPage, int size) {
+		System.out.println(lawEnforcement.toString());
 		int count = lawEnforcementDao.selectLawEnforcementCount(lawEnforcement);
-		
 		PageUtil<LawEnforcementExtend> lawEnforcementExtendPage = new PageUtil<>(currentPage, count, size);
 		Integer start = lawEnforcementExtendPage.getDataStart();
 		int end = lawEnforcementExtendPage.getDataEnd();
