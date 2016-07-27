@@ -8,12 +8,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mmle.dao.CaseDao;
 import com.mmle.dao.IExplorationDao;
 import com.mmle.dao.ILawEnforcementDao;
 import com.mmle.dao.IPenaltyDecisionDao;
 import com.mmle.dao.IRecordDao;
+import com.mmle.entity.Case;
 import com.mmle.entity.Exploration;
-import com.mmle.entity.FishBoat;
+import com.mmle.entity.LawEnMessage;
 import com.mmle.entity.LawEnforcement;
 import com.mmle.entity.LawEnforcementExtend;
 import com.mmle.entity.PenaltyDecision;
@@ -30,6 +32,9 @@ public class LawEnforcementService implements ILawEnforcementService{
 	
 	@Resource
 	private IPenaltyDecisionDao penaltyDecisionDao;
+	
+	@Resource
+	private CaseDao caseDao;
 	
 	@Resource
 	private IRecordDao recordDao;
@@ -59,8 +64,8 @@ public class LawEnforcementService implements ILawEnforcementService{
 	}
 
 	public PageUtil<LawEnforcementExtend> getLawEnforcementPage(LawEnforcement lawEnforcement, int currentPage, int size) {
+		System.out.println(lawEnforcement.toString());
 		int count = lawEnforcementDao.selectLawEnforcementCount(lawEnforcement);
-		
 		PageUtil<LawEnforcementExtend> lawEnforcementExtendPage = new PageUtil<>(currentPage, count, size);
 		Integer start = lawEnforcementExtendPage.getDataStart();
 		int end = lawEnforcementExtendPage.getDataEnd();
@@ -85,6 +90,56 @@ public class LawEnforcementService implements ILawEnforcementService{
 		}
 		return null;
 	}
+
+	public PageUtil<LawEnMessage> getLawEnMessagePage(LawEnMessage lawEnMessage, Integer currentPage, Integer size) {
+		System.out.println("fassad");
+		int count = lawEnforcementDao.selectLawEnMessageCount(lawEnMessage);
+		System.out.println("fas");
+		PageUtil<LawEnMessage> lawEnMessagePage = new PageUtil<>(currentPage, count, size);
+		Integer start = lawEnMessagePage.getDataStart();
+		int end = lawEnMessagePage.getDataEnd();
+		if(count>0){
+			System.out.println("我执行到这里！");
+			List<LawEnMessage> list = lawEnforcementDao.selectLawEnMessageByConditions(lawEnMessage, start, end);
+			System.out.println("我执行到这里！！！"+count);
+			for(int i=0;i<list.size();i++){
+				int id = list.get(i).getId();
+				Case cas =  caseDao.getCaseByCaseId(list.get(i).getCaseId());
+				list.get(i).setCasName(cas.getCaseName());
+				System.out.println(cas);
+				Record record = recordDao.selectRecordByLawEnforcementId(id);
+				PenaltyDecision penaltyDecision = 
+						penaltyDecisionDao.selectPenaltyDecisionByLawEnforcementId(id);
+				Exploration exploration = explorationDao.selectExplorationByLawEnforcementId(id);
+				if(record==null){
+					list.get(i).setRecord(false);
+				}else{
+					list.get(i).setRecord(true);
+				}
+				if(penaltyDecision==null){
+					list.get(i).setPenaltyDecision(false);
+				}else{
+					list.get(i).setPenaltyDecision(true);
+				}
+				if(exploration==null){
+					list.get(i).setExploration(false);
+				}else{
+					list.get(i).setExploration(true);
+				}
+				
+			}
+			if(list!=null){
+				lawEnMessagePage.setList(list);
+			}
+		}
+		
+		return lawEnMessagePage;
+	}
+
+	
+	
+
+	
 	
 //	public PageUtil<LawEnforcement> getLawEnforcementPage(LawEnforcement lawEnforcement, int currentPage, int size) {
 //		int count = lawEnforcementDao.selectLawEnforcementCount(lawEnforcement);

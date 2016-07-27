@@ -1,0 +1,56 @@
+2016-07-25 09:35:49.254 [main] DEBUG com.mmle.dao.CheckDao.getCheck - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@10f1c002]]]
+2016-07-25 09:35:49.258 [main] DEBUG com.mmle.dao.CheckDao.getCheck - ==>  Preparing: select * from tbl_check where 1=1 and type LIKE '%巡查%' and title LIKE '%违反%' and check_man LIKE '%李%' 
+2016-07-25 09:35:49.284 [main] DEBUG com.mmle.dao.CheckDao.getCheck - ==> Parameters: 
+2016-07-25 09:35:49.316 [main] DEBUG com.mmle.dao.CheckDao.getCheck - <==      Total: 0
+2016-07-25 09:56:11.479 [main] DEBUG com.mmle.dao.CaseDao.getCaseByTypeId - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@5b800df]]]
+2016-07-25 09:56:11.483 [main] DEBUG com.mmle.dao.CaseDao.getCaseByTypeId - ==>  Preparing: select * from tbl_case where case_type = ? 
+2016-07-25 09:56:11.509 [main] DEBUG com.mmle.dao.CaseDao.getCaseByTypeId - ==> Parameters: 1(Integer)
+2016-07-25 09:56:11.525 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@5b800df]]]
+2016-07-25 09:56:11.525 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - ==>  Preparing: select * from tbl_case_type where type_id = ? 
+2016-07-25 09:56:11.526 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - ==> Parameters: 1(Integer)
+2016-07-25 09:56:11.527 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - <==      Total: 1
+2016-07-25 09:56:11.529 [main] DEBUG com.mmle.dao.CaseDao.getCaseByTypeId - <==      Total: 2
+2016-07-25 09:59:54.828 [main] DEBUG com.mmle.dao.CaseDao.updateCaseType - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@1a920729]]]
+2016-07-25 09:59:54.864 [main] DEBUG com.mmle.dao.CaseDao.updateCaseType - ==>  Preparing: UPDATE tbl_case_type SET flag = ? WHERE (type_id = ?) 
+2016-07-25 09:59:54.887 [main] DEBUG com.mmle.dao.CaseDao.updateCaseType - ==> Parameters: false(Boolean), 6(Integer)
+2016-07-25 09:59:54.914 [main] DEBUG com.mmle.dao.CaseDao.updateCaseType - <==    Updates: 1
+2016-07-25 09:59:55.200 [main] DEBUG com.mmle.dao.CaseDao.getCaseByTypeId - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@1a920729]]]
+2016-07-25 09:59:55.200 [main] DEBUG com.mmle.dao.CaseDao.getCaseByTypeId - ==>  Preparing: select * from tbl_case where case_type = ? 
+2016-07-25 09:59:55.201 [main] DEBUG com.mmle.dao.CaseDao.getCaseByTypeId - ==> Parameters: 1(Integer)
+2016-07-25 09:59:55.223 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@1a920729]]]
+2016-07-25 09:59:55.223 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - ==>  Preparing: select * from tbl_case_type where type_id = ? 
+2016-07-25 09:59:55.224 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - ==> Parameters: 1(Integer)
+2016-07-25 09:59:55.225 [main] DEBUG com.mmle.dao.CaseDao.getCaseTypeById - <==      Total: 1
+2016-07-25 09:59:55.227 [main] DEBUG com.mmle.dao.CaseDao.getCaseByTypeId - <==      Total: 2
+2016-07-25 15:03:43.121 [main] DEBUG com.mmle.dao.CheckDao.getCheck - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@2339d5db]]]
+2016-07-25 15:03:43.166 [main] DEBUG com.mmle.dao.CheckDao.getCheck - ==>  Preparing: select * from tbl_check where 1=1 and type LIKE '%巡查%' and title LIKE '%违反%' and check_man LIKE '%李%' 
+2016-07-25 15:03:43.190 [main] DEBUG com.mmle.dao.CheckDao.getCheck - ==> Parameters: 
+2016-07-25 15:03:43.227 [main] DEBUG com.mmle.dao.CheckDao.getCheck - <==      Total: 0
+2016-07-25 15:04:15.274 [main] DEBUG com.mmle.dao.CheckDao.getCheck - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@39ba0854]]]
+2016-07-25 15:04:15.277 [main] DEBUG com.mmle.dao.CheckDao.getCheck - ==>  Preparing: select * from tbl_check where 1=1 and type LIKE '%巡查%' and title LIKE '%违反%' and check_man LIKE '%李%' 
+2016-07-25 15:04:15.308 [main] DEBUG com.mmle.dao.CheckDao.getCheck - ==> Parameters: 
+2016-07-25 15:04:15.380 [main] DEBUG com.mmle.dao.CheckDao.getCheck - <==      Total: 0
+2016-07-25 15:04:43.086 [main] DEBUG com.mmle.dao.CheckDao.getCheck - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@42deab3f]]]
+2016-07-25 15:04:43.089 [main] DEBUG com.mmle.dao.CheckDao.getCheck - ==>  Preparing: select * from tbl_check where 1=1 and title LIKE '%违反%' and check_man LIKE '%李%' 
+2016-07-25 15:04:43.113 [main] DEBUG com.mmle.dao.CheckDao.getCheck - ==> Parameters: 
+2016-07-25 15:04:43.136 [main] DEBUG c.m.d.I.selectFishBoatById - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@42deab3f]]]
+2016-07-25 15:04:43.136 [main] DEBUG c.m.d.I.selectFishBoatById - ==>  Preparing: select * from tbl_fish_boat where boat_id=? 
+2016-07-25 15:04:43.137 [main] DEBUG c.m.d.I.selectFishBoatById - ==> Parameters: 786456(String)
+2016-07-25 15:04:43.139 [main] DEBUG c.m.d.I.selectFishBoatById - <==      Total: 1
+2016-07-25 15:04:43.142 [main] DEBUG com.mmle.dao.CheckDao.getCheck - <==      Total: 2
+2016-07-25 20:24:10.516 [main] DEBUG com.mmle.dao.CheckDao.getCheck - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@73e0638d]]]
+2016-07-25 20:24:10.548 [main] DEBUG com.mmle.dao.CheckDao.getCheck - ==>  Preparing: select * from tbl_check where 1=1 
+2016-07-25 20:24:10.569 [main] DEBUG com.mmle.dao.CheckDao.getCheck - ==> Parameters: 
+2016-07-25 20:24:10.657 [main] DEBUG c.m.d.I.selectFishBoatById - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@73e0638d]]]
+2016-07-25 20:24:10.658 [main] DEBUG c.m.d.I.selectFishBoatById - ==>  Preparing: select * from tbl_fish_boat where boat_id=? 
+2016-07-25 20:24:10.659 [main] DEBUG c.m.d.I.selectFishBoatById - ==> Parameters: 7894(String)
+2016-07-25 20:24:10.661 [main] DEBUG c.m.d.I.selectFishBoatById - <==      Total: 1
+2016-07-25 20:24:10.664 [main] DEBUG com.mmle.dao.CheckDao.getCheck - <==      Total: 3
+2016-07-25 20:25:07.150 [main] DEBUG com.mmle.dao.CheckDao.getCheck - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@5aa0d09e]]]
+2016-07-25 20:25:07.155 [main] DEBUG com.mmle.dao.CheckDao.getCheck - ==>  Preparing: select * from tbl_check where 1=1 limit 0,2 
+2016-07-25 20:25:07.186 [main] DEBUG com.mmle.dao.CheckDao.getCheck - ==> Parameters: 
+2016-07-25 20:25:08.042 [main] DEBUG c.m.d.I.selectFishBoatById - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@5aa0d09e]]]
+2016-07-25 20:25:08.042 [main] DEBUG c.m.d.I.selectFishBoatById - ==>  Preparing: select * from tbl_fish_boat where boat_id=? 
+2016-07-25 20:25:08.044 [main] DEBUG c.m.d.I.selectFishBoatById - ==> Parameters: 7894(String)
+2016-07-25 20:25:08.495 [main] DEBUG c.m.d.I.selectFishBoatById - <==      Total: 1
+2016-07-25 20:25:08.498 [main] DEBUG com.mmle.dao.CheckDao.getCheck - <==      Total: 2

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mmle.entity.Exploration;
+import com.mmle.entity.LawEnMessage;
 import com.mmle.entity.LawEnforcement;
 import com.mmle.entity.LawEnforcementExtend;
 import com.mmle.entity.PenaltyDecision;
@@ -76,6 +77,20 @@ public class LawEnforcementController {
 		return result.toString();
 	}
 	
+	@RequestMapping(value="getPage")
+	public @ResponseBody Map<String, Object> getPage(@RequestBody DTO data)throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		Integer currentPage = data.getCurrentPage();
+		Integer size = data.getSize();
+		LawEnMessage lawEnMessage = data.getLawEnMessage();
+		PageUtil<LawEnMessage> lawEnMessagePage = lawEnforcementService.getLawEnMessagePage(lawEnMessage, currentPage, size);
+		
+		map.put("lawEnMessagePage", lawEnMessagePage);
+		
+		return map;
+	}
+	
 	@RequestMapping(value="delete")
 	public @ResponseBody Map<String, Object> deleteLawEnforcement(@RequestBody DTO data)throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -92,6 +107,7 @@ public class LawEnforcementController {
 	public @ResponseBody Map<String, Object> updateLawEnforcement(@RequestBody DTO data)throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
 		LawEnforcement lawEnforcement = data.getLawEnforcement();
+		System.out.println(lawEnforcement.toString());
 		if(lawEnforcementService.update(lawEnforcement)){
 			map.put("code", 1);
 		}else{
@@ -133,7 +149,6 @@ public class LawEnforcementController {
 		PenaltyDecision penaltyDecision = data.getPenaltyDecision();
 		penaltyDecision.setDate(new Date());
 		penaltyDecision.setFlag(true);
-		
 		if(penaltyDecisionService.add(penaltyDecision)){
 			map.put("code", 1);
 		}else{
@@ -141,7 +156,6 @@ public class LawEnforcementController {
 		}
 		return map;
 	}
-	
 	
 //	@RequestMapping(value="updatePenaltyDecision")
 //	public @ResponseBody Map<String, Object> updatePenaltyDecision(@RequestBody DTO data)throws Exception{

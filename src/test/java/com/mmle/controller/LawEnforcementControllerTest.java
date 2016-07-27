@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mmle.entity.Exploration;
 import com.mmle.entity.FishBoat;
+import com.mmle.entity.LawEnMessage;
 import com.mmle.entity.LawEnforcement;
 import com.mmle.entity.PenaltyDecision;
 import com.mmle.entity.Record;
@@ -143,7 +144,7 @@ public class LawEnforcementControllerTest {
 	public void selectlawEnforcement() throws Exception {
 		DTO data = new DTO();
 		LawEnforcement lawEnforcement = new LawEnforcement();
-		lawEnforcement.setLawEnforcementMan("50009998");
+		lawEnforcement.setId(50);
 		data.setLawEnforcement(lawEnforcement);
 	
 		ObjectMapper mapper = new ObjectMapper();
@@ -151,6 +152,38 @@ public class LawEnforcementControllerTest {
 		System.out.println("Java2Json: " + json);
 		
 		String map = lawEnforcementController.getLawEnforcement(data);
+		
+		
+		System.out.println(JSONObject.fromObject(map).toString());
+	}
+	
+	@Test
+	public void selectlawEnMessage() throws Exception {
+		DTO data = new DTO();
+		LawEnMessage lawEnMessage = new LawEnMessage();
+		lawEnMessage.setLawEnforcementMan("88888888");
+		data.setLawEnMessage(lawEnMessage);
+	
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString(data);
+		System.out.println("Java2Json: " + json);
+		
+		Map<String, Object> map = lawEnforcementController.getPage(data);
+		
+		
+		System.out.println(JSONObject.fromObject(map).toString());
+	}
+	
+	@Test
+	public void updatelawEnMessage() throws Exception {
+		DTO data = new DTO();
+		LawEnforcement lawEnforcement = new LawEnforcement();
+		lawEnforcement.setId(50);
+		lawEnforcement.setReason("为什么！");
+		lawEnforcement.setPass(true);
+		data.setLawEnforcement(lawEnforcement);
+		
+		Map<String, Object> map = lawEnforcementController.updateLawEnforcement(data);
 		
 		
 		System.out.println(JSONObject.fromObject(map).toString());

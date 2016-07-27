@@ -1,0 +1,4 @@
+2016-07-26 14:52:50.763 [main] DEBUG com.mmle.dao.CaseDao.updateCaseType - ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@32092e6a]]]
+2016-07-26 14:52:50.767 [main] DEBUG com.mmle.dao.CaseDao.updateCaseType - ==>  Preparing: UPDATE tbl_case_type SET flag = ? WHERE (type_id = ?) 
+2016-07-26 14:52:50.791 [main] DEBUG com.mmle.dao.CaseDao.updateCaseType - ==> Parameters: false(Boolean), 6(Integer)
+2016-07-26 14:52:50.883 [main] DEBUG com.mmle.dao.CaseDao.updateCaseType - <==    Updates: 1
