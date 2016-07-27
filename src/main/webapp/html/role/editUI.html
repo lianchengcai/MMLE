@@ -9,9 +9,77 @@
     <script language="javascript" src="../../script/DataShowManager.js" charset="utf-8"></script>
     <link type="text/css" rel="stylesheet" href="../../style/blue/pageCommon.css" />
     <script type="text/javascript"> 
+    function getParam(paramName)
+    {
+            paramValue ="";
+            isFound =false;
+            if (this.location.search.indexOf("?") ==0&&this.location.search.indexOf("=")>1)
+            {
+                arrSource = unescape(this.location.search).substring(1,this.location.search.length).split("&");
+                i =0;
+                while (i < arrSource.length &&!isFound)
+                {
+                    if (arrSource[i].indexOf("=") >0)
+                    {
+                         if (arrSource[i].split("=")[0].toLowerCase()==paramName.toLowerCase())
+                         {
+                            paramValue = arrSource[i].split("=")[1];
+                            isFound =true;
+                         }
+                    }
+                    i++;
+                }   
+            }
+       return paramValue;
+    }
+    
+    function getInfo(){
+     	var roleId = getParam('roleId');
+    	var map={};
+    	map.currentPage=1;
+    	map.size=10;
+		var role = new Object();
+    	role.roleId=roleId;
+    	map.role=role;
+    	 $.ajax({
+			 type: "POST",
+			 url: "http://localhost:8080/mmle/getRole.do",
+			 dataType:"json",
+			 contentType: "application/json;charset=utf-8",
+			 data: JSON.stringify(map),
+			 success: function(json){
+				 var role=json.role;
+				 $("#name").val(role.name);
+			 },error:function(){alert("服务器未正常响应，请重试");}
+    	 });
+    }
+    
+    function updateRole(){
+    	var map={};
+    	var roleId = getParam('roleId');
+    	var name=$("#name").val();
+		var role = new Object(); 
+		role.roleId=roleId;
+		role.name=name;
+		map.role=role;
+			 $.ajax({
+			 type: "POST",
+			 url: "http://localhost:8080/mmle/updateRole.do",
+			 dataType:"json",
+			 contentType: "application/json;charset=utf-8",
+			 data: JSON.stringify(map),
+			 success: function(json){
+				 if(json.code=="1"){
+						alert("修改成功!");
+						document.location="list.html";
+				 	}
+				 },error:function(){alert("服务器未正常响应，请重试");}
+			 });
+    }
+            
     </script>
 </head>
-<body> 
+<body onload="getInfo()"> 
 
 <!-- 标题显示 -->
 <div id="Title_bar">
@@ -37,7 +105,7 @@
                 <table cellpadding="0" cellspacing="0" class="mainForm">
                     <tr>
                         <td width="100">角色名称</td>
-                        <td><input type="text" name="name" class="InputStyle" /> *</td>
+                        <td><input type="text" name="name" id="name" class="InputStyle" /> *</td>
                     </tr>
                 </table>
             </div>
@@ -45,7 +113,7 @@
         
         <!-- 表单操作 -->
         <div id="InputDetailBar">
-            <input type="image" src="../../style/images/save.png"/>
+            <img src="../../style/images/save.png" onclick="updateRole()"/>
             <a href="javascript:history.go(-1);"><img src="../../style/images/goBack.png"/></a>
         </div>
     </form>

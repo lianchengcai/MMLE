@@ -42,6 +42,41 @@ public class UserController {
 		
 	}
 	
+	@RequestMapping("/updateUser")
+	@ResponseBody
+	public Map<String, Object> updateUser(@RequestBody DTO data) {
+		System.out.println("updateUser"+data.toString());
+		Map<String, Object> map = userService.updateUser(data.getUser());
+		return map;
+		
+	}
+	
+	@RequestMapping("/resetUser")
+	@ResponseBody
+	public Map<String, Object> resetUser(@RequestBody DTO data) {
+		System.out.println("resetUser"+data.toString());
+		data.getUser().setPassword("1234");
+		Map<String, Object> map = userService.resetUser(data.getUser());
+		return map;
+		
+	}
+	
+	@RequestMapping("/getAllUser")
+	@ResponseBody
+	public Map<String, Object> getAllUser() {
+		Map<String, Object> map = userService.getAllUser();
+		return map;
+		
+	}
+	
+	@RequestMapping("/getUser")
+	@ResponseBody
+	public Map<String, Object> getUser(@RequestBody DTO data) {
+		Map<String, Object> map = userService.getUser(data.getUser().getAccount());
+		return map;
+		
+	}
+	
 	@RequestMapping("/login")
 	@ResponseBody
 	public Map<String, Object> login(@RequestBody DTO data) {
@@ -50,18 +85,12 @@ public class UserController {
 		return map;
 	}
 	
-	/**
-	 * 
-	 * @Title: getUser 
-	 * @Description: TODO(安卓暂用) 
-	 * @param @return    设定文件 
-	 * @return Map<String,Object>    返回类型 
-	 * @throws
-	 */
-	@RequestMapping("/getUser")
+	@RequestMapping("/modifyUserPassword")
 	@ResponseBody
-	public Map<String, Object> getUser() {
-		Map<String, Object> map = userService.getUser();
+	public Map<String, Object> modifyUserPassword(@RequestBody DTO data) {
+		System.out.println("login"+data.toString());
+		Map<String, Object> map = userService.modifyUserPassword(data.getUser());
 		return map;
 	}
+	
 }

@@ -45,5 +45,6 @@ public class Role {
 	public String toString() {
 		return "Role [roleId=" + roleId + ", name=" + name + ", permissionId=" + permissionId + ", flag=" + flag + "]";
 	}
+
     
 }

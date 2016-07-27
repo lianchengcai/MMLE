@@ -9,6 +9,31 @@
     <script language="javascript" src="../../script/DataShowManager.js" charset="utf-8"></script>
     <link type="text/css" rel="stylesheet" href="../../style/blue/pageCommon.css" />
     <script type="text/javascript"> 
+    	function addRole(){
+    		var map={};
+        	map.currentPage=1;
+        	map.size=10;
+    		var role = new Object(); 
+    		var roleName=$("#name").val();
+    		role.name=roleName;
+    		map.role=role;
+    		$.ajax({
+   			 type: "POST",
+   			 url: "http://localhost:8080/mmle/insertRole.do",
+   			 dataType:"json",
+   			 contentType: "application/json;charset=utf-8",
+   			 data: JSON.stringify(map),
+   			 success: function(json){
+   				 if(json.code==1){
+   					 alert("新增角色成功！");
+   					 document.location="list.html";
+   				 	}
+   				if(json.code==0){
+  					 alert("新增角色失败！");
+  				 	}
+   			},error:function(){alert("服务器未正常响应，请重试");}
+   		});     		
+    	}
     </script>
 </head>
 <body> 
@@ -37,7 +62,7 @@
                 <table cellpadding="0" cellspacing="0" class="mainForm">
                     <tr>
                         <td width="100">角色名称</td>
-                        <td><input type="text" name="name" class="InputStyle" /> *</td>
+                        <td><input type="text" name="name" id="name" class="InputStyle" /> *</td>
                     </tr>
                 </table>
             </div>
@@ -45,7 +70,7 @@
         
         <!-- 表单操作 -->
         <div id="InputDetailBar">
-            <input type="image" src="../../style/images/save.png"/>
+            <img onclick="addRole()" src="../../style/images/save.png"/>
             <a href="javascript:history.go(-1);"><img src="../../style/images/goBack.png"/></a>
         </div>
     </form>

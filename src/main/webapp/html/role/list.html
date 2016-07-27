@@ -9,9 +9,66 @@
     <script language="javascript" src="../../script/DataShowManager.js" charset="utf-8"></script>
     <link type="text/css" rel="stylesheet" href="../../style/blue/pageCommon.css" />
     <script type="text/javascript">
+    function load(){
+    	var map={};
+    	map.currentPage=1;
+    	map.size=10;
+		var role = new Object(); 
+		map.role=role;
+			 $.ajax({
+			 type: "POST",
+			 url: "http://localhost:8080/mmle/getAllRole.do",
+			 dataType:"json",
+			 contentType: "application/json;charset=utf-8",
+			 data: JSON.stringify(map),
+			 success: function(json){
+				 var roles=json.roles;
+				 var html = "";
+					for (var i = 0; i <roles.length; i++) {
+						html += ("<tr class='TableDetail1 template' align='center'>");
+						html += ("<td>" + roles[i].name + "</td>");
+						html += ("<td>");
+						html += ("<a onclick='deleteRole(" + roles[i].roleId + ")'>删除</a>&nbsp;");
+						html += ("<a onclick='modify(" + roles[i].roleId + ")'>修改</a>&nbsp;");
+						html += ("<a onclick='setPrivilege(" + roles[i].roleId + ")'>设置权限</a>");
+						html += ("</td>");
+						html += ("</tr>");
+					}
+			       		document.getElementById("TableData").innerHTML=html;
+				 },error:function(){alert("服务器未正常响应，请重试");}
+		}); 
+    }
+    
+    function deleteRole(data){
+    	var map={};
+		var role = new Object(); 
+		map.role=role;
+		role.roleId=data;
+		role.flag=false;
+			 $.ajax({
+			 type: "POST",
+			 url: "http://localhost:8080/mmle/updateRole.do",
+			 dataType:"json",
+			 contentType: "application/json;charset=utf-8",
+			 data: JSON.stringify(map),
+			 success: function(json){
+				 if(json.code=="1"){
+						alert("删除成功!");
+				 	}
+				 },error:function(){alert("服务器未正常响应，请重试");}
+			 });
+			 load();
+    }
+    function modify(data){
+    	document.location="editUI.html?roleId="+data;
+    }
+    function setPrivilege(data){
+    	alert("设置权限");
+    	document.location="setPrivilege.html?roleId="+data;
+    }
     </script>
 </head>
-<body>
+<body onload="load()">
  
 <div id="Title_bar">
     <div id="Title_bar_Head">
@@ -36,12 +93,12 @@
 
 		<!--显示数据列表-->
         <tbody id="TableData" class="dataContainer" datakey="roleList">
-			<tr class="TableDetail1 template" align="center">
-				<td>执法人员</td>
+ 			<tr class="TableDetail1 template" align="center">
+<!-- 				<td>执法人员</td>
 				<td><a onClick="return delConfirm()" href="list.html">删除</a>
 					<a href="editUI.html">修改</a>
 					<a href="setPrivilegeUI.html">设置权限</a>
-				</td>
+				</td> -->
 			</tr>
         </tbody>
     </table>
