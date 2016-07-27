@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import com.mmle.dynaSql.FishBoatDynaSql;
 import com.mmle.dynaSql.LawEnforcementDynaSql;
 import com.mmle.entity.FishBoat;
+import com.mmle.entity.LawEnMessage;
 import com.mmle.entity.LawEnforcement;
 import com.mmle.entity.LawEnforcementExtend;
 
@@ -51,4 +52,18 @@ public interface ILawEnforcementDao {
 
 	@SelectProvider(type = LawEnforcementDynaSql.class, method = "selectLawEnforcementCount")
 	int selectLawEnforcementCount(LawEnforcement lawEnforcement);
+
+	@Select("select count(*) from tbl_law_enforcement where law_enforcement_man=#{lawEnforcementMan}")
+	int selectLawEnMessageCount(String lawEnforcementMan);
+
+	@Select("select * from tbl_law_enforcement where law_enforcement_man=#{lawEnforcementMan}")
+	List<LawEnMessage> selectLawEnMessageByUserId(String lawEnforcementMan);
+	
+	
+	@SelectProvider(type = LawEnforcementDynaSql.class, method = "selectLawEnforcement")
+	List<LawEnMessage> selectLawEnMessageByConditions(@Param("lawEnforcement") LawEnforcement lawEnforcement,@Param("start") Integer start,@Param("end") Integer end);
+
+	@SelectProvider(type = LawEnforcementDynaSql.class, method = "selectLawEnforcement")
+	int selectLawEnMessageCount(LawEnforcement lawEnforcement);
+	
 }

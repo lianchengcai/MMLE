@@ -10,6 +10,7 @@ import com.mmle.entity.CaseType;
 import com.mmle.entity.Check;
 import com.mmle.entity.Exploration;
 import com.mmle.entity.FishBoat;
+import com.mmle.entity.LawEnMessage;
 import com.mmle.entity.LawEnforcement;
 import com.mmle.entity.PenaltyDecision;
 import com.mmle.entity.Record;
@@ -38,6 +39,7 @@ public class DTO {
 	private PenaltyDecision penaltyDecision;
 	private Record record;
 	private User user;
+	private LawEnMessage lawEnMessage;
 	
 	public Integer getCurrentPage() {
 		return currentPage;
@@ -111,13 +113,20 @@ public class DTO {
 	public void setRecord(Record record) {
 		this.record = record;
 	}
+	public LawEnMessage getLawEnMessage() {
+		return lawEnMessage;
+	}
+	public void setLawEnMessage(LawEnMessage lawEnMessage) {
+		this.lawEnMessage = lawEnMessage;
+	}
 	@Override
 	public String toString() {
 		return "DTO [currentPage=" + currentPage + ", size=" + size + ", map=" + map + ", cas=" + cas + ", caseType="
 				+ caseType + ", check=" + check + ", exploration=" + exploration + ", fishBoat=" + fishBoat
 				+ ", lawEnforcement=" + lawEnforcement + ", penaltyDecision=" + penaltyDecision + ", record=" + record
-				+ ", user=" + user + "]";
+				+ ", user=" + user + ", lawEnMessage=" + lawEnMessage + "]";
 	}
+	
 
 
 }
