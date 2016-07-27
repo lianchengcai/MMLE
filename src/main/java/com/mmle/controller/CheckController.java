@@ -40,7 +40,6 @@ public class CheckController {
 	public Map<String, Object> addCheck(@RequestBody DTO data,@RequestParam MultipartFile[] pic,HttpServletRequest request){
 		log.info("addCheck:"+data.toString()+pic.toString());
 		String path = request.getServletContext().getRealPath("/images");
-		
 		Map<String, Object> map = checkService.addCheck(data.getCheck(),pic,path);
 		return map;
 	}
