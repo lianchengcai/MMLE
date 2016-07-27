@@ -19,35 +19,6 @@ import com.mmle.entity.User;
  * @version V1.0
  */
 public class DynaSqlProvider {
-	public String insertUser(final User user) {
-		return new SQL() {
-			{
-				INSERT_INTO("tbl_user");
-				if (user.getName() != null) {
-					VALUES("name", "#{name}");
-				}
-				if (user.getAccount() != null) {
-					VALUES("account", "#{account}");
-				}
-				if (user.getPassword() != null) {
-					VALUES("password", "#{password}");
-				}
-				if (user.getRoleId() != null) {
-					VALUES("role_id", "#{roleId}");
-				}
-				if (user.getRemark() != null) {
-					VALUES("remark", "#{remark}");
-				}
-				if (user.getSalt() != null) {
-					VALUES("salt", "#{salt}");
-				}
-				if (user.getFlag() != null) {
-					VALUES("flag", "#{flag}");
-				}
-			}
-		}.toString();
-	}
-
 	public String insertCaseType(final CaseType caseType) {
 		return new SQL() {
 			{

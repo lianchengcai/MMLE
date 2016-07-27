@@ -45,32 +45,6 @@ public class UserControllerTest {
 		mockMvc = webAppContextSetup(wac).build();
 	}
 
-	// @Test
-	public void inserUser() throws Exception {
-		DTO data = new DTO();
-		User user = new User();
-		user.setAccount("1111");
-		user.setName("李冰冰");
-		user.setPassword("123");
-		user.setRoleId(1);
-		data.setUser(user);
-		ObjectMapper mapper = new ObjectMapper();
-		// mapper.configure(SerializationConfig.Feature.INDENT_OUTPUT,
-		// Boolean.TRUE);
-
-		String json = mapper.writeValueAsString(data);
-
-		System.out.println("Java2Json: " + json);
-
-		data = mapper.readValue(json, DTO.class);
-
-		System.out.println("Json2Java: " + mapper.writeValueAsString(data));
-
-		MvcResult result = mockMvc.perform(
-				MockMvcRequestBuilders.post("/insertUser").contentType(MediaType.APPLICATION_JSON).content(json))
-				.andExpect(status().isOk()).andReturn();
-		System.out.println(result.getResponse().getContentAsString());
-	}
 
 	@Test
 	public void login() throws Exception {

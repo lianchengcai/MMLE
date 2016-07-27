@@ -91,14 +91,14 @@ public class CaseService implements ICaseService {
 				map.put("code", 101);
 			}
 			// 这里如果案由类型不存在，就创建案由类型
-			CaseType caseType = caseDao.getCaseTypeByName(cas.getCaseType().getName());
-			if (caseType == null) {
+			List<CaseType> caseType = caseDao.getCaseTypeById(cas.getCaseType().getTypeId());
+			if (caseType.size()==0) {
 				caseDao.insertCaseType(cas.getCaseType());
-				if (caseDao.insertCase(cas) == 1) {
-					map.put("code", 1);
-				} else {
-					map.put("code", 0);
-				}
+			}
+			if (caseDao.insertCase(cas) == 1) {
+				map.put("code", 1);
+			} else {
+				map.put("code", 0);
 			}
 		} else {
 			map.put("code", 102);

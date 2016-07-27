@@ -13,6 +13,7 @@ import com.mmle.entity.FishBoat;
 import com.mmle.entity.LawEnforcement;
 import com.mmle.entity.PenaltyDecision;
 import com.mmle.entity.Record;
+import com.mmle.entity.Role;
 import com.mmle.entity.User;
 
 
@@ -38,6 +39,7 @@ public class DTO {
 	private PenaltyDecision penaltyDecision;
 	private Record record;
 	private User user;
+	private Role role;
 	
 	public Integer getCurrentPage() {
 		return currentPage;
@@ -110,6 +112,13 @@ public class DTO {
 	}
 	public void setRecord(Record record) {
 		this.record = record;
+	}
+	
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
 	}
 	@Override
 	public String toString() {

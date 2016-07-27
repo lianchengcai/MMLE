@@ -62,6 +62,7 @@
 </table>
 </div>
 	<div id="edit">
+	
 		<!-- 标题显示 -->
 		<div id="Title_bar">
 			<div id="Title_bar_Head">
@@ -84,55 +85,48 @@
 				</div>
 
 				<!-- 表单内容显示 -->
-				<div class="ItemBlockBorder">
-					<div class="ItemBlock">
-						<table cellpadding="0" cellspacing="0" class="mainForm" >
-							<tr>
-								<td>案由编号</td>
-								<td><input type="text"  id = "caseId" class="InputStyle" readonly="readonly" />
-									*</td>
-							<tr>
-								<td>案由种类名称</td>
-								<td><select id="case_type" name="case_type"
-									style="width: 250px">
-								</select> *</td>
-							</tr>
-							<tr>
-								<td>案由名称</td>
-								<td><input type="text" name="case_name" id = "caseName" class="InputStyle" />
-									*</td>
-							</tr>
-							<tr>
-								<td>违反条约</td>
-								<td><input type="text" name="case_name" id="violateRule" class="InputStyle"  style="width:350px;" />
-									*</td>
-							</tr>
-							<tr>
-								<td>处罚依据</td>
-								<td><input type="text" id="basisPunishment" class="InputStyle" style="width:350px;" />
-									* </td>
-							</tr>
-							
-							<tr>
-								<td>处罚种类及幅度</td>
-								 <td> <!-- <textarea rows="5" cols="50" wrap="no/off" id="typePunishment" class="InputStyle">  -->
-								 <input type="text" id="typePunishment" class="InputStyle" style="width:450px ;height: 100px; " />
-									* </td>
-							</tr>
-						</table>
-					</div>
-				</div>
-
+		<div class="ItemBlockBorder">
+            <div class="ItemBlock">
+                <table cellspacing="5" class="mainForm">
+                    <tr>
+                        <td width="100px">案由编号：</td>
+                        <td><input type="text" name="case_name" id="caseId" style="width: 300px;" readonly="readonly" />*</td>
+                    </tr>
+                    <tr>
+                        <td width="100px">案由种类名称：</td>
+                        <td><select style="width: 300px" id="case_type">
+                        </select>*</td>
+                    </tr>
+                    <tr>
+                        <td width="100px">案由名称：</td>
+                        <td><input type="text" name="case_name" id="caseName" style="width: 300px;" />* </td>
+                    </tr>
+                    <tr>
+                        <td width="100px">违法条约：</td>
+                        <td><input type="text" name="violate_content" id="violateRule" style="width: 400px;"/>* </td>
+                    </tr>
+                    <tr>
+                        <td width="100px">处罚依据：</td>
+                        <td><input type="text" name="basis" id="basisPunishment" style="width: 400px;" />*</td>
+                    </tr>
+                    <tr>
+                        <td width="100px">处罚类型及幅度：</td>
+                        <td><textarea style="width: 300px;height: 100px" name="parties_information" id="typePunishment"></textarea></td>
+                </table>
+            </div>
+        </div>
 				<!-- 表单操作 -->
 			<div id="InputDetailBar" >
-					<input type="image" src="../../style/images/save.png"  onclick="saveq();"/>
+					<img src="../../style/images/save.png"  onclick="saveq();"/>
 					
 					 <a
-						href="javascript:history.go(-1);"><img
+						href="list.html"><img
 						src="../../style/images/goBack.png" /></a>
 				</div>
+
 			</form>
 		</div>
+		
 	</div>
 	
 	<div id="addNew">
@@ -155,43 +149,36 @@
         </div>
 
         <!-- 表单内容显示 -->
-        <div class="ItemBlockBorder">
+       <div class="ItemBlockBorder">
             <div class="ItemBlock">
-                <table cellpadding="0" cellspacing="0" class="mainForm">
-								<td>案由种类名称</td>
-								<td><select id="case_type" name="case_type"
-									style="width: 250px">
-								</select> *</td>
-							</tr>
-							<tr>
-								<td>案由名称</td>
-								<td><input type="text" name="case_name" id = "caseName" class="InputStyle" />
-									*</td>
-							</tr>
-							<tr>
-								<td>违反条约</td>
-								<td><input type="text" name="case_name" id="violateRule" class="InputStyle"  style="width:350px;" />
-									*</td>
-							</tr>
-							<tr>
-								<td>处罚依据</td>
-								<td><input type="text" id="basisPunishment" class="InputStyle" style="width:350px;" />
-									* </td>
-							</tr>
-							<tr>
-								<td>处罚种类及幅度</td>
-								 <td> <!-- <textarea rows="5" cols="50" wrap="no/off" id="typePunishment" class="InputStyle">  -->
-								 <input type="text" id="typePunishment" class="InputStyle" style="width:350px; " />
-									* </td>
-							</tr>
-							
+                <table cellspacing="5" class="mainForm">
+                    <tr>
+                        <td width="100px">案由种类名称：</td>
+                        <td><select style="width: 300px" id="caseType">
+                        </select>*</td>
+                    </tr>
+                    <tr>
+                        <td width="100px">案由名称：</td>
+                        <td><input type="text" name="case_name" id="case_name" style="width: 300px;" />* </td>
+                    </tr>
+                    <tr>
+                        <td width="100px">违法条约：</td>
+                        <td><input type="text" name="violate_content" id="violate_rule" style="width: 400px;"/>* </td>
+                    </tr>
+                    <tr>
+                        <td width="100px">处罚依据：</td>
+                        <td><input type="text" name="basis" id="basis_punishment" style="width: 400px;" />*</td>
+                    </tr>
+                    <tr>
+                        <td width="100px">处罚类型及幅度：</td>
+                        <td><textarea style="width: 300px;height: 100px" name="parties_information" id="type_punishment"></textarea></td>
                 </table>
             </div>
         </div>
 
         <!-- 表单操作 -->
         <div id="InputDetailBar">
-            <input type="image" src="../../style/images/save.png"/>
+            <img src="../../style/images/save.png" onclick="saveN();"/>
             <a href="javascript:history.go(-1);"><img src="../../style/images/goBack.png"/></a>
         </div>
     </form>
