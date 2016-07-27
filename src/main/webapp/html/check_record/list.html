@@ -2,11 +2,6 @@
 <head>
 <title>安全记录列表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<style type="text/css">
-	.detail input {
-		readonly:expression(this.readOnly=true);
-	}
-</style>
 <link type="text/css" rel="stylesheet"
 	href="../../style/blue/pageCommon.css" />
 <script language="javascript" src="../../script/jquery.js"></script>
@@ -73,12 +68,12 @@
 		<br>
 		<table id="paging" style="width: 400px" align="center">
 			<tr style="height: 60px">
-				<td><input type="button" name="firtPage" value="首页"></td>
-				<td><input type="button" name="previousPage" value="上一页"></td>
-				<td>当前页码:第<span id="currentPage">1</span>页
+				<td><input type="button" name="firtPage" value="首页" onclick="first();"></td>
+				<td><input type="button" name="previousPage" value="上一页" onclick="up();"></td>
+				<td>当前页码:第<span id="currentPage"></span>页
 				</td>
-				<td><input type="button" name="nextPage" value="下一页"></td>
-				<td><input type="button" name="endPage" value="尾页"></td>
+				<td><input type="button" name="nextPage" value="下一页" onclick="down();"></td>
+				<td><input type="button" name="endPage" value="尾页" onclick="last();"><span id="totalPage"></span></td>
 			</tr>
 		</table>
 	</div>
@@ -111,77 +106,77 @@
 						<tr>
 							<td width="120">类别</td>
 							<td><input type="text" name="type" id="type"
-								style="width: 200px;" /></td>
+								style="width: 200px;" readonly="readonly"  /></td>
 							<td width="150">
 							<td />
 							<td width="100">对象</td>
 							<td><input type="text" id="boat" name="boat"
-								style="width: 200px;" /></td>
+								style="width: 200px;" readonly="readonly" /></td>
 						</tr>
 						<tr>
 							<td width="120">检查人员</td>
 							<td><input type="text" name="check_man" id="checkMan"
-								style="width: 200px;" /></td>
+								style="width: 200px;"  readonly="readonly"/></td>
 							<td width="150">
 							<td />
 							<td width="100">检查时间</td>
 							<td><input type="text" name="check_time" id="checkTime"
-								style="width: 200px;" /></td>
+								style="width: 200px;" readonly="readonly"/></td>
 						</tr>
 						<tr>
 							<td width="120">标题</td>
 							<td><input type="text" name="title1" id="title1"
-								style="width: 200px;" /></td>
+								style="width: 200px;" readonly="readonly"/></td>
 						</tr>
 						<tr>
 							<td width="120">国际证书是否有效</td>
 							<td><input type="text" name="nationality" id="nationality"
-								style="width: 200px;" /></td>
+								style="width: 200px;" readonly="readonly"/></td>
 							<td width="150">
 							<td />
 							<td width="100">船检证书是否有效</td>
 							<td><input type="text" name="boat_check" id="boatCheck"
-								style="width: 200px;" /></td>
+								style="width: 200px;" readonly="readonly" /></td>
 						</tr>
 						<tr>
 							<td width="120">捕捞许可是否有效</td>
 							<td><input type="text" name="fishing" id="fishing"
-								style="width: 200px;" /></td>
+								style="width: 200px;" readonly="readonly" /></td>
 							<td width="150">
 							<td />
 							<td width="100">航行签证是否有效</td>
 							<td><input type="text" name="sailing" id="sailing"
-								style="width: 200px;" /></td>
+								style="width: 200px;" readonly="readonly"/></td>
 						</tr>
 						<tr>
 							<td width="120">船长证书是否有效</td>
 							<td><input type="text" name="boater" id="boater"
-								style="width: 200px;" /></td>
+								style="width: 200px;" readonly="readonly"/></td>
 							<td width="150">
 							<td />
 							<td width="100">轮机长证是否有效</td>
 							<td><input type="text" name="chief_engineer"
-								id="chiefEngineer" style="width: 200px;" /></td>
+								id="chiefEngineer" style="width: 200px;" readonly="readonly"/></td>
 						</tr>
 						<tr>
 							<td width="120">卫星导航设备是否有效</td>
 							<td><input type="text" name="satellite_navigation"
-								id="satelliteNavigation" style="width: 200px;" /></td>
+								id="satelliteNavigation" style="width: 200px;" readonly="readonly"/></td>
 							<td width="150">
 							<td />
 							<td width="100">雷达设备是否有效</td>
 							<td><input type="text" name="radar" id="radar"
-								style="width: 200px;" /></td>
+								style="width: 200px;" readonly="readonly" /></td>
 						</tr>
 						<tr>
 							<td width="100">单边带设备是否有效</td>
 							<td><input type="text" name="ssb" id="ssb"
-								style="width: 200px;" /></td>
+								style="width: 200px;" readonly="readonly"/></td>
 							<td width="150">
 							<td />
 							<td width="100">罗经设备是否有效</td>
 							<td><input type="text" name="compass" id="compass"
-								style="width: 200px;" /></td>
+								style="width: 200px;" readonly="readonly" /></td>
 						</tr>
 					</table>
 				</form>

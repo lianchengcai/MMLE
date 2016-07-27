@@ -61,7 +61,7 @@ public class CaseService implements ICaseService {
 		query.put("case", cas);
 		cases = caseDao.getCase(query);
 		List<CaseType> caseTypes = caseDao.getCaseType();
-		rowCount = cases.size();
+		rowCount = caseDao.getCaseInfoByCondition(cas);
 		map.put("code", 1);
 		map.put("cases", cases);
 		map.put("currentPage", currentPage);
@@ -206,6 +206,33 @@ public class CaseService implements ICaseService {
 				map.put("code", 101);
 			}
 		}
+		return map;
+	}
+
+	public Map<String, Object> getCaseTypePage(CaseType caseType, Integer currentPage, Integer size) {
+		List<CaseType> caseTypes = caseDao.getCaseType();
+		Map<String, Object> map = new HashMap<>();
+		currentPage = currentPage != null ? currentPage : 1;
+		size = size != null ? size : 10;
+		Integer offset = (currentPage - 1) * size;
+		Map<String, Object> query = new HashMap<>();
+		query.put("offset", offset);
+		query.put("size", size);
+		Integer rowCount = 0;
+		Integer totalPage = 0;
+		query.put("caseType", caseType);
+		caseTypes = caseDao.getCaseTypePage(query);
+		rowCount = caseDao.getAllCount();
+		map.put("code", 1);
+		map.put("caseTypes", caseTypes);
+		map.put("currentPage", currentPage);
+		map.put("size", size);
+		if (rowCount % size != 0) {
+			totalPage = rowCount / size + 1;
+		} else {
+			totalPage = rowCount / size;
+		}
+		map.put("totalPage", totalPage);
 		return map;
 	}
 }

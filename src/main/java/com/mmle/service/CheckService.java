@@ -203,15 +203,16 @@ public class CheckService implements ICheckService {
 		Map<String, Object> query = new HashMap<>();
 		query.put("offset", offset);
 		query.put("size", size);
+		System.out.println(offset+" "+size);
 		Integer rowCount = 0;
 		Integer totalPage = 0;
 		query.put("check", check);
 		checks = checkDao.getCheck(query);
-		rowCount = checks.size();
 		map.put("code", 1);
 		map.put("checks", checks);
 		map.put("currentPage", currentPage);
 		map.put("size", size);
+		rowCount = checkDao.getCheckCountByCondition(check);
 		if (rowCount % size != 0) {
 			totalPage = rowCount / size + 1;
 		} else {

@@ -17,6 +17,7 @@ public interface ICaseService {
 	public Map<String, Object> getCaseType();
 	public Map<String, Object> addCaseInfo(Case cas);
 	//public Map<String, Object> getCaseInfo(Case cas);
+	public Map<String, Object> getCaseTypePage(CaseType caseType, Integer currentPage, Integer size);
 	public Map<String, Object> deleteCaseInfo(Case cas);
 	public Map<String, Object> updateCaseInfo(Case cas);
 	public Map<String, Object> updateCaseType(CaseType caseType);

@@ -284,8 +284,8 @@ public class DynaSqlProvider {
 				s.append(check.getCheckId());
 				s.append(" ");
 			}
-		}
-		if (offset != null && size != null && size != 0 && size > offset) {
+		}//&& size >= offset
+		if (offset != null && size != null && size != 0 ) {
 			s.append("limit ");
 			s.append(offset);
 			s.append(",");
@@ -295,7 +295,43 @@ public class DynaSqlProvider {
 		System.out.println(s.toString());
 		return s.toString();
 	}
-
+	public String getCheckCountByCondition(final Check check) {
+		StringBuffer s = new StringBuffer();
+		s.append("select count(*) from ");
+		s.append("tbl_check");
+		s.append(" where 1=1 ");
+		if (check != null) {
+			if (check.getType() != null) {
+				s.append("and type LIKE '%");
+				s.append(check.getType());
+				s.append("%' ");
+			}
+			if (check.getTitle() != null) {
+				s.append("and title LIKE '%");
+				s.append(check.getTitle());
+				s.append("%' ");
+			}
+			if (check.getCheckMan() != null) {
+				if (check.getCheckMan() != null) {
+					s.append("and check_man LIKE '%");
+					s.append(check.getCheckMan());
+					s.append("%' ");
+				}
+			}
+			if (check.getFlag() != null) {
+				s.append("and flag =");
+				s.append(check.getFlag());
+				s.append(" ");
+			}
+			if (check.getCheckId() != null) {
+				s.append("and check_id =");
+				s.append(check.getCheckId());
+				s.append(" ");
+			}
+		}
+		System.out.println(s.toString());
+		return s.toString();
+	}
 	public String getCase(final Map<String, Object> map) {
 		Case cas = (Case) map.get("case");
 		Integer offset = (Integer) map.get("offset");
@@ -327,13 +363,44 @@ public class DynaSqlProvider {
 		}
 		s.append("and flag =");
 		s.append(1);
-		s.append(" ");
-		if (offset != null && size != null && size != 0 && size > offset) {
+		s.append(" ");// && size >=offset
+		if (offset != null && size != null && size != 0) {
 			s.append("limit ");
 			s.append(offset);
 			s.append(",");
 			s.append(size);
 		}
+		System.out.println(s.toString());
+		return s.toString();
+	}
+	public String getCaseInfoByCondition(Case cas) {
+		StringBuffer s = new StringBuffer();
+		s.append("select count(*) from ");
+		s.append("tbl_case");
+		s.append(" where 1=1 ");
+		if (cas != null) {
+			if (cas.getCaseType() != null) {
+				if (cas.getCaseType().getTypeId() != null) {
+					s.append("and case_type =");
+					s.append(cas.getCaseType().getTypeId());
+					s.append(" ");
+				}
+			}
+			if (cas.getCaseName() != null) {
+				s.append("and case_name =");
+				s.append(cas.getCaseName());
+				s.append(" ");
+			}
+			if (cas.getCaseId() != null) {
+				s.append("and case_id =");
+				s.append(cas.getCaseId());
+				s.append(" ");
+			}
+
+		}
+		s.append("and flag =");
+		s.append(1);
+		s.append(" ");
 		System.out.println(s.toString());
 		return s.toString();
 	}

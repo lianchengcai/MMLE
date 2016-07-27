@@ -96,5 +96,17 @@ public interface CaseDao {
 
 	@Delete("delete from tbl_case_type where type_id = #{typeId} ")
 	int deleteCaseTypeById(Integer typeId);
+
+	@SelectProvider(type = DynaSqlProvider.class, method = "getCaseInfoByCondition")
+	Integer getCaseInfoByCondition(Case cas);
+
+	@Select("select count(*) from  tbl_case_type where flag=1")
+	Integer getAllCount();
+
+	@Select("select * from  tbl_case_type where  flag=1 order by type_id limit ${offset},${size}")
+	@Results({
+		@Result(property="caseType",column="case_type",one=@One(select="com.mmle.dao.CaseDao.getCaseTypeById")),
+	})
+	List<CaseType> getCaseTypePage(Map<String, Object> query);
 	
 }

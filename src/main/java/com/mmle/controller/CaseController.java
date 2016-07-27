@@ -110,4 +110,10 @@ public class CaseController {
 		Map<String, Object> map = caseService.updateCaseType(caseType); 
 		return map;
 	}
+	@RequestMapping("getCaseTypePage")
+	@ResponseBody
+	public Map<String, Object> getCaseTypePage(@RequestBody DTO data)throws Exception{
+		Map<String, Object> map = caseService.getCaseTypePage(data.getCaseType(),data.getCurrentPage(),data.getSize()); 
+		return map;
+	}
 }

@@ -90,4 +90,7 @@ public interface CheckDao {
 		@Result(property="cas",column="case_id",one=@One(select="com.mmle.dao.CaseDao.getCaseByCaseId")),
 	})
 	List<Check> getCheck(Map<String, Object> query);
+
+	@SelectProvider(type = DynaSqlProvider.class, method = "getCheckCountByCondition")
+	Integer getCheckCountByCondition(Check check);
 }

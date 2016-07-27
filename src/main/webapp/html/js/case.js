@@ -3,12 +3,47 @@ $(document).ready(function() {
 		$("#addNew").hide();
 		query();
 	});
+function first() {
+	var currentPage =$("#currentPage").text();
+	if (currentPage!= 1) {
+		$("#currentPage").text(1);
+		query();
+	} else {
+		alert("当前页为首页");
+	}
+}
+function up() {
+	var currentPage =$("#currentPage").text();
+	if (currentPage!= 1) {
+		$("#currentPage").text(+currentPage-1);
+		query();
+	} else {
+		alert("当前页为首页");
+	}
+}
+function down() {
+	var currentPage =$("#currentPage").text();
+	if (currentPage!= $("#totalPage").text()) {
+		$("#currentPage").text(+currentPage+1);
+		query();
+	} else {
+		alert("当前页为最后一页");
+	}
+}
+function last() {
+	var currentPage =$("#currentPage").text();
+	if (currentPage!= $("#totalPage").text()) {
+		$("#currentPage").text($("#totalPage").text());
+		query();
+	} else {
+		alert("当前页为最后一页");
+	}
+}
 //num传入的数字，n需要的字符长度
 function PrefixInteger(num, n) {
     return (Array(n).join(0) + num).slice(-n);
 }
 	function del(caseId) {
-		alert(caseId);
 	    if (confirm("你确定删除吗？")) {  
 	    	var data = new Object();
 			var cas = new Object();
@@ -22,7 +57,6 @@ function PrefixInteger(num, n) {
 				data : JSON.stringify(data),
 				dataType : "json",
 				success : function(json) {
-					alert(JSON.stringify(json));
 					if (json.code==1) {
 						alert("已删除");
 						query();
@@ -38,7 +72,6 @@ function PrefixInteger(num, n) {
 		data.cas = cas;
 		cas.caseId = $("#caseId").val();
 		cas.caseType = new Object();
-		alert($("#case_type ").val().replace(/\s+/g,""));
 		cas.caseType.typeId=$("#case_type ").val().replace(/\s+/g,"");
 		cas.caseName = $("#caseName").val().replace(/\s+/g,"");
 		cas.violateRule=$("#violateRule").val().replace(/\s+/g,"");
@@ -56,7 +89,6 @@ function PrefixInteger(num, n) {
 				data : JSON.stringify(data),
 				dataType : "json",
 				success : function(json) {
-					alert(JSON.stringify(json));
 					if (json.code==1) {
 						alert("保存成功！");
 						query();
@@ -79,13 +111,11 @@ function PrefixInteger(num, n) {
 			success : function(json) {
 			//	alert(JSON.stringify(json));
 				$("#caseType").empty();//先清空
-				alert(json.caseTypes.length);
 				for (var i = 0; i < json.caseTypes.length; i++) {
 					var option = $("<option>").text(json.caseTypes[i].name).val(json.caseTypes[i].typeId);
 					$("#caseType").append(option);
 				}
 				$("#caseType").val(json.caseTypes[0].typeId);
-				alert(json.caseTypes[0].typeId);
 			}
 		});
 	}
@@ -94,18 +124,15 @@ function PrefixInteger(num, n) {
 		data.cas = new Object();
 		data.cas.caseType = new Object();
 		data.cas.caseType.typeId = $("#caseType").val().replace(/\s+/g,"");
-		alert($("#caseType").val().replace(/\s+/g,""));
 		data.cas.caseName = $("#case_name").val().replace(/\s+/g,"");
 		data.cas.violateRule=$("#violate_rule").val().replace(/\s+/g,"");
 		data.cas.basisPunishment=$("#basis_punishment").val().replace(/\s+/g,"");
 		data.cas.typePunishment=$("#type_punishment").val().replace(/\s+/g,"");
-		alert(data.cas.caseName==""&&data.cas.violateRule=="");
 //		if (data.cas.caseType.typeId==null&&data.cas.caseType.typeId==""&&data.cas.caseName==null&&data.cas.caseName==""&&data.cas.violateRule==null&&data.cas.violateRule==""&&data.cas.basisPunishment==null&&data.cas.basisPunishment==""&&data.cas.typePunishment==null&&data.cas.typePunishment=="") {
 		if (data.cas.caseName==""||data.cas.violateRule==""||data.cas.basisPunishment==""||data.cas.typePunishment=="") {
 			alert("请填写完整信息!");
 			return false
 		}else {
-			alert("111");
 			$.ajax({
 				url : "http://127.0.0.1:8082/mmle/addCaseInfo.do",
 				type : "post",
@@ -114,7 +141,6 @@ function PrefixInteger(num, n) {
 				data : JSON.stringify(data),
 				dataType : "json",
 				success : function(json) {
-					alert(JSON.stringify(json));
 					if (json.code==1) {
 						alert("添加成功");
 						query();
@@ -127,7 +153,6 @@ function PrefixInteger(num, n) {
 	}
 
 	function edit(caseId) {
-		alert(caseId);
 		$("#list").hide();
 		$("#edit").show();
 		var data = new Object();
@@ -168,8 +193,9 @@ function PrefixInteger(num, n) {
 		$("#list").show();
 		$("#edit").hide();
 		$("#addNew").hide();
-		alert("查询");
 		var data = new Object();
+		data.currentPage = $("#currentPage").text();
+		data.size = 2;
 		$.ajax({
 			url : "http://127.0.0.1:8082/mmle/getCaseInfo.do",
 			type : "post",
@@ -181,6 +207,10 @@ function PrefixInteger(num, n) {
 //				alert(JSON.stringify(json));
 //				alert(json.caseTypes.length);
 				var cases = json.cases;
+				if (cases.length==0) {
+					$("#TableData").html("");
+					alert("没有查到数据！");
+				}else{
 				var html = "";
 				for (var i = 0; i < cases.length; i++) {
 					var cas = cases[i];
@@ -198,6 +228,10 @@ function PrefixInteger(num, n) {
 					html += ("</tr>");
 				}
 				$("#TableData").html(html);
+				$("#currentPage").text(json.currentPage);
+				$("#totalPage").text(json.totalPage);
+				$("#totalPage").hide();				
+			}
 			}
 		})
 	}

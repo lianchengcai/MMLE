@@ -51,15 +51,16 @@
     </div>
 </div>
 <br>
-    <table id="paging" style="width: 400px" align="center">
-    <tr style="height: 60px">
-        <td><input type="button" name="firtPage" value="首页"></td>
-        <td><input type="button" name="previousPage" value="上一页"></td>
-        <td>当前页码:第1页</td>
-        <td><input type="button" name="nextPage" value="下一页"></td>
-        <td><input type="button" name="endPage" value="尾页"></td>
-    </tr>
-</table>
+   <table id="paging" style="width: 400px" align="center">
+			<tr style="height: 60px">
+				<td><input type="button" name="firtPage" value="首页" onclick="first();"></td>
+				<td><input type="button" name="previousPage" value="上一页" onclick="up();"></td>
+				<td>当前页码:第<span id="currentPage"></span>页
+				</td>
+				<td><input type="button" name="nextPage" value="下一页" onclick="down();"></td>
+				<td><input type="button" name="endPage" value="尾页" onclick="last();"><span id="totalPage"></span></td>
+			</tr>
+		</table>
 </div>
 	<div id="edit">
 	
