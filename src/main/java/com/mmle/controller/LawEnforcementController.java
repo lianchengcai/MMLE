@@ -77,6 +77,43 @@ public class LawEnforcementController {
 		return result.toString();
 	}
 	
+//	@RequestMapping(value="getLEPageByTime")
+//	public @ResponseBody String getLawEnforcementByTime(@RequestBody DTO data)throws Exception{
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		
+//		Integer currentPage = data.getCurrentPage();
+//		Integer size = data.getSize();
+//		Date lawStartTime = data.getLawStartTime();
+//		Date lawEndTime = data.getLawEndTime();
+//		LawEnforcement lawEnforcement = data.getLawEnforcement();
+//		PageUtil<LawEnforcementExtend> lawEnforcementExtendPage = 
+//				lawEnforcementService.getLawEnforcementPage(
+//						lawEnforcement, currentPage, size,lawStartTime,lawEndTime);
+//		map.put("lawEnforcementExtendPage", lawEnforcementExtendPage);
+//		
+//		JsonConfig config = new JsonConfig(); 
+//		config.registerJsonValueProcessor(Date.class, new DateJsonValueProcessor("yyyy-MM-dd hh:mm")); 
+//		JSONObject result = JSONObject.fromObject(map,config);
+//		return result.toString();
+//	}
+	
+	@RequestMapping(value="getPageByTime")
+	public @ResponseBody Map<String, Object> getPageByTime(@RequestBody DTO data)throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		Date lawStartTime = data.getLawStartTime();
+		Date lawEndTime = data.getLawEndTime();
+		Integer currentPage = data.getCurrentPage();
+		Integer size = data.getSize();
+		LawEnMessage lawEnMessage = data.getLawEnMessage();
+		PageUtil<LawEnMessage> lawEnMessagePage = 
+				lawEnforcementService.getLawEnMessagePage(
+						lawEnMessage, currentPage, size,lawStartTime,lawEndTime);
+		
+		map.put("lawEnMessagePage", lawEnMessagePage);
+		
+		return map;
+	}
+	
 	@RequestMapping(value="getPage")
 	public @ResponseBody Map<String, Object> getPage(@RequestBody DTO data)throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -133,6 +170,7 @@ public class LawEnforcementController {
 	public @ResponseBody Map<String, Object> addExploration(@RequestBody DTO data)throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
 		Exploration exploration = data.getExploration();
+		System.out.println(exploration.toString());
 		exploration.setFlag(true);
 		
 		if(explorationService.add(exploration)){

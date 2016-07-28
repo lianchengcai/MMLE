@@ -20,6 +20,10 @@ public class PenaltyDecisionService implements IPenaltyDecisionService{
 	private ILawEnforcementDao lawEnforcementDao;
 
 	public boolean add(PenaltyDecision penaltyDecision) {
+		if(penaltyDecisionDao.selectPenaltyDecisionByLawEnforcementId(
+				penaltyDecision.getLawEnforcementId())!=null){
+			return false;
+		}
 		if(penaltyDecisionDao.insertPenaltyDecision(penaltyDecision)==1)
 		{
 			LawEnforcement lawEnforcement = new LawEnforcement();

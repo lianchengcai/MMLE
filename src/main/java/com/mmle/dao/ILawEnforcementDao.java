@@ -1,5 +1,6 @@
 package com.mmle.dao;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -58,5 +59,13 @@ public interface ILawEnforcementDao {
 
 	@SelectProvider(type = LawEnforcementDynaSql.class, method = "selectLawEnforcementCount")
 	int selectLawEnMessageCount(LawEnforcement lawEnforcement);
+
+	@SelectProvider(type = LawEnforcementDynaSql.class, method = "selectLEPageByTimeCount")
+	int selectLEPageByTimeCount(@Param("lawEnforcement") LawEnforcement lawEnforcement,@Param("lawStartTime") Date lawStartTime,@Param("lawEndTime") Date lawEndTime);
+	
+	@SelectProvider(type = LawEnforcementDynaSql.class, method = "selectLEPageByTimeByConditions")
+	List<LawEnMessage> selectLEPageByTimeByConditions(@Param("lawEnforcement") LawEnforcement lawEnforcement,@Param("start")  Integer start,
+			@Param("end") Integer size,@Param("lawStartTime") Date lawStartTime,@Param("lawEndTime") Date lawEndTime);
+
 	
 }

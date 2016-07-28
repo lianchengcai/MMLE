@@ -44,12 +44,12 @@
 		if(boatId!="")fb.boatId=boatId;
 		boatLlocation = document.getElementById("boat_location").value;
 		if(boatLlocation!="")fb.boatLlocation=boatLlocation;
-	/* 	var ifPermit = $("#fish_permit").get(0).selectedIndex;
-		if(ifPermit==2)fb.ifNoPermit = true;
-		if(ifPermit==1)fb.inNoPermit = false; */
-		state = $("#state").get(0).selectedIndex;
-		if(state==2)fb.state = true;
-		if(state==1)fb.state = false;
+ 	 	var ifPermit = $("#fish_permit").get(0).selectedIndex;
+		if(ifPermit==2)fb.ifNoPermit = false;
+		if(ifPermit==1)fb.ifNoPermit = true; 
+		var state = $("#state").get(0).selectedIndex;
+		if(state==1)fb.state = true;
+		if(state==2)fb.state = false;
 		fb.flag=true;
 		map.fishBoat=fb;
 		return map;
@@ -91,6 +91,7 @@
 			 data: JSON.stringify(map),
 			 success: function(data){
 				 var html="";
+				 document.getElementById("TableData").innerHTML=html;
 				 var fishBoatPage = data['fishBoatPage'];
 				 var pageSize = fishBoatPage.pageSize;
 				 var pageIndex = fishBoatPage.pageIndex;
@@ -98,7 +99,6 @@
 				 document.getElementById("currentPage").innerHTML =pageIndex;
 				 if(fishBoatPage!=null){
 				 var obj = eval(fishBoatPage['list']);
-			        
 			        for(var i=0;i<obj.length;i++){
 			            html+=("<tr class='TableDetail1 template'>"); 
 			            html+=("<td>"+obj[i].boatId+"&nbsp;</td>");
@@ -133,7 +133,7 @@
 			            html+=("</tr>"); 
 			        }
 				 }
-			        document.getElementById("TableData").innerHTML=html;
+			       document.getElementById("TableData").innerHTML=html;
 			 	   var privilegeId="";
 					 $.ajax({
 				  		 async: false, 

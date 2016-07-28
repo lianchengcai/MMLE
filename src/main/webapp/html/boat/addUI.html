@@ -28,11 +28,17 @@
 			fb.length = document.getElementById("length").value;
 			fb.width = document.getElementById("width").value;
 			fb.fishPermitNo = document.getElementById("fish_permit_no").value;
-			/* fb.fishPermitTime = document.getElementById("fish_permit_time").value; */
+			fb.fishPermitTime = document.getElementById("fish_permit_time").value+" "+"00:00"; 
 			fb.substitutingNo = document.getElementById("substituting_no").value;
-			/* fb.substitutingTime = document.getElementById("substituting_time").value;  */
+			fb.substitutingTime = document.getElementById("substituting_time").value+" "+"00:00"; ;
 			fb.boatLlocation = document.getElementById("boat_location").value;
-			ifNoPermit = $("#state").get(0).selectedIndex;
+			var ifNoPermit = $("#if_no_permit").get(0).selectedIndex;
+			if(ifNoPermit==1){
+				fb.ifNoPermit=true;
+			}
+			if(ifNoPermit==2){
+				fb.ifNoPermit=false;
+			}
 				var map={};
 				map.fishBoat=fb;
 				 $.ajax({
@@ -42,10 +48,9 @@
 				 contentType: "application/json;charset=utf-8",
 				 data: JSON.stringify(map),
 				 success: function(data){
-					 alert("fasd");
 					 var code = data['code'];
 					 if(code=1){
-						 location.href="addUI.html"
+						 location.href="list.html"
 					 }
 			   },
 			    error:function(msg){alert("服务器未正常响应，请重试"+msg);}
@@ -115,6 +120,15 @@
                         <tr>
                             <td width="100">船籍港</td>
                             <td><input type="text" name="boat_location" id="boat_location" style="width: 200px;" /> *</td>
+                        	<td width="150"><td/>
+                       		<td width="100">无证捕捞</td>
+                            <td>
+                            	<select id="if_no_permit" name="if_no_permit">
+			    					<option value="0"></option>
+			                    	<option value="1">是</option>
+			    					<option value="2">否</option>
+			                 	</select>*
+			                 </td>
                         </tr>
                     </table>
                 </form>
