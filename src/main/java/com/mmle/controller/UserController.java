@@ -93,4 +93,11 @@ public class UserController {
 		return map;
 	}
 	
+	@RequestMapping("getUserPage")
+	@ResponseBody
+	public Map<String, Object> getUserPage(@RequestBody DTO data)throws Exception{
+		Map<String, Object> map = userService.getUserPage(data.getCurrentPage(),data.getSize()); 
+		return map;
+	}
+	
 }

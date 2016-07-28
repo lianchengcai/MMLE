@@ -9,31 +9,26 @@
     <script language="javascript" src="../../script/DataShowManager.js" charset="utf-8"></script>
     <link type="text/css" rel="stylesheet" href="../../style/blue/pageCommon.css" />
     <script type="text/javascript">
-/*    function load(){
-    	此处应该是在session中获取account代码
-    	var account=?
-    	var map={};
-		var user = new Object();
-    	user.account=account;
-    	map.user=user;
-    	 $.ajax({
-			 type: "POST",
-			 url: "http://localhost:8080/mmle/getUser.do",
-			 dataType:"json",
-			 contentType: "application/json;charset=utf-8",
-			 data: JSON.stringify(map),
-			 success: function(json){
-				 var user=json.user;
+    function load(){
+	      	 $.ajax({
+	      		 async: false, 
+	   		 type: "POST",
+	   		 url: "http://127.0.0.1:8082/mmle/login/session.do",
+	   		 dataType:"json",
+	   		 contentType: "application/json;charset=utf-8",
+	   		 success: function(data){
+				 var user=data.user;
 				 $("#name").val(user.name);
 				 $("#account").val(user.account);
 				 $("#roleName").val(user.role.name);
-			 },error:function(){alert("服务器未正常响应，请重试");}
-    	 });
+	   	   },
+	   	    error:function(msg){alert("服务器未正常响应，请重试"+msg);}
+	   	});  
     	
-    } */
+    }
     </script>
 </head>
-<body>
+<body onload="load()">
 
 <!-- 标题显示 -->
 <div id="Title_bar">
@@ -59,18 +54,18 @@
                 <table cellpadding="0" cellspacing="0" class="mainForm">
 					<tr>
                         <td width="150">工号（登录名）</td>
-                        <td><input type="text" id="account" readonly="readonly" value="admin"></input></td>
+                        <td><input type="text" style="border: none;" id="account" readonly="readonly"></input></td>
 						<td rowspan="5" align="right">
 							<img src="../../style/images/defaultAvatar.gif"/>
 						</td>
                     </tr>
                     <tr>
                         <td>姓名</td>
-                        <td><input type="text" id="name" readonly="readonly" value="老王"></input></td>
+                        <td><input type="text" style="border: none;" id="name" readonly="readonly"></input></td>
                     </tr>
 					<tr>
                         <td>角色</td>
-                        <td><input type="text" id="roleName" readonly="readonly" value="超级管理员"></input></td>
+                        <td><input type="text" style="border: none;" id="roleName" readonly="readonly"></input></td>
                     </tr>
                 </table>
             </div>

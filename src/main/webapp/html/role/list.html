@@ -9,15 +9,49 @@
     <script language="javascript" src="../../script/DataShowManager.js" charset="utf-8"></script>
     <link type="text/css" rel="stylesheet" href="../../style/blue/pageCommon.css" />
     <script type="text/javascript">
-    function load(){
+    function first() {
+    	var currentPage = $("#currentPage").text();
+    	if (currentPage != 1) {
+    		$("#currentPage").text(1);
+    		query();
+    	} else {
+    		alert("当前页为首页");
+    	}
+    }
+    function up() {
+    	var currentPage = $("#currentPage").text();
+    	if (currentPage != 1) {
+    		$("#currentPage").text(+currentPage - 1);
+    		query();
+    	} else {
+    		alert("当前页为首页");
+    	}
+    }
+    function down() {
+    	var currentPage = $("#currentPage").text();
+    	if (currentPage != $("#totalPage").text()) {
+    		$("#currentPage").text(+currentPage + 1);
+    		query();
+    	} else {
+    		alert("当前页为最后一页");
+    	}
+    }
+    function last() {
+    	var currentPage = $("#currentPage").text();
+    	if (currentPage != $("#totalPage").text()) {
+    		$("#currentPage").text($("#totalPage").text());
+    		query();
+    	} else {
+    		alert("当前页为最后一页");
+    	}
+    }
+    function query(){
     	var map={};
-    	map.currentPage=1;
-    	map.size=10;
-		var role = new Object(); 
-		map.role=role;
+    	map.currentPage=$("#currentPage").text();
+    	map.size=3;
 			 $.ajax({
 			 type: "POST",
-			 url: "http://localhost:8080/mmle/getAllRole.do",
+			 url: "http://127.0.0.1:8082/mmle/getRolePage.do",
 			 dataType:"json",
 			 contentType: "application/json;charset=utf-8",
 			 data: JSON.stringify(map),
@@ -35,6 +69,8 @@
 						html += ("</tr>");
 					}
 			       		document.getElementById("TableData").innerHTML=html;
+					 	$("#currentPage").text(json.currentPage);
+						$("#totalPage").text(json.totalPage);
 				 },error:function(){alert("服务器未正常响应，请重试");}
 		}); 
     }
@@ -47,7 +83,7 @@
 		role.flag=false;
 			 $.ajax({
 			 type: "POST",
-			 url: "http://localhost:8080/mmle/updateRole.do",
+			 url: "http://127.0.0.1:8082/mmle/updateRole.do",
 			 dataType:"json",
 			 contentType: "application/json;charset=utf-8",
 			 data: JSON.stringify(map),
@@ -63,12 +99,11 @@
     	document.location="editUI.html?roleId="+data;
     }
     function setPrivilege(data){
-    	alert("设置权限");
-    	document.location="setPrivilege.html?roleId="+data;
+    	document.location="setPrivilegeUI.html?roleId="+data;
     }
     </script>
 </head>
-<body onload="load()">
+<body onload="query()">
  
 <div id="Title_bar">
     <div id="Title_bar_Head">
@@ -113,11 +148,11 @@
 <br>
     <table id="paging" style="width: 400px" align="center">
     <tr style="height: 60px">
-        <td><input type="button" name="firtPage" value="首页"></td>
-        <td><input type="button" name="previousPage" value="上一页"></td>
-        <td>当前页码:第1页</td>
-        <td><input type="button" name="nextPage" value="下一页"></td>
-        <td><input type="button" name="endPage" value="尾页"></td>
+        <td><input type="button" name="firtPage" value="首页" onclick="first();"></td>
+        <td><input type="button" name="previousPage" value="上一页" onclick="up();"></td>
+        <td>当前页码:第<span id="currentPage"></span>页/共<span id="totalPage"></span>页
+        <td><input type="button" name="nextPage" value="下一页" onclick="down();"></td>
+        <td><input type="button" name="endPage" value="尾页" onclick="last();"></td>
     </tr>
 </table>
 </body>

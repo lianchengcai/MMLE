@@ -1,6 +1,7 @@
 package com.mmle.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
@@ -35,4 +36,10 @@ public interface IRoleDao {
 
 	@Select("select * from tbl_role where role_id=#{roleId}")
 	Role getRole(int roleId);
+
+	@Select("select * from  tbl_role where  flag=1 order by role_id limit ${offset},${size}")
+	List<Role> getRolePage(Map<String, Object> query);
+
+	@Select("select count(*) from  tbl_role where flag=1")
+	Integer getAllCount();
 }

@@ -36,7 +36,7 @@
     	var map={};
     	$.ajax({
 			 type: "POST",
-			 url: "http://localhost:8080/mmle/getAllRole.do",
+			 url: "http://127.0.0.1:8082/mmle/getAllRole.do",
 			 dataType:"json",
 			 contentType: "application/json;charset=utf-8",
 			 data: JSON.stringify(map),
@@ -59,7 +59,7 @@
     	map.user=user;
     	 $.ajax({
 			 type: "POST",
-			 url: "http://localhost:8080/mmle/getUser.do",
+			 url: "http://127.0.0.1:8082/mmle/getUser.do",
 			 dataType:"json",
 			 contentType: "application/json;charset=utf-8",
 			 data: JSON.stringify(map),
@@ -87,7 +87,7 @@
 		map.user=user;
 			 $.ajax({
 			 type: "POST",
-			 url: "http://localhost:8080/mmle/updateUser.do",
+			 url: "http://127.0.0.1:8082/mmle/updateUser.do",
 			 dataType:"json",
 			 contentType: "application/json;charset=utf-8",
 			 data: JSON.stringify(map),
