@@ -145,7 +145,9 @@ public class CaseService implements ICaseService {
 
 	public Map<String, Object> updateCaseType(CaseType caseType) {
 		Map<String, Object> map = new HashMap<>();
-		if (caseDao.updateCaseType(caseType) == 1) {
+		if (caseDao.getCaseTypeByName(caseType.getName())!=null) {
+			map.put("code", 101);
+		}else if (caseDao.updateCaseType(caseType) == 1) {
 			map.put("code", 1);
 		} else {
 			map.put("code", 0);

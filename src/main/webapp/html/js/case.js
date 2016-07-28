@@ -3,6 +3,18 @@ $(document).ready(function() {
 		$("#addNew").hide();
 		query();
 	});
+function result(code) {
+	if (code == 1) {
+		alert("已修改");
+		query();
+	}
+	if (code==101) {
+		alert("失败，该类别名称已存在！");
+	}
+	if (code==0) {
+		alert("失败!");
+	}
+}
 function first() {
 	var currentPage =$("#currentPage").text();
 	if (currentPage!= 1) {
