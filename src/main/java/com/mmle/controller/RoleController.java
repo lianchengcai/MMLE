@@ -68,4 +68,11 @@ public class RoleController {
 		
 	}
 	
+	@RequestMapping("getRolePage")
+	@ResponseBody
+	public Map<String, Object> getCaseTypePage(@RequestBody DTO data)throws Exception{
+		Map<String, Object> map = roleService.getRolePage(data.getCurrentPage(),data.getSize()); 
+		return map;
+	}
+	
 }

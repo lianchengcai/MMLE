@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.mmle.dao.UserDao;
+import com.mmle.entity.Role;
 import com.mmle.entity.User;
 import com.mmle.serviceImple.IUserService;
 import com.mmle.utils.SaltUtils;
@@ -155,6 +156,31 @@ public class UserService implements IUserService {
 			return u;
 		}
 		return null;
+	}
+
+	public Map<String, Object> getUserPage(Integer currentPage, Integer size) {
+		Map<String, Object> map = new HashMap<>();
+		currentPage = currentPage != null ? currentPage : 1;
+		size = size != null ? size : 10;
+		Integer offset = (currentPage - 1) * size;
+		Map<String, Object> query = new HashMap<>();
+		query.put("offset", offset);
+		query.put("size", size);
+		Integer rowCount = 0;
+		Integer totalPage = 0;
+		List<User> users=userDao.getUserPage(query);
+		rowCount = userDao.getAllCount();
+		map.put("code", 1);
+		map.put("users", users);
+		map.put("currentPage", currentPage);
+		map.put("size", size);
+		if (rowCount % size != 0) {
+			totalPage = rowCount / size + 1;
+		} else {
+			totalPage = rowCount / size;
+		}
+		map.put("totalPage", totalPage);
+		return map;
 	}
 
 }

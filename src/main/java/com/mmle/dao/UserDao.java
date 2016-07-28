@@ -1,6 +1,7 @@
 package com.mmle.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.One;
@@ -49,4 +50,13 @@ public interface UserDao {
 		@Result(property="role",column="role_id",one=@One(select="com.mmle.dao.IRoleDao.getRole")),
 	})
 	User getUser(String account);
+
+	@Select("select * from  tbl_user where  flag=1 order by account limit ${offset},${size}")
+	@Results({
+		@Result(property="role",column="role_id",one=@One(select="com.mmle.dao.IRoleDao.getRole")),
+	})
+	List<User> getUserPage(Map<String, Object> query);
+
+	@Select("select count(*) from  tbl_user where flag=1")
+	Integer getAllCount();
 }
