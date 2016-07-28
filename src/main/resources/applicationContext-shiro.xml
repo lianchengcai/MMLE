@@ -32,7 +32,7 @@
 		<property name="securityManager" ref="securityManager" />
 		
 		<!-- loginUrl认证提交地址，如果没有认证将会请求此地址进行认证，请求此地址将由formAuthenticationFilter进行表单认证 -->
-		<property name="loginUrl" value="/SecurityVerification/login.do" />
+		<property name="loginUrl" value="/login.html" />
 		
 		<!-- 通过unauthorizedUrl指定没有权限操作时跳转页面-->
 		<property name="unauthorizedUrl" value="/refuse.do" />
@@ -53,24 +53,14 @@
 				/images/** = anon
 				/js/** = anon
 				/styles/** = anon
-				
-				<!-- 手机端可访问 -->
-				/customer/** = anon
-				
-				<!-- 登录页面 -->
-				/SecurityVerification/pcLogin.do == anon
-				
 				<!-- 被踢出后的跳转页面 -->
 				/SecurityVerification/kick.do = anon
-				
 				<!-- 请求 logout.action地址，shiro去清除session-->
 				/logout.do = logout
-				
 				<!-- 验证码，可匿名访问 -->
 				/validatecode.jsp = anon
-				
 				<!-- authc 所有的url不许认证才能访问 kickout,authc -->
-				/back/* = authc
+				/html/* = authc
 			</value>
 		</property>
 	</bean>

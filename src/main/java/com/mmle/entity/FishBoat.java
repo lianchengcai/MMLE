@@ -33,6 +33,8 @@ public class FishBoat {
     private Date createTime;//渔船信息更新时间
 
     private Boolean state;//是否黑名单
+    
+    private Boolean ifNoPermit;//是否无证捕捞
 
     private Boolean flag;//信息是否有效，即是否删除
 
@@ -148,15 +150,21 @@ public class FishBoat {
         this.flag = flag;
     }
 
+	public Boolean getIfNoPermit() {
+		return ifNoPermit;
+	}
+
+	public void setIfNoPermit(Boolean ifNoPermit) {
+		this.ifNoPermit = ifNoPermit;
+	}
+
 	@Override
 	public String toString() {
 		return "FishBoat [boatId=" + boatId + ", boatName=" + boatName + ", boatLlocation=" + boatLlocation
 				+ ", homePort=" + homePort + ", length=" + length + ", width=" + width + ", totalWeight=" + totalWeight
 				+ ", fishPermitNo=" + fishPermitNo + ", fishPermitTime=" + fishPermitTime + ", substitutingNo="
 				+ substitutingNo + ", substitutingTime=" + substitutingTime + ", createTime=" + createTime + ", state="
-				+ state + ", flag=" + flag + "]";
+				+ state + ", ifNoPermit=" + ifNoPermit + ", flag=" + flag + "]";
 	}
 
-
-    
 }

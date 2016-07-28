@@ -5,14 +5,53 @@
 <script language="JavaScript" src="../../script/jquery.js"></script>
 <script language="JavaScript" src="../../script/menu.js"></script>
 <link type="text/css" rel="stylesheet" href="../../style/blue/menu.css" />
+<script type="text/javascript">
+	
+	function privilege(){
+		var privilegeId="";
+		 $.ajax({
+	  		 async: false, 
+			 type: "POST",
+			 url: "http://127.0.0.1:8082/mmle/login/session.do",
+			 dataType:"json",
+			 contentType: "application/json;charset=utf-8",
+			 success: function(json){
+				 privilegeId=json.user.role.permissionId;
+		   },
+		    error:function(msg){alert("服务器未正常响应，请重试"+msg);}
+		});  
+		if(privilegeId.indexOf("1")==-1){
+			$("#boat").hide();
+		}
+		if(privilegeId.indexOf("3")==-1){
+			$("#case").hide();
+		}
+		if(privilegeId.indexOf("4")==-1){
+			$("#new_case").hide();
+		}		
+		if(privilegeId.indexOf("5")==-1){
+			$("#unfinish_case").hide();
+		}		
+		if(privilegeId.indexOf("6")==-1){
+			$("#examine").hide();
+		}		
+		if(privilegeId.indexOf("7")==-1){
+			$("#case_check").hide();
+		}		
+		if(privilegeId.indexOf("8")==-1){
+			$("#system_config").hide();
+		}
+		
+	}
+</script>
 </head>
-<body style="margin: 0">
+<body style="margin: 0" onload="privilege()">
 <div id="Menu">
     <ul id="MenuUl">
-        <li class="level1">
+        <li class="level1" id="boat">
             <div class="level1Style"><img src="../../style/images/MenuIcon/FUNC20056.gif" class="Icon" /> <a target="right" href="../boat/list.html">渔船信息管理</a></div>
         </li>
-        <li class="level1">
+        <li class="level1" id="case">
             <div onClick="menuClick(this);" class="level1Style"><img src="../../style/images/MenuIcon/FUNC20082.gif" class="Icon" /> 执法案由管理</div>
             <ul style="display: none;" class="MenuLevel2">
                 <li class="level2">
@@ -26,24 +65,24 @@
         <li class="level1">
             <div onClick="menuClick(this);" class="level1Style"><img src="../../style/images/MenuIcon/FUNC20056.gif" class="Icon" />执法办案管理</a></div>
             <ul style="display: none;" class="MenuLevel2">
-                <li class="level2">
+                <li class="level2" id="record_check">
                     <div class="level2Style"><img src="../../style/images/MenuIcon/menu_arrow_single.gif" /> <a target="right" href="../check_record/list.html"> 安全检查记录</a></div>
                 </li>
-                <li class="level2">
+                <li class="level2" id="new_case">
                     <div class="level2Style"><img src="../../style/images/MenuIcon/menu_arrow_single.gif" /> <a target="right" href="../new_case/add1.html"> 新办违规案件</a></div>
                 </li>
-                <li class="level2">
+                <li class="level2" id="unfinish_case">
                     <div class="level2Style"><img src="../../style/images/MenuIcon/menu_arrow_single.gif" /> <a target="right" href="../new_case/list.html"> 待办违规案件</a></div>
                 </li>
-                <li class="level2">
+                <li class="level2" id="examine">
                     <div class="level2Style"><img src="../../style/images/MenuIcon/menu_arrow_single.gif" /> <a target="right" href="../new_case/examine.html"> 违规案件审批</a></div>
                 </li>
-                <li class="level2">
+                <li class="level2" id="case_check">
                     <div class="level2Style"><img src="../../style/images/MenuIcon/menu_arrow_single.gif" /> <a target="right" href="../new_case/check.html"> 违规案件查看</a></div>
                 </li>
             </ul>
         </li>
-        <li class="level1">
+        <li class="level1" id="system_config">
             <div onClick="menuClick(this);" class="level1Style"><img src="../../style/images/MenuIcon/FUNC20070.gif" class="Icon" />系统管理</div>
             <ul style="display: none;" class="MenuLevel2">
                 <li class="level2">

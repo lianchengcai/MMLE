@@ -8,7 +8,6 @@
     <script language="javascript" src="../../script/DemoData.js" charset="utf-8"></script>
 	<script language="javascript" src="../../script/DataShowManager.js" charset="utf-8"></script>
     <link type="text/css" rel="stylesheet" href="../../style/blue/pageCommon.css" />
-    <script type="text/javascript" src="/script/jquery.js"></script>
     <script type="text/javascript">
     function deleteBoat(id){
     	var map={};
@@ -18,7 +17,7 @@
     	map.fishBoat=fb;
     	$.ajax({
 			 type: "POST",
-			 url: "http://localhost:8088/mmle/fishBoat/delete.do",
+			 url: "http://127.0.0.1:8082/mmle/fishBoat/delete.do",
 			 dataType:"json",
 			 contentType: "application/json;charset=utf-8",
 			 data: JSON.stringify(map),
@@ -35,10 +34,9 @@
     function modify(id){
       	 location.href="editUI.html?boatId="+id;
       }
-    function conditions(){
+    function conditions(currentPage){
     	var map={};
-	   	map.currentPage=1;
-	   	map.size=20;
+	   	map.currentPage=currentPage;
 		var fb = new Object(); 
 		boatName=document.getElementById("boat_name").value;
 		if(boatName!="")fb.boatName=boatName;
@@ -46,7 +44,9 @@
 		if(boatId!="")fb.boatId=boatId;
 		boatLlocation = document.getElementById("boat_location").value;
 		if(boatLlocation!="")fb.boatLlocation=boatLlocation;
-		var ifPermit = $("#fish_permit").get(0).selectedIndex;
+	/* 	var ifPermit = $("#fish_permit").get(0).selectedIndex;
+		if(ifPermit==2)fb.ifNoPermit = true;
+		if(ifPermit==1)fb.inNoPermit = false; */
 		state = $("#state").get(0).selectedIndex;
 		if(state==2)fb.state = true;
 		if(state==1)fb.state = false;
@@ -57,7 +57,6 @@
    function all(){
 	   var map={};
 	   	map.currentPage=1;
-	   	map.size=20;
 			var fb = new Object(); 
 			map.fishBoat=fb;
 			fb.flag=true;
@@ -72,7 +71,7 @@
 	   map.fishBoat=fb;
 	   $.ajax({
 			 type: "POST",
-			 url: "http://localhost:8088/mmle/fishBoat/update.do",
+			 url: "http://127.0.0.1:8082/mmle/fishBoat/update.do",
 			 dataType:"json",
 			 contentType: "application/json;charset=utf-8",
 			 data: JSON.stringify(map),
@@ -84,16 +83,19 @@
    }
    
    function getBoatPage(map){
-   	
 			 $.ajax({
 			 type: "POST",
-			 url: "http://localhost:8088/mmle/fishBoat/getPageList.do",
+			 url: "http://127.0.0.1:8082/mmle/fishBoat/getPageList.do",
 			 dataType:"json",
 			 contentType: "application/json;charset=utf-8",
 			 data: JSON.stringify(map),
 			 success: function(data){
 				 var html="";
 				 var fishBoatPage = data['fishBoatPage'];
+				 var pageSize = fishBoatPage.pageSize;
+				 var pageIndex = fishBoatPage.pageIndex;
+				 document.getElementById("pageSize").value =pageSize;
+				 document.getElementById("currentPage").innerHTML =pageIndex;
 				 if(fishBoatPage!=null){
 				 var obj = eval(fishBoatPage['list']);
 			        
@@ -103,24 +105,28 @@
 			            html+=("<td>"+obj[i].boatName+"&nbsp;</td>");
 			            html+=("<td>"+obj[i].boatLlocation+"&nbsp;</td>");
 			            html+=("<td>"+obj[i].homePort+"&nbsp;</td>");
-			            html+=("<td>是</td>");
+			            if(obj[i].ifNoPermit==1){
+			            	html+=("<td>是</td>");
+			            }else{
+			            	html+=("<td>否</td>");
+			            }
 			            if(obj[i].state==1){
 			            	html+=("<td>是</td>");
 			            }else{
 			            	html+=("<td>否</td>");
 			            }
 			            html+=("<td>");
-			            html+=("<a href='"+"#"+"' onclick='check("+obj[i].boatId+")'>查看</a>");
+			            html+=("<input type='button' onclick='check("+obj[i].boatId+")' value='查看'></input>");
 			            html+=("&nbsp")
-			            html+=("<a href='"+"#"+"' onclick='modify("+obj[i].boatId+")'>修改</a>");
+			            html+=("<input type='button' name='mod' onclick='modify("+obj[i].boatId+")' value='修改'></input>");
 			            html+=("&nbsp")
-			            html+=("<a href='"+"#"+"' onclick='deleteBoat("+obj[i].boatId+")'>删除</a>");
+			            html+=("<input type='button' name='del' onclick='deleteBoat("+obj[i].boatId+")' value='删除'></input>");
 			            html+=("&nbsp")
 			            if(obj[i].state==0){
-			            	html+=("<a href='"+"#"+"' onclick='changeState("+obj[i].boatId+",1)'>拉黑</a>");
+			            	html+=("<input type='button' name='defriend' onclick='changeState("+obj[i].boatId+",1)'value='拉黑'></input>");
 				            html+=("&nbsp")
 			            }else{
-			            	 html+=("<a href='"+"#"+"' onclick='changeState("+obj[i].boatId+",0)'>移黑</a>");
+			            	 html+=("<input type='button' name='friend' onclick='changeState("+obj[i].boatId+",0)' value='移黑'></input>");
 					         html+=("&nbsp")
 			            }
 			            html+=("</td>");
@@ -128,13 +134,71 @@
 			        }
 				 }
 			        document.getElementById("TableData").innerHTML=html;
+			 	   var privilegeId="";
+					 $.ajax({
+				  		 async: false, 
+						 type: "POST",
+						 url: "http://127.0.0.1:8082/mmle/login/session.do",
+						 dataType:"json",
+						 contentType: "application/json;charset=utf-8",
+						 success: function(json){
+							 privilegeId=json.user.role.permissionId;
+					   },
+					    error:function(msg){alert("服务器未正常响应，请重试"+msg);}
+					});  
+					if(privilegeId.indexOf("2")==-1){
+						$("#add").hide();
+						$('input[name="mod"]').hide();
+						$('input[name="del"]').hide();
+						$('input[name="defriend"]').hide();
+						$('input[name="friend"]').hide();
+					}
 				 },error:function(){alert("服务器未正常响应，请重试");}
 		});  
  }
    
+	function firstPage(){
+   		var currentPage = document.getElementById("currentPage").innerHTML
+   		if(currentPage != 1){
+   			getBoatPage(all());
+   		}else{
+   			alert("当前页为首页");
+   		}
+   	}
+   	
+   	function previousPage(){
+   		var currentPage = document.getElementById("currentPage").innerHTML
+   		if(currentPage == 1){
+   			alert("当前页为第一页");
+   		}else{
+   			var pg = currentPage-1;
+   			getBoatPage(conditions(pg));
+   		}
+   	}
+   	
+   	function nextPage(){
+   		var currentPage = document.getElementById("currentPage").innerHTML
+   		var pageSize = document.getElementById("pageSize").value
+   		if(currentPage == pageSize){
+   			alert("当前页为最后一页");
+   		}else{
+   			var pg = +currentPage+1;
+   			getBoatPage(conditions(pg));
+   		}
+   	}
+   	
+   	function endPage(){
+   		var currentPage = document.getElementById("currentPage").innerHTML
+   		var pageSize = document.getElementById("pageSize").value
+   		if(currentPage == pageSize){
+   			alert("当前页为最后一页");
+   		}else{
+   			getBoatPage(conditions(pageSize));
+   		}
+   	}
+   
    </script>
     	
-   
 </head>
 <body onload="getBoatPage(all())">
  
@@ -147,7 +211,6 @@
         <div id="Title_End"></div>
     </div>
 </div>
-
 <div id="MainArea">
    <br>
    渔船编号: <input type="text" id="boat_id" name="boat_id" style="width: 150px;">&nbsp;&nbsp;&nbsp;
@@ -165,7 +228,6 @@
                 </select>&nbsp;&nbsp;&nbsp;
    <input type="button" value="查询" onclick="getBoatPage(conditions())">
     <br><br>
-
     <table cellspacing="0" cellpadding="7" class="TableStyle">
        
         <!-- 表头-->
@@ -198,23 +260,24 @@
 			</tr> 
         </tbody>
     </table>
-    
     <!-- 其他功能超链接 -->
     <div id="TableTail">
         <div id="TableTail_inside">
-            <a href="addUI.html"><img src="../../style/images/createNew.png" /></a>
+            <a id="add" href="addUI.html"><img src="../../style/images/createNew.png" /></a>
         </div>
     </div>
 </div>
 <br>
     <table id="paging" style="width: 400px" align="center">
         <tr style="height: 60px">
-            <td><input type="button" name="firtPage" value="首页"></td>
-            <td><input type="button" name="previousPage" value="上一页"></td>
-            <td>当前页码:第<span id="pagenum">1</span>页</td>
-            <td><input type="button" name="nextPage" value="下一页"></td>
-            <td><input type="button" name="endPage" value="尾页" ></td>
-        </tr>
+        <td><input type="button" name="firtPage" value="首页" onclick="firstPage()"></td>
+        <td><input type="button" name="previousPage" value="上一页" onclick="previousPage()"></td>
+        <td>当前页码:第<span id="currentPage"></span>页
+        <td><input type="button" name="nextPage" value="下一页" onclick="nextPage()"></td>
+        <td><input type="button" name="endPage" value="尾页" onclick="endPage()">
+        <span id="pageSize"></span></td>
+        
+    </tr>
     </table>
 </body>
 </html>

@@ -28,15 +28,16 @@
 			fb.length = document.getElementById("length").value;
 			fb.width = document.getElementById("width").value;
 			fb.fishPermitNo = document.getElementById("fish_permit_no").value;
-			fb.fishPermitTime = document.getElementById("fish_permit_time").value;
+			/* fb.fishPermitTime = document.getElementById("fish_permit_time").value; */
 			fb.substitutingNo = document.getElementById("substituting_no").value;
-			fb.substitutingTime = document.getElementById("substituting_time").value; 
+			/* fb.substitutingTime = document.getElementById("substituting_time").value;  */
 			fb.boatLlocation = document.getElementById("boat_location").value;
+			ifNoPermit = $("#state").get(0).selectedIndex;
 				var map={};
 				map.fishBoat=fb;
 				 $.ajax({
 				 type: "POST",
-				 url: "http://localhost:8088/mmle/fishBoat/add.do",
+				 url: "http://127.0.0.1:8082/mmle/fishBoat/add.do",
 				 dataType:"json",
 				 contentType: "application/json;charset=utf-8",
 				 data: JSON.stringify(map),
@@ -44,7 +45,7 @@
 					 alert("fasd");
 					 var code = data['code'];
 					 if(code=1){
-						alert("添加成功！");
+						 location.href="addUI.html"
 					 }
 			   },
 			    error:function(msg){alert("服务器未正常响应，请重试"+msg);}
