@@ -142,4 +142,20 @@ public class UserService implements IUserService {
 		return map;
 	}
 
+	public User ifLogin(User user) {
+		User u =userDao.getUser(user.getAccount());
+		System.out.println(u.toString());
+		if(u == null)return null;
+		String salt = u.getSalt();
+		String paw =SaltUtils.getMd5Password(user.getPassword(), salt);
+		System.out.println(paw);
+		System.out.println(u.getPassword());
+		if(paw.equals(u.getPassword())){
+			u.setPassword("");
+			u.setSalt("");
+			return u;
+		}
+		return null;
+	}
+
 }

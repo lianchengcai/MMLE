@@ -13,38 +13,42 @@
     function getPage(){
     	var map={};
     	var fb = new Object(); 
-    	fb.="88888888";
+    	fb.state=4;
     	map.lawEnMessage=fb;
-
-		 $.ajax({
-		 type: "POST",
-		 url: "http://localhost:8088/mmle/lawEnforcement/getPage.do",
-		 dataType:"json",
-		 contentType: "application/json;charset=utf-8",
-		 data: JSON.stringify(map),
-		 success: function(data){
-			 var html="";
-			 var lawEnMessagePage = data['lawEnMessagePage'];
-			 if(lawEnMessagePage!=null){
-			 var obj = eval(lawEnMessagePage['list']);
-			 for(var i=0;i<obj.length;i++){
-		        	html+=("<tr class='TableDetail1 template'>"); 
-		            html+=("<td>"+obj[i].id+"</td>");
-		            html+=("<td>"+obj[i].casName+"</td>");
-		            html+=("<td>"+obj[i].caseName+"</td>");
-		            html+=("<td><a href='examine_info.html?id="+obj[i].id+"'>审批</a></td>");
-	                html+=("</tr>"); 
-		        }
-		        
-			 }
-		        document.getElementById("TableData").innerHTML=html;
-			 },error:function(){alert("服务器未正常响应，请重试");}
-	});  
-}
+    	$.ajax({
+   		 type: "POST",
+   		 url: "http://localhost:8088/mmle/lawEnforcement/getPage.do",
+   		 dataType:"json",
+   		 contentType: "application/json;charset=utf-8",
+   		 data: JSON.stringify(map),
+   		 success: function(data){
+   			 var html="";
+   			 var lawEnMessagePage = data['lawEnMessagePage'];
+   			 if(lawEnMessagePage!=null){
+   			 var obj = eval(lawEnMessagePage['list']);
+   			 for(var i=0;i<obj.length;i++){
+   				 html+=("<tr class='TableDetail1 template'>"); 
+   		            html+=("<td>"+obj[i].id+"</td>");
+   		            html+=("<td>"+obj[i].casName+"</td>");
+   		            html+=("<td>"+obj[i].lawEnforcementMan+"</td>");
+   		            html+=("<td>"+obj[i].processMan+"</td>");
+   		            html+=("<td>"+obj[i].pass+"</td>");
+   		            html+=("<td>"+obj[i].reason+"</td>");
+   		            html+=("<td><a href='info.html?id="+obj[i].id+"'>查看</a></td>");
+   	                html+=("</tr>"); 
+   		        }
+   		        
+   			 }
+   		        document.getElementById("TableData").innerHTML=html;
+   			 },error:function(){alert("服务器未正常响应，请重试");}
+   	});  
+   }
+    
+	 
     
     </script>
 </head>
-<body>
+<body onload="getPage()">
  
 <div id="Title_bar">
     <div id="Title_bar_Head">
@@ -75,13 +79,7 @@
 		<!--显示数据列表-->
         <tbody id="TableData" class="dataContainer" datakey="departmentList">
 			<tr class="TableDetail1 template" align="center">
-				<td>111</td>
-                <td>捕捞的渔获物中的幼鱼超过规定比例</td>
-                <td>老王</td>
-                <td>老张</td>
-                <td>审批完成</td>
-                <td>该案件符合实情</td>
-                <td><a href="info.html">查看</a></td>
+				
 			</tr>
         </tbody>
     </table>

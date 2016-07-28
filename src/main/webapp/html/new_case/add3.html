@@ -67,7 +67,7 @@
 		 data: JSON.stringify(map),
 		 success: function(data){
 			 if(data['code']==1)alert("添加成功！");
- 				if(method==1){  location.href="check.html?id="+id;}
+ 				if(method==1){  location.href="list.html?id="+id;}
  				if(method==0){  location.href="add4.html?id="+id;}
 	   },
 	    error:function(){alert("服务器未正常响应，请重试");}

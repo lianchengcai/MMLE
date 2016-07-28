@@ -10,8 +10,123 @@
     <script language="javascript" src="../../script/DemoData.js" charset="utf-8"></script>
     <script language="javascript" src="../../script/DataShowManager.js" charset="utf-8"></script>
     <link type="text/css" rel="stylesheet" href="../../style/blue/pageCommon.css" />
+    <script type="text/javascript">
+    
+    function getParam(paramName)
+    {
+            paramValue ="";
+            isFound =false;
+            if (this.location.search.indexOf("?") ==0&&this.location.search.indexOf("=")>1)
+            {
+                arrSource = unescape(this.location.search).substring(1,this.location.search.length).split("&");
+                i =0;
+                while (i < arrSource.length &&!isFound)
+                {
+                    if (arrSource[i].indexOf("=") >0)
+                    {
+                         if (arrSource[i].split("=")[0].toLowerCase()==paramName.toLowerCase())
+                         {
+                            paramValue = arrSource[i].split("=")[1];
+                            isFound =true;
+                         }
+                    }
+                    i++;
+                }   
+            }
+       return paramValue;
+    }
+    
+    function getMessage(method){
+    	var id = getParam('id');
+		var map={};
+  		var c = new Object();
+  		c.id=id;
+  		map.lawEnforcement=c;
+		 $.ajax({
+		 type: "POST",
+		 url: "http://localhost:8088/mmle/lawEnforcement/getLawEnforcementPage.do",
+		 dataType:"json",
+		 contentType: "application/json;charset=utf-8",
+		 data: JSON.stringify(map),
+		 success: function(data){
+			 var lawEnforcement = data['lawEnforcementExtendPage'];
+			 if(lawEnforcement!=null){
+				 var obj = eval(lawEnforcement['list']);
+				 var d = obj[0].exploration.explorationStartTime+" —— "+obj[0].exploration.explorationEndTime;
+				 document.getElementById("explorationTime").innerHTML = d;
+				 document.getElementById("explorationLocation").innerHTML = obj[0].exploration.explorationLocation;
+				 document.getElementById("parties").innerHTML = obj[0].exploration.parties;
+				 document.getElementById("situation").innerHTML = obj[0].exploration.situation;
+				 document.getElementById("accountName11").innerHTML = obj[0].exploration.accountName;
+				 document.getElementById("account11").innerHTML = obj[0].exploration.account;
+				 
+				 var record = obj[0].record
+				 var dt = record.startDate+" —— "+record.endDate;
+				 document.getElementById("recordTime").innerHTML = dt;
+				 document.getElementById("recordLoc").innerHTML = record.location;
+				 document.getElementById("ask").innerHTML = record.ask;
+				 document.getElementById("asked").innerHTML = record.asked;
+				 document.getElementById("departmentName").innerHTML = record.departmentName;
+				 document.getElementById("recordAc").innerHTML = record.account;
+				 document.getElementById("violateRule").innerHTML = record.violateRule;
+				 document.getElementById("caseName").innerHTML = obj[0].caseName;
+				 document.getElementById("feedbackTwo").innerHTML = record.feedbackTwo;
+				 
+				 var penaltyDecision = obj[0].penaltyDecision;
+				 
+				 document.getElementById("danshiren").innerHTML = record.feedbackTwo;
+				 document.getElementById("yian").innerHTML = obj[0].caseName;
+				 document.getElementById("pcontent").innerHTML = penaltyDecision.content;
+				 document.getElementById("evidence").innerHTML = penaltyDecision.evidence;
+				 document.getElementById("basiss").innerHTML = penaltyDecision.basis;
+				 document.getElementById("bass").innerHTML = obj[0].caseName;
+				 document.getElementById("plocation").innerHTML = penaltyDecision.location;
+			 }
+	   },
+	    error:function(){alert("服务器未正常响应，请重试");}
+	});  
+	}
+    
+    function ifPass(method){
+    	var map ={};
+    	var id = getParam('id');
+    	var c = new Object();
+    	c.id=id;
+    	c.processMan="张珊-29992";
+    	var reason = document.getElementById("reason").value;
+    	c.reason=reason;
+    	if(method==1){
+      		c.pass=true;
+    	}else{
+    		c.pass=false;
+    	}
+    	map.lawEnforcement=c;
+    	alert(c.pass);
+    	return map;
+    }
+    
+    function passLaw(map){
+    	$.ajax({
+		 type: "POST",
+		 url: "http://localhost:8088/mmle/lawEnforcement/update.do",
+		 dataType:"json",
+		 contentType: "application/json;charset=utf-8",
+		 data: JSON.stringify(map),
+		 success: function(data){
+			 var code = data['code'];
+			 if(code=1){
+				 location.href="check.html"
+			 }
+	   },
+	    error:function(msg){alert("服务器未正常响应，请重试"+msg);}
+	});  
+}
+    
+  
+    
+    </script>
 </head>
-<body>
+<body onload="getMessage()">
 <div id="Title_bar">
     <div id="Title_bar_Head">
         <div id="Title_Head"></div>
@@ -25,25 +140,25 @@
     <br>
     <table align="center" width="600px" border="0" cellpadding="5">
         <tr style="width: 100%">
-            <td><div style="font-size: larger">检查时间：<u>2016年7月24日11点22分</u>至<u>2016年7月24日11点40分</u></div></td>
+            <td><div style="font-size: larger">检查时间：<u id="explorationTime"></u></div></td>
         </tr>
         <tr style="width: 100%">
-            <td><div style="font-size: larger">检查地点：<u>南海群岛</u></div></td>
+            <td><div style="font-size: larger">检查地点：<u id="explorationLocation">南海群岛</u></div></td>
         </tr>
         <tr style="width: 100%">
-            <td><div style="font-size: larger">当事人：<u>老王</u></div></td>
+            <td><div style="font-size: larger">当事人：<u id="parties">老王</u></div></td>
         </tr>
         <tr style="width: 100%">
-            <td><div style="font-size: larger">现场检查情况：<u>倒萨所发生的电风扇电风扇电风扇打法的发发发发</u></div></td>
+            <td><div style="font-size: larger">现场检查情况：<u id="situation">倒萨所发生的电风扇电风扇电风扇打法的发发发发</u></div></td>
         </tr>
         <tr style="width: 100%">
-            <td><div style="font-size: larger">执法人:<u>算算算</u></div></td>
+            <td><div style="font-size: larger">执法人:<u id="accountName11">算算算</u></div></td>
         </tr>
         <tr style="width: 100%">
-            <td><div style="font-size: larger">执法证件号:<u>123456</u></div></td>
+            <td><div style="font-size: larger">执法证件号:<u id="account11">123456</u></div></td>
         </tr>
         <tr style="width: 100%">
-            <td><div style="font-size: larger">以上笔录我已看过(或向我宣读过),属实无误。</div></td>
+            <td><div style="font-size: larger">以上笔录我已看过(或向我宣读过),属实无误。<u>是</u></div></td>
         </tr>
     </table>
     <br><br><br>
@@ -51,28 +166,28 @@
     <br>
     <table align="center" width="600px" border="0" cellpadding="5">
         <tr style="width: 100%">
-            <td><div style="font-size: larger">询问地点：<u>南海群岛</u></div></td>
+            <td><div style="font-size: larger">询问地点：<u id="recordLoc">南海群岛</u></div></td>
         </tr>
         <tr style="width: 100%">
-            <td><div style="font-size: larger">询问时间：<u>2016年7月24日11点22分</u>至<u>2016年7月24日11点40分</u></div></td>
+            <td><div style="font-size: larger">询问时间：<u id="recordTime">2016年7月24日11点22分</u></div></td>
         </tr>
         <tr style="width: 100%">
-            <td><div style="font-size: larger">询问人：<u>老王</u></div></td>
+            <td><div style="font-size: larger">询问人：<u id="ask">老王</u></div></td>
         </tr>
         <tr style="width: 100%">
-            <td><div style="font-size: larger">记录人：<u>老张</u></div></td>
+            <td><div style="font-size: larger">记录人：<u id="asked">老张</u></div></td>
         </tr>
         <tr style="width: 100%">
-            <td><div style="font-size: larger">我们是(单位名称)<u>算算算</u>渔业行政执法人员</div></td>
+            <td><div style="font-size: larger">我们是(单位名称)<u id="departmentName">算算算</u>渔业行政执法人员</div></td>
         </tr>
         <tr style="width: 100%">
-            <td><div style="font-size: larger">执法证件号:<u>123456</u></div></td>
+            <td><div style="font-size: larger">执法证件号:<u id="recordAc">123456</u></div></td>
         </tr>
         <tr style="width: 100%">
-            <td><div style="font-size: larger">根据<u>123456</u>等海洋法律、法规的规定，</div></td>
+            <td><div style="font-size: larger">根据<u id="violateRule">123456</u>等海洋法律、法规的规定，</div></td>
         </tr>
         <tr style="width: 100%">
-            <td><div style="font-size: larger">现就<u>123456</u>一事进行询问，</div></td>
+            <td><div style="font-size: larger">现就<u id="caseName">123456</u>一事进行询问，</div></td>
         </tr>
         <tr style="width: 100%">
             <td colspan="5"><div style="font-size: larger">根据有关法律规定，你享有一下权利：执法人员少于2人或执法人员与证件不符的，有权拒绝调查询问。同时你应承担以下义务：如实提供有关资料、回答询问，如做虚假陈述或拒绝、阻扰调查，将依法追究法律责任。请你配合。</div></td>
@@ -87,7 +202,7 @@
             <td><div style="font-size: larger">问：请介绍一下你的身份(姓名、身份证号码、单位、职务等)</div></td>
         </tr>
         <tr style="width: 100%">
-            <td><div style="font-size: larger"><u>姓名：老张，身份证号码：4853131311</u></div></td>
+            <td><div style="font-size: larger"><u id="feedbackTwo">姓名：老张，身份证号码：4853131311</u></div></td>
         </tr>
         <tr style="width: 100%">
             <td><div style="font-size: larger">以上笔录我已看过(或向我宣读过),属实无误。</div></td>
@@ -99,28 +214,28 @@
     <br>
     <table align="center" width="600px" border="0"  cellpadding="5">
         <tr style="width: 100%">
-            <td><div style="font-size: larger">当事人基本情况：<u>姓名：老张；身份证号码：5465676444</u></div></td>
+            <td><div style="font-size: larger">当事人基本情况：<u id="danshiren">姓名：老张；身份证号码：5465676444</u></div></td>
         </tr>
         <tr style="width: 100%">
-            <td><div style="font-size: larger">你(单位)：<u>福州新大陆</u>一案，经本机关依法调查，</div></td>
+            <td><div style="font-size: larger">你(单位)：<u id="yian">福州新大陆</u>一案，经本机关依法调查，</div></td>
         </tr>
         <tr style="width: 100%">
-            <td><div style="font-size: larger">现查明<u>发发发司法所飞洒飞洒发烧发烧</u></div></td>
+            <td><div style="font-size: larger">现查明<u id="pcontent">发发发司法所飞洒飞洒发烧发烧</u></div></td>
         </tr>
         <tr style="width: 100%">
-            <td><div style="font-size: larger">以上违法事实清楚，并有<u>风发司法所飞洒发烧发</u></div></td>
+            <td><div style="font-size: larger">以上违法事实清楚，并有<u id="evidence">风发司法所飞洒发烧发</u></div></td>
         </tr>
         <tr style="width: 100%">
-            <td><div style="font-size: larger">等证据证明。本机关认为，你(单位)上述行为已违反<u>发送到撒发司法所发送飞洒飞洒</u></div></td>
+            <td><div style="font-size: larger">等证据证明。本机关认为，你(单位)上述行为已违反<u id="basiss">发送到撒发司法所发送飞洒飞洒</u></div></td>
         </tr>
         <tr style="width: 100%">
-            <td><div style="font-size: larger">依据<u>发生大幅度发烧发烧发</u></div></td>
+            <td><div style="font-size: larger">依据<u id="bass">发生大幅度发烧发烧发</u></div></td>
         </tr>
         <tr style="width: 100%">
             <td><div style="font-size: larger">依法做出如下处决：<u>123456</u></div></td>
         </tr>
         <tr style="width: 100%">
-            <td><div style="font-size: larger">&nbsp;&nbsp;你(单位)必须在收到本决定之日起十五日内持本决定书到<u>市政府公安局</u></div></td>
+            <td><div style="font-size: larger">&nbsp;&nbsp;你(单位)必须在收到本决定之日起十五日内持本决定书到<u id="plocation">市政府公安局</u></div></td>
         </tr>
         <tr style="width: 100%">
             <td colspan="5"><div style="font-size: larger">缴纳罚款，逾期不按规定缴纳罚款的，每日按罚款金额的3%加处罚款，在边远、水上、交通不便地区，经你(单位)提出，可由执法人员当场收缴罚款。</div></td>
@@ -138,5 +253,6 @@
             <a href="javascript:history.go(-1);"><img src="../../style/images/goBack.png"/></a>
         </div>
     </div>
+
 </body>
 </html>

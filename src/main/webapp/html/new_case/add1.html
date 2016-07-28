@@ -11,6 +11,24 @@
     
      <script type="text/javascript"> 
      
+     function getUser(){
+         var user = new Object();
+       	 $.ajax({
+       		 async: false, 
+    		 type: "POST",
+    		 url: "http://localhost:8088/mmle/login/session.do",
+    		 dataType:"json",
+    		 contentType: "application/json;charset=utf-8",
+    		 success: function(data){
+    			 var u = data['user'];
+    			 user.account = u.account;
+    			 user.roleId=u.role.roleId;
+    	   },
+    	    error:function(msg){alert("服务器未正常响应，请重试"+msg);}
+    	});  
+    	return user;
+        }
+     
      function caseInfo(id){
     	var map={};
   		var c = new Object();
@@ -73,12 +91,13 @@
 			var  myselect = document.getElementById("case");
 	    	var index=myselect.selectedIndex ;
 	    	var svalue = myselect.options[index].value;
-	    	
+	    	var user = new Object();
+	    	user = getUser();
 			var map={};
 	  		var c = new Object();
 	  		c.caseName=descript;
 	  		c.caseId=svalue;
-	  		c.lawEnforcementMan = "88888888";
+	  		c.lawEnforcementMan = user.account;
 	  		map.lawEnforcement=c;
 			 $.ajax({
 			 type: "POST",
@@ -89,7 +108,7 @@
 			 success: function(data){
 				 if(data['code']==1)alert("添加成功！");
 				 var id = data['id'];
-	 				if(method==1){  location.href="check.html?id="+id;}
+	 				if(method==1){  location.href="list.html?id="+id;}
 	 				if(method==0){  location.href="add2.html?id="+id;}
 		   },
 		    error:function(){alert("服务器未正常响应，请重试");}

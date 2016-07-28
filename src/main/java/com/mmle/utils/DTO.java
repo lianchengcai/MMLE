@@ -42,6 +42,7 @@ public class DTO {
 	private User user;
 	private Role role;
 	private LawEnMessage lawEnMessage;
+	private String validateCode;
 	
 	public Role getRole() {
 		return role;
@@ -127,13 +128,20 @@ public class DTO {
 	public void setRecord(Record record) {
 		this.record = record;
 	}
+	public String getValidateCode() {
+		return validateCode;
+	}
+	public void setValidateCode(String validateCode) {
+		this.validateCode = validateCode;
+	}
 	@Override
 	public String toString() {
 		return "DTO [currentPage=" + currentPage + ", size=" + size + ", map=" + map + ", cas=" + cas + ", caseType="
 				+ caseType + ", check=" + check + ", exploration=" + exploration + ", fishBoat=" + fishBoat
 				+ ", lawEnforcement=" + lawEnforcement + ", penaltyDecision=" + penaltyDecision + ", record=" + record
-				+ ", user=" + user + "]";
+				+ ", user=" + user + ", role=" + role + ", lawEnMessage=" + lawEnMessage + ", validateCode="
+				+ validateCode + "]";
 	}
-
+	
 
 }
