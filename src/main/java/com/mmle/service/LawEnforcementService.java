@@ -71,7 +71,7 @@ public class LawEnforcementService implements ILawEnforcementService{
 		int end = lawEnforcementExtendPage.getDataEnd();
 		if(count>0){
 			List<LawEnforcementExtend> lawEnforcementExtendList = 
-					lawEnforcementDao.selectLawEnforcementExtendByConditions(lawEnforcement,start,end );
+					lawEnforcementDao.selectLawEnforcementExtendByConditions(lawEnforcement,start,size );
 			for(int i=0;i<lawEnforcementExtendList.size();i++){
 				int id = lawEnforcementExtendList.get(i).getId();
 				
@@ -100,7 +100,8 @@ public class LawEnforcementService implements ILawEnforcementService{
 		int end = lawEnMessagePage.getDataEnd();
 		if(count>0){
 			System.out.println("我执行到这里！");
-			List<LawEnMessage> list = lawEnforcementDao.selectLawEnMessageByConditions(lawEnMessage, start, end);
+			System.out.println(size);
+			List<LawEnMessage> list = lawEnforcementDao.selectLawEnMessageByConditions(lawEnMessage, start, size);
 			System.out.println("我执行到这里！！！"+count);
 			for(int i=0;i<list.size();i++){
 				int id = list.get(i).getId();

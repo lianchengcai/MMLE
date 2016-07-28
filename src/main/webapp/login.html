@@ -19,7 +19,7 @@
 		map.validateCode = document.getElementById("imgCode").value;
 		 $.ajax({
 		 type: "POST",
-		 url: "http://localhost:8088/mmle/login/web.do",
+		 url: "http://127.0.0.1:8082/mmle/login/web.do",
 		 dataType:"json",
 		 contentType: "application/json;charset=utf-8",
 		 data: JSON.stringify(map),
