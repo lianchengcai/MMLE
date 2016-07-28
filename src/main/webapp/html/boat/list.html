@@ -11,7 +11,6 @@
     <script type="text/javascript" src="/script/jquery.js"></script>
     <script type="text/javascript">
     function deleteBoat(id){
-    	alert("asdf");
     	var map={};
     	var fb = new Object(); 
     	fb.boatId=id;
@@ -64,6 +63,26 @@
 			fb.flag=true;
 			return map;
    }
+   
+   function changeState(id,state){
+	   var map={};
+	   	var fb = new Object(); 
+	   	fb.boatId=id;
+	   	fb.state=state;
+	   map.fishBoat=fb;
+	   $.ajax({
+			 type: "POST",
+			 url: "http://localhost:8088/mmle/fishBoat/update.do",
+			 dataType:"json",
+			 contentType: "application/json;charset=utf-8",
+			 data: JSON.stringify(map),
+			 success: function(data){
+				 if(data['code']==1)alert("黑名单处理成功！");
+				 location.reload();
+			 },error:function(){alert("服务器未正常响应，请重试");}
+		}); 
+   }
+   
    function getBoatPage(map){
    	
 			 $.ajax({
@@ -85,7 +104,7 @@
 			            html+=("<td>"+obj[i].boatLlocation+"&nbsp;</td>");
 			            html+=("<td>"+obj[i].homePort+"&nbsp;</td>");
 			            html+=("<td>是</td>");
-			            if(obj[i].state==0){
+			            if(obj[i].state==1){
 			            	html+=("<td>是</td>");
 			            }else{
 			            	html+=("<td>否</td>");
@@ -97,6 +116,13 @@
 			            html+=("&nbsp")
 			            html+=("<a href='"+"#"+"' onclick='deleteBoat("+obj[i].boatId+")'>删除</a>");
 			            html+=("&nbsp")
+			            if(obj[i].state==0){
+			            	html+=("<a href='"+"#"+"' onclick='changeState("+obj[i].boatId+",1)'>拉黑</a>");
+				            html+=("&nbsp")
+			            }else{
+			            	 html+=("<a href='"+"#"+"' onclick='changeState("+obj[i].boatId+",0)'>移黑</a>");
+					         html+=("&nbsp")
+			            }
 			            html+=("</td>");
 			            html+=("</tr>"); 
 			        }

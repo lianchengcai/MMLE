@@ -52,13 +52,6 @@ public interface ILawEnforcementDao {
 
 	@SelectProvider(type = LawEnforcementDynaSql.class, method = "selectLawEnforcementCount")
 	int selectLawEnforcementCount(LawEnforcement lawEnforcement);
-
-	@Select("select count(*) from tbl_law_enforcement where law_enforcement_man=#{lawEnforcementMan}")
-	int selectLawEnMessageCount(String lawEnforcementMan);
-
-	@Select("select * from tbl_law_enforcement where law_enforcement_man=#{lawEnforcementMan}")
-	List<LawEnMessage> selectLawEnMessageByUserId(String lawEnforcementMan);
-	
 	
 	@SelectProvider(type = LawEnforcementDynaSql.class, method = "selectLawEnforcement")
 	List<LawEnMessage> selectLawEnMessageByConditions(@Param("lawEnforcement") LawEnforcement lawEnforcement,@Param("start") Integer start,@Param("end") Integer end);

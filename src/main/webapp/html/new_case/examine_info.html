@@ -12,6 +12,25 @@
     <link type="text/css" rel="stylesheet" href="../../style/blue/pageCommon.css" />
     <script type="text/javascript">
     
+    function getUser(){
+        var user = new Object();
+      	 $.ajax({
+      		 async: false, 
+   		 type: "POST",
+   		 url: "http://localhost:8088/mmle/login/session.do",
+   		 dataType:"json",
+   		 contentType: "application/json;charset=utf-8",
+   		 success: function(data){
+   			 var u = data['user'];
+   			 user.account = u.account;
+   			 user.name = u.name;
+   			 user.roleId=u.role.roleId;
+   	   },
+   	    error:function(msg){alert("服务器未正常响应，请重试"+msg);}
+   	});  
+   	return user;
+       }
+    
     function getParam(paramName)
     {
             paramValue ="";
@@ -91,14 +110,28 @@
     	var map ={};
     	var id = getParam('id');
     	var c = new Object();
+    	var user = getUser();
     	c.id=id;
-    	c.processMan="张珊-29992";
+    	c.processMan=user.account+user.name;
+    	alert(c.processMan);
     	var reason = document.getElementById("reason").value;
     	c.reason=reason;
     	if(method==1){
       		c.pass=true;
+       
+      		if(user.roleId==3){
+      			c.state=2
+      		}
+      		if(user.roleId==4){
+      			c.state=3
+      		}
+      		if(user.roleId==5){
+      			c.state=4
+      		}
+      		
     	}else{
     		c.pass=false;
+    		c.state=4;
     	}
     	map.lawEnforcement=c;
     	alert(c.pass);

@@ -10,10 +10,40 @@
     <link type="text/css" rel="stylesheet" href="../../style/blue/pageCommon.css" />
     <script type="text/javascript">
     
+    function getUser(){
+        var user = new Object();
+      	 $.ajax({
+      		 async: false, 
+   		 type: "POST",
+   		 url: "http://localhost:8088/mmle/login/session.do",
+   		 dataType:"json",
+   		 contentType: "application/json;charset=utf-8",
+   		 success: function(data){
+   			 var u = data['user'];
+   			 user.account = u.account;
+   			 user.name = u.name;
+   			 user.roleId=u.role.roleId;
+   	   },
+   	    error:function(msg){alert("服务器未正常响应，请重试"+msg);}
+   	});  
+   	return user;
+       }
+    
     function getPage(){
     	var map={};
     	var fb = new Object(); 
-    	fb.lawEnforcementMan="88888888";
+    	var user = new Object();
+    	user = getUser();  
+    	alert(user.roleId)
+    	 if(user.roleId==3){
+			fb.state=1
+		}
+		if(user.roleId==4){
+			fb.state=2
+		}
+		if(user.roleId==5){
+			fb.state=3
+		} 
     	map.lawEnMessage=fb;
 
 		 $.ajax({
@@ -27,17 +57,19 @@
 			 var lawEnMessagePage = data['lawEnMessagePage'];
 			 if(lawEnMessagePage!=null){
 			 var obj = eval(lawEnMessagePage['list']);
-			 for(var i=0;i<obj.length;i++){
-		        	html+=("<tr class='TableDetail1 template'>"); 
-		            html+=("<td>"+obj[i].id+"</td>");
-		            html+=("<td>"+obj[i].casName+"</td>");
-		            html+=("<td>"+obj[i].caseName+"</td>");
-		            html+=("<td><a href='examine_info.html?id="+obj[i].id+"'>审批</a></td>");
-	                html+=("</tr>"); 
-		        }
-		        
+			 if(obj!=null){
+				 for(var i=0;i<obj.length;i++){
+			        	html+=("<tr class='TableDetail1 template'>"); 
+			            html+=("<td>"+obj[i].id+"</td>");
+			            html+=("<td>"+obj[i].casName+"</td>");
+			            html+=("<td>"+obj[i].caseName+"</td>");
+			            html+=("<td><a href='examine_info.html?id="+obj[i].id+"'>审批</a></td>");
+		                html+=("</tr>"); 
+			        }
+			        
+				 }
+			        document.getElementById("TableData").innerHTML=html;
 			 }
-		        document.getElementById("TableData").innerHTML=html;
 			 },error:function(){alert("服务器未正常响应，请重试");}
 	});  
 }

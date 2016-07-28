@@ -10,10 +10,31 @@
     <link type="text/css" rel="stylesheet" href="../../style/blue/pageCommon.css" />
     <script type="text/javascript">
     
+    function getUser(){
+     var user = new Object();
+   	 $.ajax({
+   		 async: false, 
+		 type: "POST",
+		 url: "http://localhost:8088/mmle/login/session.do",
+		 dataType:"json",
+		 contentType: "application/json;charset=utf-8",
+		 success: function(data){
+			 var u = data['user'];
+			 user.account = u.account;
+			 user.roleId=u.role.roleId;
+	   },
+	    error:function(msg){alert("服务器未正常响应，请重试"+msg);}
+	});  
+	return user;
+    }
+    
     function getPage(){
     	var map={};
     	var fb = new Object(); 
-    	fb.lawEnforcementMan="88888888";
+    	var user = new Object();
+    	user = getUser();
+    	fb.lawEnforcementMan=user.account;
+    	fb.state=0;
     	map.lawEnMessage=fb;
 
 		 $.ajax({
@@ -27,6 +48,8 @@
 			 var lawEnMessagePage = data['lawEnMessagePage'];
 			 if(lawEnMessagePage!=null){
 			 var obj = eval(lawEnMessagePage['list']);
+			 if(obj!=null){
+				 
 			 for(var i=0;i<obj.length;i++){
 		        	html+=("<tr class='TableDetail1 template'>"); 
 		            html+=("<td>"+obj[i].id+"</td>");
@@ -40,16 +63,25 @@
 		            if(obj[i].record==true){
 		            	html+=("<td>"+"完成"+"</td>");
 		            }else{
-		            	html+=("<td><a href='add3.html?id="+obj[i].id+"'>未完成</a></td>");
+		            	if(obj[i].exploration==true){
+		            		 html+=("<td><a href='add3.html?id="+obj[i].id+"'>未完成</a></td>");
+		            	}else{
+		            		html+=("<td>"+"未完成"+"</td>");
+		            	}
+		    
 		            }
 		            if(obj[i].penaltyDecision==true){
 		            	html+=("<td>"+"完成"+"</td>");
 		            }else{
-		            	html+=("<td><a href='add4.html?id="+obj[i].id+"'>未完成</a></td>");
+		            	if(obj[i].record==true){
+		            		html+=("<td><a href='add4.html?id="+obj[i].id+"'>未完成</a></td>");
+		            	}else{
+		            		html+=("<td>"+"未完成"+"</td>");
+		            	}
 		            }
 	                html+=("</tr>"); 
 		        }
-		        
+			 }
 			 }
 		        document.getElementById("TableData").innerHTML=html;
 			 },error:function(){alert("服务器未正常响应，请重试");}
@@ -59,7 +91,7 @@
     </script>
 </head>
 <body onload="getPage()">
- 
+ <input type="hidden" id="sessio" >
 <div id="Title_bar">
     <div id="Title_bar_Head">
         <div id="Title_Head"></div>
@@ -88,12 +120,7 @@
 		<!--显示数据列表-->
         <tbody id="TableData" class="dataContainer" datakey="departmentList">
 			<tr class="TableDetail1 template" align="center">
-				<td>111</td>
-                <td>捕捞的渔获物中的幼鱼超过规定比例</td>
-                <td>捕捞的渔获物中的幼鱼超过规定比例百分之20</td>
-                <td>完成</td>
-                <td><a href="add3.html">未完成</a></td>
-                <td><a href="add4.html">未完成</a></td>
+			
 			</tr>
         </tbody>
     </table>
