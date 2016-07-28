@@ -167,12 +167,15 @@ function query() {
 	data.check = check;
 	if (type != null && type != "") {
 		check.type = type;
+		data.currentPage=1;
 	}
 	if (title != null && title != "") {
 		check.title = title;
+		data.currentPage=1;
 	}
 	if (checkMan != null && checkMan != "") {
 		check.checkMan = checkMan;
+		data.currentPage=1;
 	}
 	$
 			.ajax({

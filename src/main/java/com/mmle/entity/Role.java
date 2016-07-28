@@ -5,7 +5,7 @@ public class Role {
 
     private String name;
 
-    private Integer permissionId;
+    private String permissionId;
 
     private Boolean flag;
 
@@ -25,15 +25,15 @@ public class Role {
         this.name = name == null ? null : name.trim();
     }
 
-    public Integer getPermissionId() {
-        return permissionId;
-    }
+    public String getPermissionId() {
+		return permissionId;
+	}
 
-    public void setPermissionId(Integer permissionId) {
-        this.permissionId = permissionId;
-    }
+	public void setPermissionId(String permissionId) {
+		this.permissionId = permissionId;
+	}
 
-    public Boolean getFlag() {
+	public Boolean getFlag() {
         return flag;
     }
 
