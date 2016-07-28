@@ -159,7 +159,7 @@ function change(checkId) {
 function query() {
 	var data = new Object();
 	data.currentPage = $("#currentPage").text();
-	data.size = 2;
+	data.size = 14;
 	var type = $("#type_but").val();
 	var title = $("#title_but").val();
 	var checkMan = $("#check_man_but").val();

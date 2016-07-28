@@ -144,7 +144,6 @@ public class UserService implements IUserService {
 
 	public User ifLogin(User user) {
 		User u =userDao.getUser(user.getAccount());
-		System.out.println(u.toString());
 		if(u == null)return null;
 		String salt = u.getSalt();
 		String paw =SaltUtils.getMd5Password(user.getPassword(), salt);

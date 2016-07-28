@@ -5,14 +5,17 @@ $(document).ready(function() {
 	});
 function result(code) {
 	if (code == 1) {
-		alert("已修改");
+		alert("已保存");
 		query();
 	}
 	if (code==101) {
-		alert("失败，该类别名称已存在！");
+		alert("失败，该名称已存在！");
 	}
 	if (code==0) {
 		alert("失败!");
+	}
+	if (code==102) {
+		alert("信息不完整!");
 	}
 }
 function first() {
@@ -153,12 +156,13 @@ function PrefixInteger(num, n) {
 				data : JSON.stringify(data),
 				dataType : "json",
 				success : function(json) {
-					if (json.code==1) {
-						alert("添加成功");
-						query();
-					}else {
-						alert("添加失败");
-					}
+//					if (json.code==1) {
+//						alert("添加成功");
+//						query();
+//					}else {
+//						alert("添加失败");
+//					}
+					result(json.code);
 				}
 			});
 		}
@@ -207,7 +211,7 @@ function PrefixInteger(num, n) {
 		$("#addNew").hide();
 		var data = new Object();
 		data.currentPage = $("#currentPage").text();
-		data.size = 2;
+		data.size = 14;
 		$.ajax({
 			url : "http://127.0.0.1:8082/mmle/getCaseInfo.do",
 			type : "post",

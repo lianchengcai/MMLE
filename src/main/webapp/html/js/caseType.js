@@ -131,7 +131,7 @@ function edit(typeId) {
 }
 function query() {
 	var data = new Object();
-	data.size = 2;
+	data.size = 14;
 	data.currentPage = $("#currentPage").text();
 	$
 			.ajax({

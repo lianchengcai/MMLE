@@ -87,18 +87,19 @@ public class CaseService implements ICaseService {
 		if (cas != null) {
 			List<Case> cases = caseDao.getCaseByName(cas.getCaseName());
 			System.out.println(cases.size());
-			if (cases != null) {
+			if (cases .size()>0) {
 				map.put("code", 101);
-			}
-			// 这里如果案由类型不存在，就创建案由类型
-			List<CaseType> caseType = caseDao.getCaseTypeById(cas.getCaseType().getTypeId());
-			if (caseType.size()==0) {
-				caseDao.insertCaseType(cas.getCaseType());
-			}
-			if (caseDao.insertCase(cas) == 1) {
-				map.put("code", 1);
-			} else {
-				map.put("code", 0);
+			}else{
+				// 这里如果案由类型不存在，就创建案由类型
+				List<CaseType> caseType = caseDao.getCaseTypeById(cas.getCaseType().getTypeId());
+				if (caseType.size()==0) {
+					caseDao.insertCaseType(cas.getCaseType());
+				}
+				if (caseDao.insertCase(cas) == 1) {
+					map.put("code", 1);
+				} else {
+					map.put("code", 0);
+				}
 			}
 		} else {
 			map.put("code", 102);
