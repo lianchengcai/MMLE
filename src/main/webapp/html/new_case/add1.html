@@ -16,7 +16,7 @@
        	 $.ajax({
        		 async: false, 
     		 type: "POST",
-    		 url: "http://localhost:8088/mmle/login/session.do",
+    		 url: "http://127.0.0.1/:8082/mmle/login/session.do",
     		 dataType:"json",
     		 contentType: "application/json;charset=utf-8",
     		 success: function(data){
@@ -38,7 +38,7 @@
   		map.cas=c
      	$.ajax({
  			 type: "POST",
- 			 url: "http://localhost:8088/mmle/getCaseInfo.do",
+ 			 url: "http://127.0.0.1:8082/mmle/getCaseInfo.do",
  			 dataType:"json",
  			 contentType: "application/json;charset=utf-8",
  			 data: JSON.stringify(map),
@@ -64,7 +64,7 @@
 			var map={};
 			 $.ajax({
 			 type: "POST",
-			 url: "http://localhost:8088/mmle/getCaseType.do",
+			 url: "http://127.0.0.1:8082/mmle/getCaseType.do",
 			 dataType:"json",
 			 contentType: "application/json;charset=utf-8",
 			 data: JSON.stringify(map),
@@ -101,7 +101,7 @@
 	  		map.lawEnforcement=c;
 			 $.ajax({
 			 type: "POST",
-			 url: "http://localhost:8088/mmle/lawEnforcement/add.do",
+			 url: "http://127.0.0.1:8082/mmle/lawEnforcement/add.do",
 			 dataType:"json",
 			 contentType: "application/json;charset=utf-8",
 			 data: JSON.stringify(map),

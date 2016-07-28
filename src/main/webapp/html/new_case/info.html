@@ -44,7 +44,7 @@
   		map.lawEnforcement=c;
 		 $.ajax({
 		 type: "POST",
-		 url: "http://localhost:8088/mmle/lawEnforcement/getLawEnforcementPage.do",
+		 url: "http://127.0.0.1:8082/mmle/lawEnforcement/getLawEnforcementPage.do",
 		 dataType:"json",
 		 contentType: "application/json;charset=utf-8",
 		 data: JSON.stringify(map),
@@ -108,7 +108,7 @@
     function passLaw(map){
     	$.ajax({
 		 type: "POST",
-		 url: "http://localhost:8088/mmle/lawEnforcement/update.do",
+		 url: "http://127.0.0.1:8082/mmle/lawEnforcement/update.do",
 		 dataType:"json",
 		 contentType: "application/json;charset=utf-8",
 		 data: JSON.stringify(map),

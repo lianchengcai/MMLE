@@ -53,24 +53,14 @@
 				/images/** = anon
 				/js/** = anon
 				/styles/** = anon
-				
-				<!-- 手机端可访问 -->
-				/customer/** = anon
-				
-				<!-- 登录页面 -->
-				/SecurityVerification/pcLogin.do == anon
-				
 				<!-- 被踢出后的跳转页面 -->
 				/SecurityVerification/kick.do = anon
-				
 				<!-- 请求 logout.action地址，shiro去清除session-->
 				/logout.do = logout
-				
 				<!-- 验证码，可匿名访问 -->
 				/validatecode.jsp = anon
-				
 				<!-- authc 所有的url不许认证才能访问 kickout,authc -->
-				/back/* = authc
+				/html/* = authc
 			</value>
 		</property>
 	</bean>

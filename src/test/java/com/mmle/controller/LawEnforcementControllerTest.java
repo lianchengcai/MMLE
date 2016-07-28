@@ -50,12 +50,23 @@ public class LawEnforcementControllerTest {
 
 	@Test
 	public void insert() throws Exception {
-		
+		for(int i=0;i<20;i++){
+			DTO data = new DTO();
+			LawEnforcement lawEnforcement = new LawEnforcement();
+			lawEnforcement.setCaseId(1);
+			lawEnforcement.setCaseName("测试执法表");
+			lawEnforcement.setLawEnforcementMan("105032013082");
+			data.setLawEnforcement(lawEnforcement);
+			lawEnforcementController.addLawEnforcement(data);
+			ObjectMapper mapper = new ObjectMapper();
+			String json = mapper.writeValueAsString(data);
+			System.out.println("Java2Json: " + json);
+		}
 		DTO data = new DTO();
 		LawEnforcement lawEnforcement = new LawEnforcement();
-		lawEnforcement.setCaseId(123);
+		lawEnforcement.setCaseId(1);
 		lawEnforcement.setCaseName("测试执法表");
-		lawEnforcement.setLawEnforcementMan("50009998");
+		lawEnforcement.setLawEnforcementMan("105032013082");
 		data.setLawEnforcement(lawEnforcement);
 		
 		ObjectMapper mapper = new ObjectMapper();

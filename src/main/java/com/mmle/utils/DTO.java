@@ -1,9 +1,7 @@
 package com.mmle.utils;
 
-import java.util.Arrays;
 import java.util.Map;
 
-import org.springframework.web.multipart.MultipartFile;
 
 import com.mmle.entity.Case;
 import com.mmle.entity.CaseType;
@@ -29,7 +27,7 @@ import com.mmle.entity.User;
 public class DTO {
 	//字段没有全 看之后传输的参数还需要什么，开发的时候在添进去，然后记得把ToString方法重写
 	private Integer currentPage = 1;
-	private Integer size = 10;
+	private Integer size = 2;
 	private Map<String, Object> map;
 	private Case cas;
 	private CaseType caseType;
