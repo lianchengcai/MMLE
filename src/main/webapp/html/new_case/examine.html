@@ -15,7 +15,7 @@
       	 $.ajax({
       		 async: false, 
    		 type: "POST",
-   		 url: "http://localhost:8088/mmle/login/session.do",
+   		 url: "http://127.0.0.1:8082/mmle/login/session.do",
    		 dataType:"json",
    		 contentType: "application/json;charset=utf-8",
    		 success: function(data){
@@ -29,12 +29,11 @@
    	return user;
        }
     
-    function getPage(){
+    function getPage(currentPage){
     	var map={};
     	var fb = new Object(); 
     	var user = new Object();
     	user = getUser();  
-    	alert(user.roleId)
     	 if(user.roleId==3){
 			fb.state=1
 		}
@@ -45,16 +44,21 @@
 			fb.state=3
 		} 
     	map.lawEnMessage=fb;
-
+    	map.currentPage=currentPage;
+		if(user.roleId !=1 && user.roleId !=2){
 		 $.ajax({
 		 type: "POST",
-		 url: "http://localhost:8088/mmle/lawEnforcement/getPage.do",
+		 url: "http://127.0.0.1:8082/mmle/lawEnforcement/getPage.do",
 		 dataType:"json",
 		 contentType: "application/json;charset=utf-8",
 		 data: JSON.stringify(map),
 		 success: function(data){
 			 var html="";
 			 var lawEnMessagePage = data['lawEnMessagePage'];
+			 var pageSize = lawEnMessagePage.pageSize;
+			 var pageIndex = lawEnMessagePage.pageIndex;
+			 document.getElementById("pageSize").value =pageSize;
+			 document.getElementById("currentPage").innerHTML =pageIndex;
 			 if(lawEnMessagePage!=null){
 			 var obj = eval(lawEnMessagePage['list']);
 			 if(obj!=null){
@@ -72,11 +76,52 @@
 			 }
 			 },error:function(){alert("服务器未正常响应，请重试");}
 	});  
+		}
 }
+    
+    function firstPage(){
+   		var currentPage = document.getElementById("currentPage").innerHTML
+   		if(currentPage != 1){
+   			getPage(1);
+   		}else{
+   			alert("当前页为首页");
+   		}
+   	}
+   	
+   	function previousPage(){
+   		var currentPage = document.getElementById("currentPage").innerHTML
+   		if(currentPage == 1){
+   			alert("当前页为第一页");
+   		}else{
+   			var pg = currentPage-1;
+   			getPage(pg);
+   		}
+   	}
+   	
+   	function nextPage(){
+   		var currentPage = document.getElementById("currentPage").innerHTML
+   		var pageSize = document.getElementById("pageSize").value
+   		if(currentPage == pageSize){
+   			alert("当前页为最后一页");
+   		}else{
+   			var pg = +currentPage+1;
+   			getPage(pg);
+   		}
+   	}
+   	
+   	function endPage(){
+   		var currentPage = document.getElementById("currentPage").innerHTML
+   		var pageSize = document.getElementById("pageSize").value
+   		if(currentPage == pageSize){
+   			alert("当前页为最后一页");
+   		}else{
+   			getPage(pageSize);
+   		}
+   	}
     
     </script>
 </head>
-<body onload="getPage()">
+<body onload="getPage(1)">
  
 <div id="Title_bar">
     <div id="Title_bar_Head">
@@ -103,23 +148,21 @@
 
 		<!--显示数据列表-->
         <tbody id="TableData" class="dataContainer" datakey="departmentList">
-			<tr class="TableDetail1 template" align="center">
-				<td>111</td>
-                <td>捕捞的渔获物中的幼鱼超过规定比例</td>
-                <td>捕捞的渔获物中的幼鱼超过规定比例百分之20</td>
-                <td><a href="examine_info.html">审批</a></td>
-			</tr>
+			<tr class='TableDetail1 template'>
+			</tr> 
         </tbody>
     </table>
 </div>
 <br>
     <table id="paging" style="width: 400px" align="center">
     <tr style="height: 60px">
-        <td><input type="button" name="firtPage" value="首页"></td>
-        <td><input type="button" name="previousPage" value="上一页"></td>
-        <td>当前页码:第1页</td>
-        <td><input type="button" name="nextPage" value="下一页"></td>
-        <td><input type="button" name="endPage" value="尾页"></td>
+        <td><input type="button" name="firtPage" value="首页" onclick="firstPage()"></td>
+        <td><input type="button" name="previousPage" value="上一页" onclick="previousPage()"></td>
+        <td>当前页码:第<span id="currentPage"></span>页
+        <td><input type="button" name="nextPage" value="下一页" onclick="nextPage()"></td>
+        <td><input type="button" name="endPage" value="尾页" onclick="endPage()">
+        <span id="pageSize"></span></td>
+        
     </tr>
 </table>
 </body>

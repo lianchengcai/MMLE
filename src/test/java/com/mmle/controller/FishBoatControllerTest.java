@@ -72,7 +72,8 @@ public class FishBoatControllerTest {
 	public void select() throws Exception {
 		
 		DTO data = new DTO();
-		
+		FishBoat  fishBoat = new FishBoat();
+		data.setFishBoat(fishBoat);
 		String map = fishBoatController.getFishBoatList(data);
 		
 		JSONObject jsonb = JSONObject.fromObject(map);
