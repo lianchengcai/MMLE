@@ -8,7 +8,6 @@
     <script language="javascript" src="../../script/DemoData.js" charset="utf-8"></script>
 	<script language="javascript" src="../../script/DataShowManager.js" charset="utf-8"></script>
     <link type="text/css" rel="stylesheet" href="../../style/blue/pageCommon.css" />
-    <script type="text/javascript" src="/script/jquery.js"></script>
     <script type="text/javascript">
     function deleteBoat(id){
     	var map={};
@@ -18,7 +17,7 @@
     	map.fishBoat=fb;
     	$.ajax({
 			 type: "POST",
-			 url: "http://localhost:8088/mmle/fishBoat/delete.do",
+			 url: "http://127.0.0.1:8082/mmle/fishBoat/delete.do",
 			 dataType:"json",
 			 contentType: "application/json;charset=utf-8",
 			 data: JSON.stringify(map),
@@ -72,7 +71,7 @@
 	   map.fishBoat=fb;
 	   $.ajax({
 			 type: "POST",
-			 url: "http://localhost:8088/mmle/fishBoat/update.do",
+			 url: "http://127.0.0.1:8082/mmle/fishBoat/update.do",
 			 dataType:"json",
 			 contentType: "application/json;charset=utf-8",
 			 data: JSON.stringify(map),
@@ -84,10 +83,9 @@
    }
    
    function getBoatPage(map){
-   	
 			 $.ajax({
 			 type: "POST",
-			 url: "http://localhost:8088/mmle/fishBoat/getPageList.do",
+			 url: "http://127.0.0.1:8082/mmle/fishBoat/getPageList.do",
 			 dataType:"json",
 			 contentType: "application/json;charset=utf-8",
 			 data: JSON.stringify(map),
@@ -110,17 +108,17 @@
 			            	html+=("<td>否</td>");
 			            }
 			            html+=("<td>");
-			            html+=("<a href='"+"#"+"' onclick='check("+obj[i].boatId+")'>查看</a>");
+			            html+=("<input type='button' onclick='check("+obj[i].boatId+")' value='查看'></input>");
 			            html+=("&nbsp")
-			            html+=("<a href='"+"#"+"' onclick='modify("+obj[i].boatId+")'>修改</a>");
+			            html+=("<input type='button' name='mod' onclick='modify("+obj[i].boatId+")' value='修改'></input>");
 			            html+=("&nbsp")
-			            html+=("<a href='"+"#"+"' onclick='deleteBoat("+obj[i].boatId+")'>删除</a>");
+			            html+=("<input type='button' name='del' onclick='deleteBoat("+obj[i].boatId+")' value='删除'></input>");
 			            html+=("&nbsp")
 			            if(obj[i].state==0){
-			            	html+=("<a href='"+"#"+"' onclick='changeState("+obj[i].boatId+",1)'>拉黑</a>");
+			            	html+=("<input type='button' name='defriend' onclick='changeState("+obj[i].boatId+",1)'value='拉黑'></input>");
 				            html+=("&nbsp")
 			            }else{
-			            	 html+=("<a href='"+"#"+"' onclick='changeState("+obj[i].boatId+",0)'>移黑</a>");
+			            	 html+=("<input type='button' name='friend' onclick='changeState("+obj[i].boatId+",0)' value='移黑'></input>");
 					         html+=("&nbsp")
 			            }
 			            html+=("</td>");
@@ -128,13 +126,31 @@
 			        }
 				 }
 			        document.getElementById("TableData").innerHTML=html;
+			 	   var privilegeId="";
+					 $.ajax({
+				  		 async: false, 
+						 type: "POST",
+						 url: "http://127.0.0.1:8082/mmle/login/session.do",
+						 dataType:"json",
+						 contentType: "application/json;charset=utf-8",
+						 success: function(json){
+							 privilegeId=json.user.role.permissionId;
+					   },
+					    error:function(msg){alert("服务器未正常响应，请重试"+msg);}
+					});  
+					if(privilegeId.indexOf("2")==-1){
+						$("#add").hide();
+						$('input[name="mod"]').hide();
+						$('input[name="del"]').hide();
+						$('input[name="defriend"]').hide();
+						$('input[name="friend"]').hide();
+					}
 				 },error:function(){alert("服务器未正常响应，请重试");}
 		});  
  }
    
    </script>
     	
-   
 </head>
 <body onload="getBoatPage(all())">
  
@@ -147,7 +163,6 @@
         <div id="Title_End"></div>
     </div>
 </div>
-
 <div id="MainArea">
    <br>
    渔船编号: <input type="text" id="boat_id" name="boat_id" style="width: 150px;">&nbsp;&nbsp;&nbsp;
@@ -165,7 +180,6 @@
                 </select>&nbsp;&nbsp;&nbsp;
    <input type="button" value="查询" onclick="getBoatPage(conditions())">
     <br><br>
-
     <table cellspacing="0" cellpadding="7" class="TableStyle">
        
         <!-- 表头-->
@@ -198,11 +212,10 @@
 			</tr> 
         </tbody>
     </table>
-    
     <!-- 其他功能超链接 -->
     <div id="TableTail">
         <div id="TableTail_inside">
-            <a href="addUI.html"><img src="../../style/images/createNew.png" /></a>
+            <a id="add" href="addUI.html"><img src="../../style/images/createNew.png" /></a>
         </div>
     </div>
 </div>

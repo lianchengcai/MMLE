@@ -2,10 +2,28 @@
 <head>
     <title>Top</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script language="javascript" src="../../script/jquery.js"></script>
 	<link type="text/css" rel="stylesheet" href="../../style/blue/top.css" />
 </head>
+<script type="text/javascript">
+	function load(){
+	        var name ="";
+	      	 $.ajax({
+	      		 async: false, 
+	   		 type: "POST",
+	   		 url: "http://127.0.0.1:8082/mmle/login/session.do",
+	   		 dataType:"json",
+	   		 contentType: "application/json;charset=utf-8",
+	   		 success: function(data){
+	   			 name = data['user'].name;
+				 $("#username").val(name);
+	   	   },
+	   	    error:function(msg){alert("服务器未正常响应，请重试"+msg);}
+	   	});  
+	}
+</script>
 
-<body class="PageBody" style="margin: 0">
+<body class="PageBody" style="margin: 0" onload="load()">
  
 	<div id="Head1">
 		<div id="Logo">
@@ -16,7 +34,7 @@
 		
 		<div id="Head1Right">
 			<div id="Head1Right_UserName">
-                <img border="0" width="13" height="14" src="../../style/images/top/user.gif" /> 您好，<b>管理员</b>
+                <img border="0" width="13" height="14" src="../../style/images/top/user.gif" /> 您好，<b><input type="text" size="5" id="username" readonly="readonly"></b>
 			</div>
 		</div>
 		
