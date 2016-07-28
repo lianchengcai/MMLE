@@ -62,6 +62,9 @@ public class FishBoatDynaSql {
 				if (fishBoat.getCreateTime() != null) {
 					VALUES("create_time", "#{createTime}");
 				}
+				if (fishBoat.getIfNoPermit() != null) {
+					VALUES("if_no_permit", "#{ifNoPermit}");
+				}
 				if (fishBoat.getState() != null) {
 					VALUES("state", "#{state}");
 				}
@@ -108,11 +111,12 @@ public class FishBoatDynaSql {
 					SET("substituting_time = #{substitutingTime}");
 				}
 				if (fishBoat.getCreateTime() != null) {
-					VALUES("create_time", "#{createTime}");
 					SET("create_time = #{createTime}");
 				}
+				if (fishBoat.getIfNoPermit() != null) {
+					SET("if_no_permit = #{ifNoPermit}");
+				}
 				if (fishBoat.getState() != null) {
-					VALUES("state", "#{state}");
 					SET("state = #{state}");
 				}
 				if (fishBoat.getFlag() != null) {
@@ -158,6 +162,11 @@ public class FishBoatDynaSql {
 				s.append(fishBoat.getFlag());
 				s.append(" ");
 			}
+			if (fishBoat.getIfNoPermit() != null) {
+				s.append("and if_no_permit =");
+				s.append(fishBoat.getIfNoPermit());
+				s.append(" ");
+			}
 			if (fishBoat.getState() != null) {
 				s.append("and state =");
 				s.append(fishBoat.getState());
@@ -199,6 +208,11 @@ public class FishBoatDynaSql {
 			s.append("and boat_llocation LIKE '%");
 			s.append(fishBoat.getBoatLlocation());
 			s.append("%' ");
+		}
+		if (fishBoat.getIfNoPermit() != null) {
+			s.append("and if_no_permit =");
+			s.append(fishBoat.getIfNoPermit());
+			s.append(" ");
 		}
 		if (fishBoat.getState() != null) {
 			s.append("and state =");

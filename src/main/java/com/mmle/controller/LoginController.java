@@ -83,4 +83,19 @@ public class LoginController {
 		return map;
 	}
 	
+	@RequestMapping(value="out")
+	public @ResponseBody Map<String, Object> loginOut(HttpServletRequest request)throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		HttpSession session = request.getSession();
+		try {
+			System.out.println("请求退出");
+			session.invalidate();
+			map.put("code", 1);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("code", 0);
+		}
+		return map;
+	}
+	
 }

@@ -34,6 +34,8 @@ public class FishBoatController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		System.out.println("添加");
 		FishBoat fishBoat = data.getFishBoat();
+		fishBoat.setFishPermitTime(new Date());
+		fishBoat.setSubstitutingTime(new Date());
 		if(fishBoatService.add(fishBoat)){
 			map.put("code", 1);
 		}else{

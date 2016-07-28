@@ -34,10 +34,9 @@
     function modify(id){
       	 location.href="editUI.html?boatId="+id;
       }
-    function conditions(){
+    function conditions(currentPage){
     	var map={};
-	   	map.currentPage=1;
-	   	map.size=20;
+	   	map.currentPage=currentPage;
 		var fb = new Object(); 
 		boatName=document.getElementById("boat_name").value;
 		if(boatName!="")fb.boatName=boatName;
@@ -45,7 +44,9 @@
 		if(boatId!="")fb.boatId=boatId;
 		boatLlocation = document.getElementById("boat_location").value;
 		if(boatLlocation!="")fb.boatLlocation=boatLlocation;
-		var ifPermit = $("#fish_permit").get(0).selectedIndex;
+	/* 	var ifPermit = $("#fish_permit").get(0).selectedIndex;
+		if(ifPermit==2)fb.ifNoPermit = true;
+		if(ifPermit==1)fb.inNoPermit = false; */
 		state = $("#state").get(0).selectedIndex;
 		if(state==2)fb.state = true;
 		if(state==1)fb.state = false;
@@ -56,7 +57,6 @@
    function all(){
 	   var map={};
 	   	map.currentPage=1;
-	   	map.size=20;
 			var fb = new Object(); 
 			map.fishBoat=fb;
 			fb.flag=true;
@@ -92,6 +92,10 @@
 			 success: function(data){
 				 var html="";
 				 var fishBoatPage = data['fishBoatPage'];
+				 var pageSize = fishBoatPage.pageSize;
+				 var pageIndex = fishBoatPage.pageIndex;
+				 document.getElementById("pageSize").value =pageSize;
+				 document.getElementById("currentPage").innerHTML =pageIndex;
 				 if(fishBoatPage!=null){
 				 var obj = eval(fishBoatPage['list']);
 			        
@@ -101,7 +105,11 @@
 			            html+=("<td>"+obj[i].boatName+"&nbsp;</td>");
 			            html+=("<td>"+obj[i].boatLlocation+"&nbsp;</td>");
 			            html+=("<td>"+obj[i].homePort+"&nbsp;</td>");
-			            html+=("<td>是</td>");
+			            if(obj[i].ifNoPermit==1){
+			            	html+=("<td>是</td>");
+			            }else{
+			            	html+=("<td>否</td>");
+			            }
 			            if(obj[i].state==1){
 			            	html+=("<td>是</td>");
 			            }else{
@@ -148,6 +156,46 @@
 				 },error:function(){alert("服务器未正常响应，请重试");}
 		});  
  }
+   
+	function firstPage(){
+   		var currentPage = document.getElementById("currentPage").innerHTML
+   		if(currentPage != 1){
+   			getBoatPage(all());
+   		}else{
+   			alert("当前页为首页");
+   		}
+   	}
+   	
+   	function previousPage(){
+   		var currentPage = document.getElementById("currentPage").innerHTML
+   		if(currentPage == 1){
+   			alert("当前页为第一页");
+   		}else{
+   			var pg = currentPage-1;
+   			getBoatPage(conditions(pg));
+   		}
+   	}
+   	
+   	function nextPage(){
+   		var currentPage = document.getElementById("currentPage").innerHTML
+   		var pageSize = document.getElementById("pageSize").value
+   		if(currentPage == pageSize){
+   			alert("当前页为最后一页");
+   		}else{
+   			var pg = +currentPage+1;
+   			getBoatPage(conditions(pg));
+   		}
+   	}
+   	
+   	function endPage(){
+   		var currentPage = document.getElementById("currentPage").innerHTML
+   		var pageSize = document.getElementById("pageSize").value
+   		if(currentPage == pageSize){
+   			alert("当前页为最后一页");
+   		}else{
+   			getBoatPage(conditions(pageSize));
+   		}
+   	}
    
    </script>
     	
@@ -222,12 +270,14 @@
 <br>
     <table id="paging" style="width: 400px" align="center">
         <tr style="height: 60px">
-            <td><input type="button" name="firtPage" value="首页"></td>
-            <td><input type="button" name="previousPage" value="上一页"></td>
-            <td>当前页码:第<span id="pagenum">1</span>页</td>
-            <td><input type="button" name="nextPage" value="下一页"></td>
-            <td><input type="button" name="endPage" value="尾页" ></td>
-        </tr>
+        <td><input type="button" name="firtPage" value="首页" onclick="firstPage()"></td>
+        <td><input type="button" name="previousPage" value="上一页" onclick="previousPage()"></td>
+        <td>当前页码:第<span id="currentPage"></span>页
+        <td><input type="button" name="nextPage" value="下一页" onclick="nextPage()"></td>
+        <td><input type="button" name="endPage" value="尾页" onclick="endPage()">
+        <span id="pageSize"></span></td>
+        
+    </tr>
     </table>
 </body>
 </html>

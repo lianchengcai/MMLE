@@ -41,7 +41,7 @@ public class FishBoatService implements IFishBoatService{
 			Integer end = fishBoatPage.getDataEnd();
 			System.out.println("起始数据："+start);
 			System.out.println("结束数据："+end);
-			List<FishBoat> fishBoatList = fishBoatDao.selectFishBoatByConditions(fishBoat,start, end);
+			List<FishBoat> fishBoatList = fishBoatDao.selectFishBoatByConditions(fishBoat,start, size);
 			fishBoatPage.setList(fishBoatList);
 			return fishBoatPage;
 		}

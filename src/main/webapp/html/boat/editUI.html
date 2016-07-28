@@ -48,7 +48,7 @@
 			map.fishBoat=fb;
 			$.ajax({
 				type: "POST",
-				url: "http://localhost:8088/mmle/fishBoat/getBoatById.do",
+				url: "http://127.0.0.1:8082/mmle/fishBoat/getBoatById.do",
 				dataType:"json",
 				contentType: "application/json;charset=utf-8",
 				data: JSON.stringify(map),
@@ -66,6 +66,11 @@
 					document.getElementById("fish_permit_time").value = strdate;
 					document.getElementById("substituting_no").value = fishBoat.substitutingNo;
 					var substitutingTime = changedt(fishBoat.substitutingTime);
+					if(fishBoat.ifNoPermit){
+						$("#if_no_permit ").val("是");
+					}else{
+						$("#if_no_permit ").val("否");
+					}
 					var strt = substitutingTime[0]+"-"+substitutingTime[1]+"-"+substitutingTime[2]
 					document.getElementById("substituting_time").value = strt;
 					document.getElementById("boat_location").value = fishBoat.boatLlocation;
@@ -103,7 +108,7 @@
                     <table cellpadding="0" cellspacing="0" class="mainForm">
                         <tr>
                             <td width="100">渔船编号</td>
-                            <td><input type="text" name="boat_id" id="boat_id" style="width: 200px;" /> *</td>
+                            <td><input type="text" name="boat_id" id="boat_id" readonly="readonly" style="width: 200px;" /> *</td>
                             <td width="150"><td/>
                             <td width="100">船名</td>
                             <td><input type="text" name="boat_name" id="boat_name" style="width: 200px;" /> *</td>
@@ -139,6 +144,15 @@
                         <tr>
                             <td width="100">船籍港</td>
                             <td><input type="text" name="boat_location" id="boat_location" style="width: 200px;" /> *</td>
+                       		<td width="150"><td/>
+                       		<td width="100">无证捕捞</td>
+                            <td>
+                            	<select id="if_no_permit" name="if_no_permit">
+			    					<option value="0"></option>
+			                    	<option value="1">是</option>
+			    					<option value="2">否</option>
+			                 	</select>*
+			                 </td>
                         </tr>
                     </table>
                 </form>
