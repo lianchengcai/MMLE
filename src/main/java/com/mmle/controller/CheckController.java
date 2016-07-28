@@ -44,6 +44,14 @@ public class CheckController {
 		return map;
 	}
 	
+	@RequestMapping("addCheck1")
+	@ResponseBody
+	public Map<String, Object> addCheck1(@RequestBody DTO data){
+		log.info("addCheck1:"+data.toString());
+		Map<String, Object> map = checkService.addCheck1(data.getCheck());
+		return map;
+	}
+	
 	@RequestMapping("getCheck")
 	@ResponseBody
 	public Map<String, Object> getCheck(@RequestBody DTO data){
@@ -68,4 +76,12 @@ public class CheckController {
 		Map<String, Object> map = checkService.deleteCheck(data.getCheck());
 		return map;
 	}
+//	
+//	@RequestMapping("addCheck2")
+//	@ResponseBody
+//	public Map<String, Object> addCheck2(HttpServletRequest request){
+//		log.info("addCheck2:");
+//		Map<String, Object> map = checkService.addCheck2(request);
+//		return map;
+//	}
 }

@@ -91,7 +91,7 @@ public class DynaSqlProvider {
 					VALUES("sailing", "#{sailing}");
 				}
 				if (check.getSatelliteNavigation() != null) {
-					VALUES("satelliteNavigation", "#{satelliteNavigation}");
+					VALUES("satellite_navigation", "#{satelliteNavigation}");
 				}
 				if (check.getSsb() != null) {
 					VALUES("ssb", "#{ssb}");
@@ -103,7 +103,7 @@ public class DynaSqlProvider {
 					VALUES("boat_image", "#{boatImage}");
 				}
 				if (check.getCheckMan() != null) {
-					VALUES("check_man", "#{checkMan.account}");
+					VALUES("check_man", "#{checkMan}");
 				}
 				if (check.getCheckTime() != null) {
 					VALUES("check_time", "#{checkTime}");

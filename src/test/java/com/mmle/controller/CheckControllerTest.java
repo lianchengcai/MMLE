@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mmle.entity.Case;
 import com.mmle.entity.CaseType;
 import com.mmle.entity.Check;
+import com.mmle.entity.FishBoat;
 import com.mmle.entity.User;
 import com.mmle.utils.DTO;
 
@@ -49,7 +50,7 @@ public class CheckControllerTest {
 		mockMvc = webAppContextSetup(wac).build();
 	}
 
-	@Test
+	//@Test
 	public void getCheck() throws Exception {
 		DTO data = new DTO();
 //		Check check = new Check();
@@ -79,11 +80,20 @@ public class CheckControllerTest {
 		System.out.println(result.getResponse().getContentAsString());
 	}
 
-	//@Test
+	@Test
 	public void addCheck() throws Exception {
 		DTO data = new DTO();
 		Check check = new Check();
 		check.setBoatCheck(true);
+		check.setBoatCheck(true);
+		FishBoat fishBoat = new FishBoat();
+		fishBoat.setBoatId("456");
+		check.setBoat(fishBoat);
+		check.setSatelliteNavigation(false);
+		Case case1 = new Case();
+		case1.setCaseId(1);
+		check.setState(false);
+		check.setCas(case1);
 		data.setCheck(check);
 		ObjectMapper mapper = new ObjectMapper();
 		// mapper.configure(SerializationConfig.Feature.INDENT_OUTPUT,
@@ -98,7 +108,7 @@ public class CheckControllerTest {
 		System.out.println("Json2Java: " + mapper.writeValueAsString(data));
 
 		MvcResult result = mockMvc.perform(
-				MockMvcRequestBuilders.post("/addCheck").contentType(MediaType.APPLICATION_JSON).content(json))
+				MockMvcRequestBuilders.post("/addCheck1").contentType(MediaType.APPLICATION_JSON).content(json))
 				.andExpect(status().isOk()).andReturn();
 		System.out.println(result.getResponse().getContentAsString());
 	}

@@ -11,7 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.lang.ObjectUtils.Null;
 import org.springframework.objenesis.instantiator.perc.PercInstantiator;
 import org.springframework.stereotype.Service;
@@ -222,4 +224,85 @@ public class CheckService implements ICheckService {
 		return map;
 	}
 
+	@Override
+	public Map<String, Object> addCheck1(Check check) {
+		Map<String, Object> map = new HashMap<>();
+		if (check.getState()==true) {
+			Case cas = new Case();
+			cas.setCaseId(1);
+			check.setCas(cas);
+		}
+		if (checkDao.addCheck(check) == 1) {
+			map.put("code", 1);
+		} else {
+			map.put("code", 0);
+		}
+		return map;
+	}
+
+//	@Override
+//	public Map<String, Object> addCheck2(HttpServletRequest request) {
+//		request.setCharacterEncoding("UTF-8");
+//		request.setCharacterEncoding("UTF-8");
+//		DiskFileItemFactory factory = new DiskFileItemFactory();
+////		String path = "J:/upload";
+//		
+//		//String path="/home/penglian/tools/upload/image"; //上传文件存放目录linux下
+//		String path=request.getServletContext().getRealPath("/images"); //上传文件存放目录windows下
+//		String imagePath = "";
+//		String date = "";
+//		factory.setRepository(new File(path));
+//		factory.setSizeThreshold(1024 * 1024);
+//		ServletFileUpload upload = new ServletFileUpload(factory);
+//
+//		try {
+//			// List<FileItem> list =
+//			// (List<FileItem>)upload.parseRequest(request);
+//			List<FileItem> list = (List<FileItem>) upload.parseRequest(request);
+//			for (FileItem item : list) {
+//				String name = item.getFieldName();
+//				System.out.println("name:" + name);
+//				if (item.isFormField()) {
+//					String value = item.getString();
+//					System.out.println("value:" + value);
+//					date = value;
+//					request.setAttribute(name, value);
+//				} else {
+//					String value = item.getName();
+//					int start = value.lastIndexOf("\\");
+//					String filename = value.substring(start + 1);
+//					System.out.println("filename:" + filename);
+//					imagePath = path + "/" + filename;
+//					request.setAttribute(name, filename);
+//
+//					OutputStream out = new FileOutputStream(new File(path,
+//							filename));
+//					InputStream in = item.getInputStream();
+//
+//					int length = 0;
+//					byte[] buf = new byte[1024];
+//					System.out.println("文件大小:" + item.getSize());
+//
+//					while ((length = in.read(buf)) != -1) {
+//						out.write(buf, 0, length);
+//					}
+//					in.close();
+//					out.close();
+//				}
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		System.out.println("imagePath" + imagePath);
+//		Connection connection = null;
+//		PreparedStatement statement = null;
+//		int result = 0;
+//		String sql = "update sendorder set image=" + "'" + imagePath + "'"
+//				+ " where date=" + "'"+date+"'";
+//		result = ConnectUpdate.coon_update(sql, connection, statement);
+//		System.out.println("result:" + result);
+//	}
+//
+//	}
+	//}
 }

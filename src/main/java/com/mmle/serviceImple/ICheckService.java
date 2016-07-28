@@ -27,5 +27,9 @@ public interface ICheckService {
 	
 	public Map<String, Object> getCheck2(Check check, Integer size, Integer currentPage);
 
+	public Map<String, Object> addCheck1(Check check);
+
+	//public Map<String, Object> addCheck2(HttpServletRequest request);
+
 
 }
