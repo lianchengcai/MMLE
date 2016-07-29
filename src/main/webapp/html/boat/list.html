@@ -37,6 +37,7 @@
     function conditions(currentPage){
     	var map={};
 	   	map.currentPage=currentPage;
+	   	map.size=7;
 		var fb = new Object(); 
 		boatName=document.getElementById("boat_name").value;
 		if(boatName!="")fb.boatName=boatName;
@@ -57,6 +58,7 @@
    function all(){
 	   var map={};
 	   	map.currentPage=1;
+	   	map.size=7;
 			var fb = new Object(); 
 			map.fishBoat=fb;
 			fb.flag=true;
