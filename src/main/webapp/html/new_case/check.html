@@ -10,9 +10,31 @@
     <link type="text/css" rel="stylesheet" href="../../style/blue/pageCommon.css" />
     <script type="text/javascript">
     
+    function getUser(){
+        var user = new Object();
+      	 $.ajax({
+      		 async: false, 
+   		 type: "POST",
+   		 url: "http://127.0.0.1:8082/mmle/login/session.do",
+   		 dataType:"json",
+   		 contentType: "application/json;charset=utf-8",
+   		 success: function(data){
+   			 var u = data['user'];
+   			 user.account = u.account;
+   			 user.roleId=u.role.roleId;
+   	   },
+   	    error:function(msg){alert("服务器未正常响应，请重试"+msg);}
+   	});  
+   	return user;
+       }
+    
     function getPage(currentPage){
     	var map={};
     	var fb = new Object(); 
+    	user = getUser();  
+   	 	if(user.roleId==2){
+   	 		fb.lawEnforcementMan=user.account;
+		}
     	fb.state=4;
     	map.lawEnMessage=fb;
     	map.currentPage=currentPage;
@@ -40,6 +62,7 @@
       		            html+=("<td>"+obj[i].processMan+"</td>");
       		            html+=("<td>"+obj[i].pass+"</td>");
       		            html+=("<td>"+obj[i].reason+"</td>");
+      		         	html+=("<td>"+obj[i].date+"</td>");
       		            html+=("<td><a href='info.html?id="+obj[i].id+"'>查看</a></td>");
       	                html+=("</tr>"); 
       		        }
@@ -51,6 +74,61 @@
    			 },error:function(){alert("服务器未正常响应，请重试");}
    	});  
    }
+    
+    function getPageByTime(currentPage){
+    	var map={};
+    	
+    	var startTime = document.getElementById("startTime").value.split("T");
+    	map.lawStartTime = startTime[0]+" "+startTime[1];
+		var endTime = document.getElementById("endTime").value.split("T");;
+		map.lawEndTime = endTime[0]+" "+endTime[1];
+    	
+    	var fb = new Object(); 
+    	user = getUser();  
+   	 	if(user.roleId==2){
+   	 		fb.lawEnforcementMan=user.account;
+		}
+    	fb.state=4;
+    	map.lawEnMessage=fb;
+    	map.currentPage=currentPage;
+    	$.ajax({
+   		 type: "POST",
+   		 url: "http://127.0.0.1:8082/mmle/lawEnforcement/getPageByTime.do",
+   		 dataType:"json",
+   		 contentType: "application/json;charset=utf-8",
+   		 data: JSON.stringify(map),
+   		 success: function(data){
+   			 var html="";
+   			 var lawEnMessagePage = data['lawEnMessagePage'];
+   			 var pageSize = lawEnMessagePage.pageSize;
+			 var pageIndex = lawEnMessagePage.pageIndex;
+			 document.getElementById("pageSize").value =pageSize;
+			 document.getElementById("currentPage").innerHTML =pageIndex;
+   			 if(lawEnMessagePage!=null){
+   			 var obj = eval(lawEnMessagePage['list']);
+   			 if(obj!=null){
+   				for(var i=0;i<obj.length;i++){
+      				 html+=("<tr class='TableDetail1 template'>"); 
+      		            html+=("<td>"+obj[i].id+"</td>");
+      		            html+=("<td>"+obj[i].casName+"</td>");
+      		            html+=("<td>"+obj[i].lawEnforcementMan+"</td>");
+      		            html+=("<td>"+obj[i].processMan+"</td>");
+      		            html+=("<td>"+obj[i].pass+"</td>");
+      		            html+=("<td>"+obj[i].reason+"</td>");
+      		         	html+=("<td>"+obj[i].date+"</td>");
+      		            html+=("<td><a href='info.html?id="+obj[i].id+"'>查看</a></td>");
+      	                html+=("</tr>"); 
+      		        }
+      		        
+      			 }
+      		        document.getElementById("TableData").innerHTML=html;
+   			 }
+   			 
+   			 },error:function(){alert("服务器未正常响应，请重试");}
+   	});  
+   }
+    
+    
     
     function firstPage(){
    		var currentPage = document.getElementById("currentPage").innerHTML
@@ -108,6 +186,13 @@
 </div>
 
 <div id="MainArea">
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   开始时间: <input type="datetime-local" id="startTime" style="width: 180px;">&nbsp;&nbsp;&nbsp;
+   结束时间: <input type="datetime-local" id="endTime" style="width: 180px;">&nbsp;&nbsp;&nbsp;
+   <input type="button" value="查询" onclick="getPageByTime()">
+   <br><br>
     <table cellspacing="0" cellpadding="0" class="TableStyle">
        
         <!-- 表头-->
@@ -118,7 +203,8 @@
                 <td width="80px">执法人员</td>
                 <td width="80px">审批人员</td>
                 <td width="80px">状态</td>
-                <td width="280px">审批结果描述</td>
+                <td width="200px">审批结果描述</td>
+                <td width="160px">立案时间</td>
                 <td width="80px">操作</td>
             </tr>
         </thead>

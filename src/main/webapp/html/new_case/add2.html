@@ -46,6 +46,10 @@
   		c.situation = document.getElementById("situation").value;
   		c.parties = document.getElementById("parties").value;
   		c.explorationLocation = document.getElementById("location").value;
+  		var startTime = document.getElementById("explorationStartTime").value.split("T");
+  		c.explorationStartTime = startTime[0]+" "+startTime[1];
+		var endTime = document.getElementById("explorationEndTime").value.split("T");;
+  		c.explorationEndTime = endTime[0]+" "+endTime[1];
   		c.lawEnforcementId = id;
   		map.exploration=c;
 		 $.ajax({
@@ -91,11 +95,11 @@
                     <table cellspacing="5" class="mainForm">
                         <tr>
                             <td width="300px">检查开始时间：</td>
-                            <td><input type="date"><input type="time"> </td>
+                            <td><input id="explorationStartTime" type="datetime-local"></td>
                         </tr>
                         <tr>
-                            <td width="300px">坚持结束时间：</td>
-                            <td><input type="date"><input type="time"> </td>
+                            <td width="300px">检查结束时间：</td>
+                            <td><input id="explorationEndTime" type="datetime-local"></td>
                         </tr>
                         <tr>
                             <td width="300px">检查地点：</td>

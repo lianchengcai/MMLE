@@ -112,7 +112,7 @@
     	var c = new Object();
     	var user = getUser();
     	c.id=id;
-    	c.processMan=user.account+user.name;
+    	c.processMan=user.account+"-"+user.name;
     	alert(c.processMan);
     	var reason = document.getElementById("reason").value;
     	c.reason=reason;

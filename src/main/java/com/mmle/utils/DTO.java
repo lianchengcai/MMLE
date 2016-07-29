@@ -1,5 +1,6 @@
 package com.mmle.utils;
 
+import java.util.Date;
 import java.util.Map;
 
 
@@ -27,7 +28,7 @@ import com.mmle.entity.User;
 public class DTO {
 	//字段没有全 看之后传输的参数还需要什么，开发的时候在添进去，然后记得把ToString方法重写
 	private Integer currentPage = 1;
-	private Integer size = 2;
+	private Integer size = 14;
 	private Map<String, Object> map;
 	private Case cas;
 	private CaseType caseType;
@@ -41,6 +42,8 @@ public class DTO {
 	private Role role;
 	private LawEnMessage lawEnMessage;
 	private String validateCode;
+	private Date lawStartTime;
+	private Date lawEndTime;
 	
 	public Role getRole() {
 		return role;
@@ -132,14 +135,28 @@ public class DTO {
 	public void setValidateCode(String validateCode) {
 		this.validateCode = validateCode;
 	}
+	
+	public Date getLawStartTime() {
+		return lawStartTime;
+	}
+	public void setLawStartTime(Date lawStartTime) {
+		this.lawStartTime = lawStartTime;
+	}
+	public Date getLawEndTime() {
+		return lawEndTime;
+	}
+	public void setLawEndTime(Date lawEndTime) {
+		this.lawEndTime = lawEndTime;
+	}
 	@Override
 	public String toString() {
 		return "DTO [currentPage=" + currentPage + ", size=" + size + ", map=" + map + ", cas=" + cas + ", caseType="
 				+ caseType + ", check=" + check + ", exploration=" + exploration + ", fishBoat=" + fishBoat
 				+ ", lawEnforcement=" + lawEnforcement + ", penaltyDecision=" + penaltyDecision + ", record=" + record
 				+ ", user=" + user + ", role=" + role + ", lawEnMessage=" + lawEnMessage + ", validateCode="
-				+ validateCode + "]";
+				+ validateCode + ", lawStartTime=" + lawStartTime + ", lawEndTime=" + lawEndTime + "]";
 	}
+	
 	
 
 }

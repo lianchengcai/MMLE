@@ -47,7 +47,10 @@
   		c.violateRule = document.getElementById("violate_rule").value;
   		c.content = document.getElementById("content1").value;
   		c.asked = document.getElementById("asked").value;
-  		
+  		var startDate = document.getElementById("startDate").value.split("T");
+  		c.startDate = startDate[0]+" "+startDate[1];
+		var endDate = document.getElementById("endDate").value.split("T");;
+  		c.endDate = endDate[0]+" "+endDate[1];
   		var  myselect = document.getElementById("ifconfire");
    		var index=myselect.selectedIndex ;
    		var svalue = myselect.options[index].value;
@@ -101,11 +104,11 @@
                     <table cellspacing="5" class="mainForm">
                         <tr>
                             <td width="300px">询问开始时间：</td>
-                            <td><input type="date" style="width: 125px"><input type="time"> </td>
+                            <td><input id="startDate" type="datetime-local"></td>
                         </tr>
                         <tr>
                             <td width="300px">询问结束时间：</td>
-                            <td><input type="date" style="width: 125px"><input type="time"> </td>
+                            <td><input id="endDate" type="datetime-local"></td>
                         </tr>
                         <tr>
                             <td width="300px">询问地点：</td>

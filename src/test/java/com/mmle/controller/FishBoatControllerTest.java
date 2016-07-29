@@ -54,10 +54,10 @@ public class FishBoatControllerTest {
 
 	@Test
 	public void insert() throws Exception {
-		
+		for(int i=0;i<30;i++){
 		DTO data = new DTO();
 		FishBoat fishBoat = new FishBoat();
-		fishBoat.setBoatId("789400");
+		fishBoat.setBoatId("12345654"+i);
 		fishBoat.setBoatName("名字测试");
 		fishBoat.setBoatLlocation("位置测试");
 		fishBoat.setHomePort("港口测试");
@@ -65,7 +65,7 @@ public class FishBoatControllerTest {
 		data.setFishBoat(fishBoat);
 		
 		fishBoatController.addFishBoat(data);
-	
+		}
 	}
 	
 	@Test

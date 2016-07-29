@@ -1,5 +1,7 @@
 package com.mmle.dynaSql;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 import org.apache.ibatis.jdbc.SQL;
@@ -196,6 +198,132 @@ public class LawEnforcementDynaSql {
 		}
 		return s.toString();
 	}
+	
+	public String selectLEPageByTimeCount(Map<String, Object> map){
+		LawEnforcement lawEnforcement = (LawEnforcement) map.get("lawEnforcement");
+		Date lawStartTime = (Date)map.get("lawStartTime");
+		Date lawEndTime = (Date)map.get("lawEndTime");
+		StringBuffer s = new StringBuffer();
+		s.append("select count(*) from ");
+		s.append(TABLE_NAME);
+		s.append(" where 1=1 ");
+		if (lawEnforcement.getCaseId() != null) {
+			s.append("and case_id = ");
+			s.append(lawEnforcement.getCaseId());
+			s.append(" ");
+		}
+		if (lawEnforcement.getState() != null) {
+			s.append("and state = ");
+			s.append(lawEnforcement.getState());
+			s.append(" ");
+		} 
+		if (lawEnforcement.getPass() != null) {
+			s.append("and pass = ");
+			s.append(lawEnforcement.getPass());
+			s.append(" ");
+		} 
+		if (lawEnforcement.getReason() != null) {
+			s.append("and reason = ");
+			s.append(lawEnforcement.getReason());
+			s.append(" ");
+		} 
+		if (lawEnforcement.getCaseName()!=null) {
+			s.append("and case_name LIKE '%");
+			s.append(lawEnforcement.getCaseName());
+			s.append("%' ");
+		}
+		if (lawEnforcement.getProcessMan()!=null) {
+			s.append("and process_man LIKE '%");
+			s.append(lawEnforcement.getProcessMan());
+			s.append("%' ");
+		}
+		if (lawEnforcement.getLawEnforcementMan() != null) {
+			s.append("and law_enforcement_man LIKE '%");
+			s.append(lawEnforcement.getLawEnforcementMan());
+			s.append("%' ");
+		}
+		if(lawStartTime!=null && lawEndTime!=null){
+			SimpleDateFormat sdf =   new SimpleDateFormat( " yyyy-MM-dd HH:mm:ss " );
+			String startTimeStr = sdf.format(lawStartTime);
+			String endTimeStr = sdf.format(lawEndTime);
+			s.append("and date>='"+startTimeStr);
+			s.append("' and date<='"+endTimeStr);
+			s.append("' ");
+		}
+		if (lawEnforcement.getFlag() != null) {
+			s.append("and flag =");
+			s.append(lawEnforcement.getFlag());
+			s.append(" ");
+		}
+		return s.toString();
+	}
 
+	public String selectLEPageByTimeByConditions(Map<String, Object> map){
+		LawEnforcement lawEnforcement = (LawEnforcement) map.get("lawEnforcement");
+		Date lawStartTime = (Date)map.get("lawStartTime");
+		Date lawEndTime = (Date)map.get("lawEndTime");
+		Integer start = (Integer)map.get("start");
+		Integer end = (Integer)map.get("end");
+		StringBuffer s = new StringBuffer();
+		s.append("select * from ");
+		s.append(TABLE_NAME);
+		s.append(" where 1=1 ");
+		if (lawEnforcement.getCaseId() != null) {
+			s.append("and case_id = ");
+			s.append(lawEnforcement.getCaseId());
+			s.append(" ");
+		}
+		if (lawEnforcement.getState() != null) {
+			s.append("and state = ");
+			s.append(lawEnforcement.getState());
+			s.append(" ");
+		} 
+		if (lawEnforcement.getPass() != null) {
+			s.append("and pass = ");
+			s.append(lawEnforcement.getPass());
+			s.append(" ");
+		} 
+		if (lawEnforcement.getReason() != null) {
+			s.append("and reason = ");
+			s.append(lawEnforcement.getReason());
+			s.append(" ");
+		} 
+		if (lawEnforcement.getCaseName()!=null) {
+			s.append("and case_name LIKE '%");
+			s.append(lawEnforcement.getCaseName());
+			s.append("%' ");
+		}
+		if (lawEnforcement.getProcessMan()!=null) {
+			s.append("and process_man LIKE '%");
+			s.append(lawEnforcement.getProcessMan());
+			s.append("%' ");
+		}
+		if (lawEnforcement.getLawEnforcementMan() != null) {
+			s.append("and law_enforcement_man LIKE '%");
+			s.append(lawEnforcement.getLawEnforcementMan());
+			s.append("%' ");
+		}
+		if (lawEnforcement.getFlag() != null) {
+			s.append("and flag =");
+			s.append(lawEnforcement.getFlag());
+			s.append(" ");
+		}
+		if(lawStartTime!=null && lawEndTime!=null){
+			SimpleDateFormat sdf =   new SimpleDateFormat( " yyyy-MM-dd HH:mm:ss " );
+			String startTimeStr = sdf.format(lawStartTime);
+			String endTimeStr = sdf.format(lawEndTime);
+			s.append("and date>='"+startTimeStr);
+			s.append("' and date<='"+endTimeStr);
+			s.append("' ");
+		}
+		if(start != null && end != null && end!=0){
+			s.append("limit ");
+			s.append(start);
+			s.append(",");
+			s.append(end);
+			
+		}
+		return s.toString();
+	}
 
 }

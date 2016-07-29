@@ -1,5 +1,7 @@
 package com.mmle.service;
 
+import java.util.Date;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -16,6 +18,10 @@ public class RecordService implements IRecordService{
 	private IRecordDao recordDao;
 
 	public boolean add(Record record) {
+		if(recordDao.selectRecordByLawEnforcementId(
+				record.getLawEnforcementId())!=null){
+			return false;
+		}
 		if(recordDao.insertRecord(record)==1)
 			return true;
 		return false;

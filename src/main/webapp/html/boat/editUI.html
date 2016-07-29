@@ -46,6 +46,7 @@
 			var fb = new Object(); 
 			fb.boatId=boatId;
 			map.fishBoat=fb;
+			
 			$.ajax({
 				type: "POST",
 				url: "http://127.0.0.1:8082/mmle/fishBoat/getBoatById.do",
@@ -55,7 +56,7 @@
 				success: function(data){
 					var fishBoat = data['fishBoat'];
 					document.getElementById("boat_id").value = fishBoat.boatId;
-					document.getElementById("boat_name").value = fishBoat.boatId;
+					document.getElementById("boat_name").value = fishBoat.boatName;
 					document.getElementById("home_port").value = fishBoat.homePort;
 					document.getElementById("total_weight").value = fishBoat.totalWeight;
 					document.getElementById("length").value = fishBoat.length;
@@ -74,12 +75,51 @@
 					var strt = substitutingTime[0]+"-"+substitutingTime[1]+"-"+substitutingTime[2]
 					document.getElementById("substituting_time").value = strt;
 					document.getElementById("boat_location").value = fishBoat.boatLlocation;
-					document.getElementById("create_time").value = fishBoat.createTime;
 					},
 				error:function(){alert("服务器未正常响应，请重试");}
 				});  
 		}
     
+		function update(){
+			var boatId = getParam('boatId');
+			var map={};
+			var fb = new Object(); 
+			fb.boatId=boatId;
+			fb.boatName = document.getElementById("boat_name").value;
+			fb.homePort = document.getElementById("home_port").value;
+			fb.totalWeight = document.getElementById("total_weight").value;
+			fb.length = document.getElementById("length").value;
+			fb.width = document.getElementById("width").value;
+			fb.fishPermitNo = document.getElementById("fish_permit_no").value;
+			fb.boatLlocation = document.getElementById("boat_location").value;
+			fb.fishPermitNo = document.getElementById("fish_permit_no").value;
+			fb.fishPermitTime = document.getElementById("fish_permit_time").value+" "+"00:00"; 
+			fb.substitutingNo = document.getElementById("substituting_no").value;
+			fb.substitutingTime = document.getElementById("substituting_time").value+" "+"00:00"; ;
+			var ifNoPermit = $("#if_no_permit").get(0).selectedIndex;
+			if(ifNoPermit==1){
+				fb.ifNoPermit=true;
+			}
+			if(ifNoPermit==2){
+				fb.ifNoPermit=false;
+			}
+			map.fishBoat=fb;
+			$.ajax({
+				type: "POST",
+				url: "http://127.0.0.1:8082/mmle/fishBoat/update.do",
+				dataType:"json",
+				contentType: "application/json;charset=utf-8",
+				data: JSON.stringify(map),
+				success: function(data){
+					if(data['code']==1){
+						alert("修改成功！");
+						location.href="list.html";
+					}
+					},
+				error:function(){alert("服务器未正常响应，请重试");}
+				});  
+		}
+		
     </script>
 </head>
 <body onload="getMessage()">
@@ -161,7 +201,7 @@
 
         <!-- 表单操作 -->
         <div id="InputDetailBar">
-            <input type="image" src="../../style/images/save.png"/>
+            <input type="image" onclick="update()" src="../../style/images/save.png"/>
             <a href="javascript:history.go(-1);"><img src="../../style/images/goBack.png"/></a>
         </div>
     </form>

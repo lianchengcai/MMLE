@@ -1,5 +1,6 @@
 package com.mmle.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -137,11 +138,84 @@ public class LawEnforcementService implements ILawEnforcementService{
 		return lawEnMessagePage;
 	}
 
+	public PageUtil<LawEnMessage> getLawEnMessagePage(LawEnMessage lawEnMessage, Integer currentPage, Integer size,
+			Date lawStartTime, Date lawEndTime) {
+		System.out.println("fassad");
+		int count = lawEnforcementDao.selectLEPageByTimeCount(lawEnMessage,lawStartTime,lawEndTime);
+		System.out.println("fas");
+		PageUtil<LawEnMessage> lawEnMessagePage = new PageUtil<>(currentPage, count, size);
+		Integer start = lawEnMessagePage.getDataStart();
+		int end = lawEnMessagePage.getDataEnd();
+		if(count>0){
+			System.out.println("我执行到这里！");
+			System.out.println(size);
+			List<LawEnMessage> list = 
+					lawEnforcementDao.selectLEPageByTimeByConditions(
+							lawEnMessage,start,size,lawStartTime,lawEndTime);
+			System.out.println("我执行到这里！！！"+count);
+			for(int i=0;i<list.size();i++){
+				int id = list.get(i).getId();
+				Case cas =  caseDao.getCaseByCaseId(list.get(i).getCaseId());
+				list.get(i).setCasName(cas.getCaseName());
+				System.out.println(cas);
+				Record record = recordDao.selectRecordByLawEnforcementId(id);
+				PenaltyDecision penaltyDecision = 
+						penaltyDecisionDao.selectPenaltyDecisionByLawEnforcementId(id);
+				Exploration exploration = explorationDao.selectExplorationByLawEnforcementId(id);
+				if(record==null){
+					list.get(i).setRecord(false);
+				}else{
+					list.get(i).setRecord(true);
+				}
+				if(penaltyDecision==null){
+					list.get(i).setPenaltyDecision(false);
+				}else{
+					list.get(i).setPenaltyDecision(true);
+				}
+				if(exploration==null){
+					list.get(i).setExploration(false);
+				}else{
+					list.get(i).setExploration(true);
+				}
+				
+			}
+			if(list!=null){
+				lawEnMessagePage.setList(list);
+			}
+		}
+		
+		return lawEnMessagePage;
+	}
 	
 	
-
-	
-	
+//	public PageUtil<LawEnforcementExtend> getLawEnforcementPage(LawEnforcement lawEnforcement, Integer currentPage,
+//			Integer size, Date lawStartTime, Date lawEndTime) {
+//		System.out.println(lawEnforcement.toString());
+//		int count = lawEnforcementDao.selectLEPageByTimeCount(lawEnforcement,lawStartTime,lawEndTime);
+//		PageUtil<LawEnforcementExtend> lawEnforcementExtendPage = new PageUtil<>(currentPage, count, size);
+//		Integer start = lawEnforcementExtendPage.getDataStart();
+//		if(count>0){
+//			List<LawEnforcementExtend> lawEnforcementExtendList = 
+//					lawEnforcementDao.selectLEPageByTimeByConditions(lawEnforcement,start,size,lawStartTime,lawEndTime);
+//			for(int i=0;i<lawEnforcementExtendList.size();i++){
+//				int id = lawEnforcementExtendList.get(i).getId();
+//				
+//				PenaltyDecision penaltyDecision = 
+//						penaltyDecisionDao.selectPenaltyDecisionByLawEnforcementId(id);
+//				Exploration exploration = explorationDao.selectExplorationByLawEnforcementId(id);
+//				Record record = recordDao.selectRecordByLawEnforcementId(id);
+//				
+//				lawEnforcementExtendList.get(i).setPenaltyDecision(penaltyDecision);
+//				lawEnforcementExtendList.get(i).setRecord(record);
+//				lawEnforcementExtendList.get(i).setExploration(exploration);
+//				
+//			}
+//			lawEnforcementExtendPage.setList(lawEnforcementExtendList);
+//			return lawEnforcementExtendPage;
+//		}
+//		return null;
+//	}
+//	
 //	public PageUtil<LawEnforcement> getLawEnforcementPage(LawEnforcement lawEnforcement, int currentPage, int size) {
 //		int count = lawEnforcementDao.selectLawEnforcementCount(lawEnforcement);
 //		PageUtil<LawEnforcement> lawEnforcementPage = new PageUtil<>(currentPage, count, size);

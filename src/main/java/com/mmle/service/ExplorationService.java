@@ -1,5 +1,7 @@
 package com.mmle.service;
 
+import java.util.Date;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -19,7 +21,10 @@ public class ExplorationService implements IExplorationService{
 
 
 	public boolean add(Exploration exploration) {
-
+		if(explorationDao.selectExplorationByLawEnforcementId(
+				exploration.getLawEnforcementId())!=null){
+			return false;
+		}
 		if(explorationDao.insertExploration(exploration)==1)
 			return true;
 		return false;
