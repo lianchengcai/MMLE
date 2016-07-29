@@ -36,7 +36,7 @@ public interface UserDao {
 	@Select("select * from tbl_user where account=#{account} and password=#{password}")
 	User login(User user);
 	
-	@Select("select * from tbl_user where flag=1")
+	@Select("select * from tbl_user where flag=1 and role_id=2")
 	@Results({
 		@Result(property="role",column="role_id",one=@One(select="com.mmle.dao.IRoleDao.getRole")),
 	})
